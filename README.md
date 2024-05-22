@@ -1,2 +1,2 @@
-# DAW-JAVA
-Repositorio de archivos con ejercicios y proyectos de programación en Java del ciclo de Grado Superior en Desarrollo de Aplicaciones web
+# Programación-JAVA
+Repositorio de archivos con ejercicios y proyectos de programación en Java de ciclos de grado superior en desarrollo de software.
