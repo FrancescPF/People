@@ -29,7 +29,7 @@ public class Insert extends javax.swing.JDialog {
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
         insert.setEnabled(false);
-        this.pack();
+        pack();
     }
 
     public JButton getReset() {
@@ -79,8 +79,8 @@ public class Insert extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert - People v1.0");
-        setMinimumSize(new java.awt.Dimension(660, 220));
-        setPreferredSize(new java.awt.Dimension(748, 182));
+        setMinimumSize(new java.awt.Dimension(810, 280));
+        setPreferredSize(new java.awt.Dimension(810, 280));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

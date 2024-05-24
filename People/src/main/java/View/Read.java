@@ -28,7 +28,7 @@ public class Read extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         read.setVisible(false);
-        this.pack();
+        pack();
     }
 
     public JButton getRead() {
@@ -216,9 +216,9 @@ public class Read extends javax.swing.JDialog {
 
         reset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         reset.setText("RESET");
-        reset.setMaximumSize(new java.awt.Dimension(180, 33));
-        reset.setMinimumSize(new java.awt.Dimension(180, 33));
-        reset.setPreferredSize(new java.awt.Dimension(180, 33));
+        reset.setMaximumSize(new java.awt.Dimension(187, 33));
+        reset.setMinimumSize(new java.awt.Dimension(187, 33));
+        reset.setPreferredSize(new java.awt.Dimension(187, 33));
         reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetActionPerformed(evt);
