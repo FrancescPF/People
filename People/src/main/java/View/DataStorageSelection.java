@@ -24,6 +24,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         arrayListCheck.setSelected(true);
         itemSelected = arrayListCheck;
+        this.pack();
     }
 
     /**

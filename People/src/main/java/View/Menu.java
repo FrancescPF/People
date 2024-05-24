@@ -20,6 +20,7 @@ public class Menu extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Application logo is not available", "WARNING MESSAGE", JOptionPane.WARNING_MESSAGE);
         }
+        this.pack();
     }
 
     public JButton getInsert() {

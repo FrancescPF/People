@@ -29,6 +29,7 @@ public class Insert extends javax.swing.JDialog {
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
         insert.setEnabled(false);
+        this.pack();
     }
 
     public JButton getReset() {
@@ -78,9 +79,8 @@ public class Insert extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert - People v1.0");
-        setMaximumSize(new java.awt.Dimension(700, 300));
-        setMinimumSize(new java.awt.Dimension(700, 300));
-        setPreferredSize(new java.awt.Dimension(700, 300));
+        setMinimumSize(new java.awt.Dimension(660, 220));
+        setPreferredSize(new java.awt.Dimension(748, 182));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -153,9 +153,9 @@ public class Insert extends javax.swing.JDialog {
         photo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         photo.setText("<html><center>PHOTO</center></br><br><center> <i>Supported formats: .GIF, .PNG, .JFIF, .JPG</i></center></br><br><center><i>Maximum size 64KB</i></center></html>");
         photo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        photo.setMaximumSize(new java.awt.Dimension(100, 135));
-        photo.setMinimumSize(new java.awt.Dimension(100, 135));
-        photo.setPreferredSize(new java.awt.Dimension(100, 135));
+        photo.setMaximumSize(new java.awt.Dimension(150, 135));
+        photo.setMinimumSize(new java.awt.Dimension(150, 135));
+        photo.setPreferredSize(new java.awt.Dimension(150, 135));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -203,9 +203,9 @@ public class Insert extends javax.swing.JDialog {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Date of Birth");
-        jLabel8.setMaximumSize(new java.awt.Dimension(100, 22));
-        jLabel8.setMinimumSize(new java.awt.Dimension(100, 22));
-        jLabel8.setPreferredSize(new java.awt.Dimension(100, 22));
+        jLabel8.setMaximumSize(new java.awt.Dimension(150, 22));
+        jLabel8.setMinimumSize(new java.awt.Dimension(150, 22));
+        jLabel8.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -226,9 +226,9 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
 
-        dateOfBirth.setMaximumSize(new java.awt.Dimension(400, 22));
-        dateOfBirth.setMinimumSize(new java.awt.Dimension(400, 22));
-        dateOfBirth.setPreferredSize(new java.awt.Dimension(400, 22));
+        dateOfBirth.setMaximumSize(new java.awt.Dimension(350, 22));
+        dateOfBirth.setMinimumSize(new java.awt.Dimension(350, 22));
+        dateOfBirth.setPreferredSize(new java.awt.Dimension(350, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
