@@ -84,7 +84,7 @@ public class Read extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(660, 220));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        read.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        read.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         read.setText("READ");
         read.setMaximumSize(new java.awt.Dimension(187, 33));
         read.setMinimumSize(new java.awt.Dimension(187, 33));
@@ -97,7 +97,7 @@ public class Read extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         getContentPane().add(read, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("NIF ");
         jLabel1.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel1.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -149,7 +149,7 @@ public class Read extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 6);
         getContentPane().add(photo, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Name");
         jLabel3.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel3.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -175,7 +175,7 @@ public class Read extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
         getContentPane().add(name, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Date of Birth");
         jLabel8.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel8.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -213,7 +213,7 @@ public class Read extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 12);
         getContentPane().add(jLabel2, gridBagConstraints);
 
-        reset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         reset.setText("RESET");
         reset.setMaximumSize(new java.awt.Dimension(180, 33));
         reset.setMinimumSize(new java.awt.Dimension(180, 33));

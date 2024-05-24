@@ -15,6 +15,7 @@ import View.Delete;
 import View.Insert;
 import View.Menu;
 import View.Read;
+import View.ReadAll;
 import View.Update;
 import java.awt.event.ActionEvent;
 //import View.StudentDelete;
@@ -36,14 +37,14 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.DateModel;
 //import java.time.LocalDate;
 //import java.time.ZoneId;
@@ -74,6 +75,7 @@ public class ControllerImplementation implements IController, ActionListener {
     private Read read;
     private Delete delete;
     private Update update;
+    private ReadAll readAll;
 
     //Para conectarnos a la base de datos
     //Variables para la conexión segura contra el servidor (sin especificar DDBB)
@@ -145,6 +147,7 @@ public class ControllerImplementation implements IController, ActionListener {
             menu.getRead().addActionListener(this);
             menu.getUpdate().addActionListener(this);
             menu.getDelete().addActionListener(this);
+            menu.getReadAll().addActionListener(this);
             if (daoSelected.equals("ArrayList")) {
                 dao = new DAOArrayList();
             } else if (daoSelected.equals("HashMap")) {
@@ -393,37 +396,36 @@ public class ControllerImplementation implements IController, ActionListener {
             } else {
                 JOptionPane.showMessageDialog(update, "Wrong arguments: data marked with * are required.", "Update - Peoplev1.0", JOptionPane.WARNING_MESSAGE);
             }
+        } else if (e.getSource()
+                == menu.getReadAll()) {
+            ArrayList<Person> s = readAll();
+            if (s.isEmpty()) {
+                JOptionPane.showMessageDialog(readAll, "There are not people in BBDD", "Read All", JOptionPane.WARNING_MESSAGE);
+            } else {
+                readAll = new ReadAll(menu, true);
+                DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
+                for (int i = 0; i < s.size(); i++) {
+                    model.addRow(new Object[i]);
+                    model.setValueAt(s.get(i).getNif(), i, 0);
+                    model.setValueAt(s.get(i).getName(), i, 1);
+                    if (s.get(i).getDateOfBirth() != null) {
+                        model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
+                    } else {
+                        model.setValueAt("", i, 2);
+                    }
+                    if (s.get(i).getPhoto() != null) {
+                        model.setValueAt("yes", i, 3);
+//                        s.get(i).getPhoto().
+                    } else {
+                        model.setValueAt("no", i, 3);
+                    }
+                }
+                readAll.setVisible(true);
+            }
+
         }
 
-//        }  else if (e.getSource() == menuStu.getShowAll()) {
-//            List<Student> s = showAllStudents();
-//            if (s.isEmpty()) {
-//                JOptionPane.showMessageDialog(showAllStu, "There are not student in BBDD", "Show All Students", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                showAllStu = new StudentShowAll(menuStu, true);
-//                DefaultTableModel model = (DefaultTableModel) showAllStu.getTable().getModel();
-//                for (int i = 0; i < s.size(); i++) {
-//                    model.addRow(new Object[i]);
-//                    model.setValueAt(s.get(i).getName(), i, 0);
-//                    model.setValueAt(s.get(i).getSurName(), i, 1);
-//                    model.setValueAt(s.get(i).getSecondSurName(), i, 2);
-//                    model.setValueAt(s.get(i).getNif(), i, 3);
-//                    model.setValueAt(s.get(i).getPhoneNumber(), i, 4);
-//                    model.setValueAt(s.get(i).getEmail(), i, 5);
-//                    if (s.get(i).getDateOfBirth() != null) {
-//                        model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 6);
-//                    } else {
-//                        model.setValueAt("", i, 6);
-//                    }
-//                    if (s.get(i).getPhoto() != null) {
-//                        model.setValueAt("yes", i, 7);
-////                        s.get(i).getPhoto().
-//                    } else {
-//                        model.setValueAt("no", i, 7);
-//                    }
-//                }
-//                showAllStu.setVisible(true);
-//            }
+
 //        } else if (e.getSource() == menuStu.getDeleteAll()) {
 //            int optionSelected = JOptionPane.showConfirmDialog(menuStu,
 //                    "Are you sure to delete ALL BBDD?", "Delete All Students", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -465,18 +467,18 @@ public class ControllerImplementation implements IController, ActionListener {
 //        }
         return pTR;
     }
-//
-//    @Override
-//    public List<Student> showAllStudents() {
-//        List<Student> students = new ArrayList<>();
-//        try {
-//            students = daoSt.readALL();
-//        } catch (DAO_Excep ex) {
-//            JOptionPane.showMessageDialog(showAllStu, ex.getMessage(), "BBDD Problem", JOptionPane.ERROR_MESSAGE);
-//        }
-//        return students;
-//    }
-//
+
+    @Override
+    public ArrayList<Person> readAll() {
+        ArrayList<Person> people = new ArrayList<>();
+        try {
+            people = dao.readAll();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(readAll, ex.getMessage(), "BBDD Problem", JOptionPane.ERROR_MESSAGE);
+        }
+        return people;
+    }
+
 //    @Override
 //    public void deleteAllStudents() {
 //        try {
@@ -490,7 +492,6 @@ public class ControllerImplementation implements IController, ActionListener {
 //        }
 //    }
 //
-
     @Override
     public void delete(Person personToDelete
     ) {

@@ -23,6 +23,44 @@ public class DAOFileSerializable implements IDAO {
     File fileProject = new File(filePath);
 
     @Override
+    public ArrayList<Person> readAll(){
+        ArrayList<Person> people = new ArrayList<>();
+        if (fileProject.exists()) {
+            ObjectInputStream ois = null;
+            FileInputStream fIS = null;
+            try {
+                fIS = new FileInputStream(fileProject);
+                System.out.println(fIS);
+                ois = new ObjectInputStream(fIS);
+                System.out.println(ois);
+                Person pr;
+                while ((pr = (Person) ois.readObject()) != null) {
+                    people.add(pr);
+                }
+            } catch (FileNotFoundException ex) {
+                System.out.println("Fichero no encontrado");
+            } catch (EOFException ex) {
+                System.out.println("Fin fichero");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Clase no encontrada");
+            } catch (IOException ex) {
+                System.out.println("Algo pasa con el fichero READ");
+            } finally {
+                try {
+                    if (ois != null) {
+                        ois.close();
+                        fIS.close();
+                    }
+                } catch (IOException ex) {
+                    System.out.println("Algo pasa con el archivo");
+                }
+            }
+        }
+        return people;
+    }
+    
+    
+    @Override
     public Person read(Person p) {
         Person personToReturn = null;
         if (fileProject.exists()) {

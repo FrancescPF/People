@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class DAOSQL implements IDAO {
     private final String JDBC_DDBB_TABLE = JDBC_DDBB + "." + JDBC_TABLE;
 
     //Variables para las consultas SQL
-//    private final String SQL_SELECT_ALL = "SELECT * FROM " + JDBC_DDBB_TABLE + ";";
+    private final String SQL_SELECT_ALL = "SELECT * FROM " + JDBC_DDBB_TABLE + ";";
     private final String SQL_SELECT = "SELECT * FROM " + JDBC_DDBB_TABLE + " WHERE (nif = ?);";
 //    private final String SQL_SELECT2 = "SELECT * FROM " + JDBC_DDBB_TABLE + " WHERE (age = ";
     private final String SQL_INSERT = "INSERT INTO " + JDBC_DDBB_TABLE + " (nif, name, dateOfBirth, photo) VALUES (?, ?, ?, ?);";
@@ -116,39 +117,44 @@ public class DAOSQL implements IDAO {
             }
         }
     }
-//
-//    @Override
-//    public List<Student> readALL() throws DAO_Excep {
-//        List<Student> students = new ArrayList<>();
-//        Connection conn = null;
-//        Statement instruction = null;
-//        ResultSet rs = null;
-//        try {
-//            conn = connect();
-//            instruction = conn.createStatement();
-//            rs = instruction.executeQuery(SQL_SELECT_ALL);
-//            while (rs.next()) {
-//                int id = rs.getInt("id");
-//                String nombre = rs.getString("name");
-//                int edad = rs.getInt("age");
-//                students.add(new Student(id, nombre, edad));
-//            }
-//        } catch (SQLException ex) {
-//            //ex.printStackTrace(System.out);
-//            throw new Read_SQL_DAO_Excep("Can not read from database - readAll");
-//        } finally {
-//            try {
-//                rs.close();
-//                instruction.close();
-//                disconnect(conn);
-//            } catch (SQLException ex) {
-//                //ex.printStackTrace(System.out);
-//                throw new Read_SQL_DAO_Excep("Can not read from database - readAll");
-//            }
-//        }
-//        return students;
-//    }
-//
+
+    @Override
+    public ArrayList<Person> readAll() {
+        ArrayList<Person> people = new ArrayList<>();
+        Connection conn = null;
+        Statement instruction = null;
+        ResultSet rs = null;
+        try {
+            conn = connect();
+            instruction = conn.createStatement();
+            rs = instruction.executeQuery(SQL_SELECT_ALL);
+            while (rs.next()) {
+                String nif = rs.getString("nif");
+                String name = rs.getString("name");
+                Date date = rs.getDate("dateOfBirth");
+                String photo = rs.getString("photo");
+                if (photo != null) {
+                    people.add(new Person(nif, name, date, new ImageIcon(photo)));
+                } else {
+                    people.add(new Person(nif, name, date, null));
+                }
+            }
+        } catch (SQLException ex) {
+            //ex.printStackTrace(System.out);
+            System.out.println("Can not read from database - readAll");
+        } finally {
+            try {
+                rs.close();
+                instruction.close();
+                disconnect(conn);
+            } catch (SQLException ex) {
+                //ex.printStackTrace(System.out);
+                System.out.println("Can not read from database - readAll");
+            }
+        }
+        return people;
+    }
+
 
     @Override
     public Person read(Person p) {

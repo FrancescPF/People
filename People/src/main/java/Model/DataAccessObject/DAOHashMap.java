@@ -1,11 +1,17 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DAOHashMap implements IDAO{
     
     HashMap <String, Person> people = new HashMap();
+    
+    @Override
+    public ArrayList<Person> readAll(){
+        return new ArrayList<>(people.values());
+    }
 
     @Override
     public Person read(Person p) {

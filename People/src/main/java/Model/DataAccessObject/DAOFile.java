@@ -16,6 +16,7 @@ import java.io.RandomAccessFile;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.RandomAccess;
@@ -34,6 +35,51 @@ public class DAOFile implements IDAO {
     File folderPhotoProject = new File(folderPhotoPath);
     String filePath = folderPath + sep + "People.txt";
     File fileProject = new File(filePath);
+    
+    
+    @Override
+    public ArrayList<Person> readAll(){
+        ArrayList<Person> people = new ArrayList<>();
+        FileReader fr = null;
+        BufferedReader br = null;
+        try {
+            fr = new FileReader(fileProject);
+            br = new BufferedReader(fr);
+            String line;
+            line = br.readLine();
+            while (line != null) {
+                String data[] = line.split("\t");
+                String dni = data[0];
+                String name = data[1];
+                Date date = null;
+                if (!data[2].equals("null")) {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                    date = dateFormat.parse(data[2]);
+                }
+                ImageIcon photo = null;
+                if (!data[3].equals("null")) {
+                    photo = new ImageIcon(folderPhotoPath + sep + data[3] + ".png");
+                }
+                people.add(new Person(data[0], data[1], date, photo));
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("Project file not found");
+        } catch (IOException ex) {
+            System.out.println("Can access project file");
+        } catch (ParseException ex) {
+            System.out.println("Can not convert Date");
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(DAOFile.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return people;
+    }
 
     @Override
     public Person read(Person p) {

@@ -87,7 +87,7 @@ public class Update extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(660, 220));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        update.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         update.setText("UPDATE");
         update.setMaximumSize(new java.awt.Dimension(194, 33));
         update.setMinimumSize(new java.awt.Dimension(194, 33));
@@ -100,7 +100,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
         getContentPane().add(update, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("NIF ");
         jLabel1.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel1.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -153,7 +153,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 6);
         getContentPane().add(photo, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Name");
         jLabel3.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel3.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -184,7 +184,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
         getContentPane().add(name, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Date of Birth");
         jLabel8.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel8.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -210,7 +210,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
         getContentPane().add(dateOfBirth, gridBagConstraints);
 
-        updateReset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        updateReset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         updateReset.setText("RESET");
         updateReset.setMaximumSize(new java.awt.Dimension(194, 33));
         updateReset.setMinimumSize(new java.awt.Dimension(194, 33));

@@ -39,6 +39,10 @@ public class Menu extends javax.swing.JFrame {
         return update;
     }
 
+    public JButton getReadAll() {
+        return readAll;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,9 +64,12 @@ public class Menu extends javax.swing.JFrame {
         setTitle("Menu - People v1.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setMaximumSize(new java.awt.Dimension(300, 450));
+        setMinimumSize(new java.awt.Dimension(300, 450));
+        setPreferredSize(new java.awt.Dimension(300, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        read.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        read.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         read.setText("READ");
         read.setMaximumSize(new java.awt.Dimension(120, 50));
         read.setMinimumSize(new java.awt.Dimension(120, 50));
@@ -72,10 +79,10 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(read, gridBagConstraints);
 
-        delete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         delete.setText("DELETE");
         delete.setMaximumSize(new java.awt.Dimension(120, 50));
         delete.setMinimumSize(new java.awt.Dimension(120, 50));
@@ -85,10 +92,10 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(delete, gridBagConstraints);
 
-        update.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         update.setText("UPDATE");
         update.setMaximumSize(new java.awt.Dimension(120, 50));
         update.setMinimumSize(new java.awt.Dimension(120, 50));
@@ -98,10 +105,10 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(update, gridBagConstraints);
 
-        insert.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         insert.setText("INSERT");
         insert.setMaximumSize(new java.awt.Dimension(120, 50));
         insert.setMinimumSize(new java.awt.Dimension(120, 50));
@@ -111,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 24);
         getContentPane().add(insert, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
@@ -122,10 +129,10 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        readAll.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        readAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         readAll.setText("READ ALL");
         readAll.setMaximumSize(new java.awt.Dimension(120, 50));
         readAll.setMinimumSize(new java.awt.Dimension(120, 50));
@@ -135,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(readAll, gridBagConstraints);
 
         pack();

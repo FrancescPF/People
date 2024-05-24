@@ -20,6 +20,11 @@ public class DAOArrayList implements IDAO{
     }
     
     @Override
+    public ArrayList<Person> readAll(){
+        return people;
+    }
+    
+    @Override
     public int insert(Person p) {
         return people.add(p) ? 1 : 0;
     }

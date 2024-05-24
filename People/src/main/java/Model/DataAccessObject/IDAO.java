@@ -1,6 +1,7 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
+import java.util.ArrayList;
 
 
 /**
@@ -15,6 +16,7 @@ public interface IDAO {
 //        public abstract int deleteALL () throws DAO_Excep;
       
     public abstract Person read (Person p);
+    public abstract ArrayList<Person> readAll();
     public abstract int insert(Person p);
     public abstract int update (Person p);   
     public abstract int delete (Person p);

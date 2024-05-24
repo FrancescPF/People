@@ -55,17 +55,20 @@ public class DataStorageSelection extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFocusable(false);
         setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        setMaximumSize(new java.awt.Dimension(500, 550));
+        setMinimumSize(new java.awt.Dimension(500, 550));
+        setPreferredSize(new java.awt.Dimension(500, 550));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        answer.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        answer.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         answer.setText("What kind of data storage do you want to use? ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 24);
         getContentPane().add(answer, gridBagConstraints);
 
         arrayListCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -80,7 +83,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(arrayListCheck, gridBagConstraints);
 
         fileCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -95,7 +98,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(fileCheck, gridBagConstraints);
 
         dataBaseCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -110,7 +113,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(dataBaseCheck, gridBagConstraints);
 
         hashMapCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -125,7 +128,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(hashMapCheck, gridBagConstraints);
 
         fileSerializationCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -140,7 +143,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(fileSerializationCheck, gridBagConstraints);
 
         dataBaseSerializationCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -156,15 +159,17 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 12, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(dataBaseSerializationCheck, gridBagConstraints);
 
         authorMail.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
+        authorMail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         authorMail.setText("Author: francesc.perez@stucom.com - Version 1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(authorMail, gridBagConstraints);
         authorMail.getAccessibleContext().setAccessibleName("francesc.perez@stucom.com - version 1.0");
 
@@ -174,7 +179,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 60, 12, 12);
         getContentPane().add(accept, gridBagConstraints);
 
         cancel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -188,7 +193,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 60);
         getContentPane().add(cancel, gridBagConstraints);
 
         getAccessibleContext().setAccessibleName("Data Storage Selection - People v1.0 ");

@@ -56,7 +56,7 @@ public class Delete extends javax.swing.JDialog {
         setMinimumSize(new java.awt.Dimension(323, 150));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("NIF");
         jLabel1.setMaximumSize(new java.awt.Dimension(60, 22));
         jLabel1.setMinimumSize(new java.awt.Dimension(60, 22));
@@ -69,7 +69,7 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 6);
         getContentPane().add(jLabel1, gridBagConstraints);
 
-        delete.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         delete.setText("DELETE");
         delete.setMaximumSize(new java.awt.Dimension(187, 33));
         delete.setMinimumSize(new java.awt.Dimension(187, 33));

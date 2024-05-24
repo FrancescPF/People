@@ -78,10 +78,12 @@ public class Insert extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert - People v1.0");
-        setMinimumSize(new java.awt.Dimension(660, 220));
+        setMaximumSize(new java.awt.Dimension(700, 300));
+        setMinimumSize(new java.awt.Dimension(700, 300));
+        setPreferredSize(new java.awt.Dimension(700, 300));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        insert.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        insert.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         insert.setText("INSERT");
         insert.setMaximumSize(new java.awt.Dimension(187, 33));
         insert.setMinimumSize(new java.awt.Dimension(187, 33));
@@ -91,10 +93,10 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(insert, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Name");
         jLabel1.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel1.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -104,7 +106,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         name.setMaximumSize(new java.awt.Dimension(400, 22));
@@ -124,10 +126,10 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(name, gridBagConstraints);
 
-        reset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         reset.setText("RESET");
         reset.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         reset.setMaximumSize(new java.awt.Dimension(187, 33));
@@ -143,7 +145,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(reset, gridBagConstraints);
 
         photo.setBackground(new java.awt.Color(255, 255, 255));
@@ -160,10 +162,10 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridheight = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 12);
         getContentPane().add(photo, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("NIF");
         jLabel5.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel5.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -173,7 +175,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 12);
         getContentPane().add(jLabel5, gridBagConstraints);
 
         nif.setMaximumSize(new java.awt.Dimension(400, 22));
@@ -196,10 +198,10 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 24);
         getContentPane().add(nif, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("Date of Birth");
         jLabel8.setMaximumSize(new java.awt.Dimension(100, 22));
         jLabel8.setMinimumSize(new java.awt.Dimension(100, 22));
@@ -209,7 +211,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel8, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
@@ -221,7 +223,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
 
         dateOfBirth.setMaximumSize(new java.awt.Dimension(400, 22));
@@ -232,7 +234,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(dateOfBirth, gridBagConstraints);
 
         pack();
