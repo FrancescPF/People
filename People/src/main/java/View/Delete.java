@@ -53,20 +53,21 @@ public class Delete extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Delete - People v1.0");
-        setMinimumSize(new java.awt.Dimension(323, 150));
+        setMinimumSize(new java.awt.Dimension(350, 200));
+        setPreferredSize(new java.awt.Dimension(350, 200));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("NIF");
-        jLabel1.setMaximumSize(new java.awt.Dimension(60, 22));
-        jLabel1.setMinimumSize(new java.awt.Dimension(60, 22));
-        jLabel1.setPreferredSize(new java.awt.Dimension(60, 22));
+        jLabel1.setMaximumSize(new java.awt.Dimension(50, 22));
+        jLabel1.setMinimumSize(new java.awt.Dimension(50, 22));
+        jLabel1.setPreferredSize(new java.awt.Dimension(50, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 12);
         getContentPane().add(jLabel1, gridBagConstraints);
 
         delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -79,12 +80,12 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(delete, gridBagConstraints);
 
-        nif.setMaximumSize(new java.awt.Dimension(187, 22));
-        nif.setMinimumSize(new java.awt.Dimension(187, 22));
-        nif.setPreferredSize(new java.awt.Dimension(187, 22));
+        nif.setMaximumSize(new java.awt.Dimension(200, 22));
+        nif.setMinimumSize(new java.awt.Dimension(200, 22));
+        nif.setPreferredSize(new java.awt.Dimension(200, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -99,10 +100,9 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 6, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 24);
         getContentPane().add(nif, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
@@ -111,10 +111,10 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 6, 12);
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
 
         pack();
