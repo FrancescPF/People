@@ -7,24 +7,31 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+/**
+ * This class defines the structure of the selection screen for the type of 
+ * storage device chosen by the user before starting to interact with the 
+ * application.
+ * @author Francesc Perez
+ * @version 1.0
+ */
+
 public class DataStorageSelection extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DataAccessObjectSelection
-     */
     javax.swing.JCheckBox itemSelected;
 
     public DataStorageSelection() {
         initComponents();
+        String projectDir = System.getProperty("user.dir");
+        String s = File.separator;
+        String pathImageLogo = projectDir + s + "images" + s + "logo.png";
         try {
-            setIconImage(new ImageIcon(ImageIO.read(new File("images/logoPeople.png"))).getImage());
+            setIconImage(new ImageIcon(ImageIO.read(new File(pathImageLogo))).getImage());
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Application logo is not available", "WARNING MESSAGE", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Application logo is not available. Can not be found in " + pathImageLogo, "Logo - People v1.0", JOptionPane.WARNING_MESSAGE);
         }
         setLocationRelativeTo(null);
         arrayListCheck.setSelected(true);
         itemSelected = arrayListCheck;
-        this.pack();
     }
 
     /**
@@ -202,6 +209,12 @@ public class DataStorageSelection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This method allows you to select a single storage system, by default it 
+     * is the "ArrayList". Only when there is a selection is the accept button 
+     * activated so that the event can be sent to the controller.
+     * @param jcb checkbox selected by user
+     */
     private void JCB(javax.swing.JCheckBox jcb) {
         if (jcb.isSelected()) {
             itemSelected = jcb;
