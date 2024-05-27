@@ -17,6 +17,8 @@ public class Start {
      * the dSS object of the DataStorageSelection class as an input argument to 
      * first determine what type of storage system to use.
      * @param args The application does not need input parameters to run
+     * @author Francesc Perez
+     * @version 1.0
      */
     public static void main(String[] args) {
         DataStorageSelection dSS = new DataStorageSelection();      
