@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model.Class;
 
 import java.io.Serializable;
@@ -10,12 +6,12 @@ import java.util.Objects;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * Encapsulated class that defines the type of entity that will manage the application.
  * @author Fran Perez
+ * @version 1.0
  */
 public class Person implements Serializable{
 
-    //Person attributes
     private String name;
     private String nif;
     private Date dateOfBirth;
@@ -25,20 +21,33 @@ public class Person implements Serializable{
         
     }
     
-    
-    //Constructor to validate new person.
-    //Two persons cannot have the same NIF
+    /**
+     * Constructor to validate new person. Two persons cannot have the same NIF
+     * @param nif 
+     */
     public Person(String nif) {
         this.nif = nif;
     }
-
-    //Constructor with mandatory data
+    
+    /**
+     * Constructor with mandatory data.
+     * @author Fran Perez
+     * @version 1.0
+     */
     public Person(String name, String nif) {
         this.name = name;
         this.nif = nif;
     }
 
-    //Constructor with everything
+    /**
+     * Constructor with all data
+     * @author Fran Perez
+     * @version 1.0
+     * @param name
+     * @param nif
+     * @param dateOfBirth
+     * @param photo
+     */
     public Person(String name, String nif, Date dateOfBirth, ImageIcon photo) {
         this.name = name;      
         this.nif = nif;
@@ -79,7 +88,11 @@ public class Person implements Serializable{
         this.photo = photo;
     }
     
-    //Used to compare two persons by their nifs
+    /**
+     * Function used to compare two Personas. There cannot be two or more people
+     * with the same ID. Actually it isn't used in this project.
+     * @return 
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -87,6 +100,12 @@ public class Person implements Serializable{
         return hash;
     }
 
+    /**
+     * Function used to compare two Personas in ArrayList and HashMap 
+     * structures. There cannot be two or more people with the same ID.
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -102,7 +121,12 @@ public class Person implements Serializable{
         return Objects.equals(this.hashCode(), other.hashCode());
     }
 
-    //Used to show person's inform by console. Only for debugging pourposes.
+    
+    /**
+     * Function sed to show person's inform by console. Only for debugging 
+     * pourposes.
+     * @return 
+     */
     @Override
     public String toString() {
         return "Student{" + "Name= " + name + ", NIF= " + nif
