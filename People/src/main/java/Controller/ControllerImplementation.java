@@ -1,8 +1,5 @@
 package Controller;
 
-//import Model.DAO.*;
-//import Exceptions.*;
-//import Model.data.Student;
 import Model.Class.Person;
 import Model.DataAccessObject.DAOArrayList;
 import Model.DataAccessObject.DAOFile;
@@ -18,15 +15,6 @@ import View.Read;
 import View.ReadAll;
 import View.Update;
 import java.awt.event.ActionEvent;
-//import View.StudentDelete;
-//import View.StudentInsert;
-//import java.util.ArrayList;
-//import java.util.List;
-//import View.StudentMenu;
-//import View.StudentSearch;
-//import View.StudentShowAll;
-//import View.StudentUpdate;
-//import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
@@ -46,28 +34,20 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.DateModel;
-//import java.time.LocalDate;
-//import java.time.ZoneId;
-//import java.time.ZonedDateTime;
-//import java.util.Calendar;
-//import java.util.Date;
-//import java.util.GregorianCalendar;
-//import javax.swing.ImageIcon;
-//import javax.swing.JDialog;
-//import javax.swing.JOptionPane;
-//import javax.swing.table.DefaultTableModel;
-//import org.jdatepicker.DateModel;
+
 
 /**
- *
- * @author Fran Perez
+ * This class starts the visual part of the application and programs and manages
+ * all the events that it can receive from it. For each event received the 
+ * controller performs an action.
+ * @author Francesc Perez
+ * @version 1.0
  */
-//Implements the ActionListener interface. This allows the StudentControllerImplementation 
-//objects to listen to the events that are launched in the application and to be able to 
-//process some of them (https://www.discoduroderoer.es/eventos-y-listeners-en-java/)
-//thanks to the mandatory implementation method "actionPerformed" 
+ 
 public class ControllerImplementation implements IController, ActionListener {
 
+    //Instance variables used so that both the visual and model parts can be 
+    //accessed from the controller.
     private final DataStorageSelection dSS;
     private IDAO dao;
     private Menu menu;
@@ -88,11 +68,25 @@ public class ControllerImplementation implements IController, ActionListener {
     private final String JDBC_TABLE = "person";
     private final String JDBC_DDBB_TABLE = JDBC_DDBB + "." + JDBC_TABLE;
 
+    /**
+     * This constructor allows the controller to know which data storage option 
+     * the user has chosen. Schedule an event to deploy when the user has made 
+     * the selection.
+     * @param dSS
+     * @author Francesc Perez
+     * @version 1.0
+     */
     public ControllerImplementation(DataStorageSelection dSS) {
         this.dSS = dSS;
         ((JButton) (dSS.getAccept()[0])).addActionListener(this);
     }
-
+    
+    /**
+     * With this method, the application is started, asking the user for the 
+     * chosen storage system.
+     * @author Francesc Perez
+     * @version 1.0
+     */
     @Override
     public void start() {
         dSS.setVisible(true);

@@ -14,11 +14,17 @@ import javax.swing.JOptionPane;
  * @author Francesc Perez
  * @version 1.0
  */
-
 public class DataStorageSelection extends javax.swing.JFrame {
-
+    
+    //Instance variable that saves the storage system chosen by the user, by 
+    //default, it will be the "ArrayList".
     javax.swing.JCheckBox itemSelected;
 
+    /**
+     * Function that loads the Data Storage System Selection Menu View.
+     * @author Francesc Perez
+     * @version 1.0
+     */
     public DataStorageSelection() {
         initComponents();
         String projectDir = System.getProperty("user.dir");
@@ -214,6 +220,8 @@ public class DataStorageSelection extends javax.swing.JFrame {
      * is the "ArrayList". Only when there is a selection is the accept button 
      * activated so that the event can be sent to the controller.
      * @param jcb checkbox selected by user
+     * @author Francesc Perez
+     * @version 1.0
      */
     private void JCB(javax.swing.JCheckBox jcb) {
         if (jcb.isSelected()) {
@@ -230,6 +238,13 @@ public class DataStorageSelection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * This method allows the controller to know the storage system chosen by 
+     * the user.
+     * @return c Returns the accept button and the selected chechbox.
+     * @author Francesc Perez
+     * @version 1.0
+     */
     public Component [] getAccept() {
         Component c [] = new Component[2];
         c[0] = accept;
@@ -261,6 +276,11 @@ public class DataStorageSelection extends javax.swing.JFrame {
         JCB(dataBaseCheck);
     }//GEN-LAST:event_dataBaseCheckActionPerformed
 
+    /**
+     * If the user selects the cancel option when starting the application, 
+     * the program closes.
+     * @param evt 
+     */
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         System.exit(0);
     }//GEN-LAST:event_cancelActionPerformed
