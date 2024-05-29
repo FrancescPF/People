@@ -91,23 +91,6 @@ public class ControllerImplementation implements IController, ActionListener {
         dSS.setVisible(true);
     }
 
-//    private StudentShowAll showAllStu;
-//    private StudentShowAll deleteAllStu;
-//
-//    public tControllerImplementation(StudentMenu menuStu, IDAO daoSt) {
-//        this.daoSt = daoSt;
-//        this.menuStu = menuStu;
-//        //JButton objects have defined the method addActionListener, from this 
-//        //class we active that when someone press this buttons an ActionListener 
-//        //event is launched
-//        //With "this" we tell it that it has to execute the action 
-//        //defined within the "StudentControllerImplementation" class
-//        //in actionPerformed method
-//        
-//    }
-//
-//    
-//
     private void resetUpdated() {
         update.getNif().setEnabled(true);
         update.getNif().setEditable(true);
@@ -132,7 +115,6 @@ public class ControllerImplementation implements IController, ActionListener {
     /**
      * This receives method handles the events of the part. Each event has an
      * associated action.
-     *
      * @param e The event generated in the visual part
      * @author Francesc Perez
      * @version 1.0
@@ -227,6 +209,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 //Has to be done
             }
             dSS.dispose();
+            //Showing the menu and schedule the events
             menu = new Menu();
             menu.setVisible(true);
             menu.getInsert().addActionListener(this);
@@ -234,14 +217,12 @@ public class ControllerImplementation implements IController, ActionListener {
             menu.getUpdate().addActionListener(this);
             menu.getDelete().addActionListener(this);
             menu.getReadAll().addActionListener(this);
-        } else if (e.getSource()
-                == menu.getInsert()) {
+        //Events for the insert option
+        } else if (e.getSource()== menu.getInsert()) {
             insert = new Insert(menu, true);
             insert.getInsert().addActionListener(this);
             insert.setVisible(true);
-        } else if (insert
-                != null && e.getSource()
-                == insert.getInsert()) {
+        } else if (insert != null && e.getSource()== insert.getInsert()) {
             Person p = new Person(insert.getNam().getText(), insert.getNif().getText());
             if (insert.getDateOfBirth().getModel().getValue() != null) {
                 p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
@@ -251,15 +232,13 @@ public class ControllerImplementation implements IController, ActionListener {
             }
             insert(p);
             insert.getReset().doClick();
-        } else if (e.getSource()
-                == menu.getRead()) {
+        //Events for the read option
+        } else if (e.getSource() == menu.getRead()) {
             //Creating SearchStudent JDialog Menu
             read = new Read(menu, true);
             read.getRead().addActionListener(this);
             read.setVisible(true);
-        } else if (read
-                != null && e.getSource()
-                == read.getRead()) {
+        } else if (read != null && e.getSource()== read.getRead()) {
             read.getNif().setText(read.getNif().getText());
             Person p = new Person(read.getNif().getText());
             Person pNew = read(p);
@@ -275,14 +254,12 @@ public class ControllerImplementation implements IController, ActionListener {
             } else {
                 read.getReset().doClick();
             }
-        } else if (e.getSource()
-                == menu.getDelete()) {
+        //Events for the delete option    
+        } else if (e.getSource()== menu.getDelete()) {
             delete = new Delete(menu, true);
             delete.getDelete().addActionListener(this);
             delete.setVisible(true);
-        } else if (delete
-                != null && e.getSource()
-                == delete.getDelete()) {
+        } else if (delete != null && e.getSource()== delete.getDelete()) {
             if (!delete.getNif().getText().isEmpty()) {
                 Person p = new Person(delete.getNif().getText());
                 delete(p);
@@ -291,16 +268,14 @@ public class ControllerImplementation implements IController, ActionListener {
             } else {
                 JOptionPane.showMessageDialog(delete, "Wrong arguments: nif field can not be empty.", "Delete - People v1.0", JOptionPane.WARNING_MESSAGE);
             }
-        } else if (e.getSource()
-                == menu.getUpdate()) {
+        //Events for the update option
+        } else if (e.getSource()== menu.getUpdate()) {
             update = new Update(menu, true);
             update.getUpdate().addActionListener(this);
             update.getRead().addActionListener(this);
             update.getUpdateReset().addActionListener(this);
             update.setVisible(true);
-        } else if (update
-                != null && e.getSource()
-                == update.getRead()) {
+        } else if (update != null && e.getSource()== update.getRead()) {
             Person p = new Person(update.getNif().getText());
             Person pNew = read(p);
             if (pNew != null) {
@@ -315,13 +290,9 @@ public class ControllerImplementation implements IController, ActionListener {
             } else {
                 update.getUpdateReset().doClick();
             }
-        } else if (update
-                != null && e.getSource()
-                == update.getUpdateReset()) {
+        } else if (update != null && e.getSource()== update.getUpdateReset()) {
             resetUpdated();
-        } else if (update
-                != null && e.getSource()
-                == update.getUpdate()) {
+        } else if (update != null && e.getSource()== update.getUpdate()) {
             if (!update.getNam().getText().isEmpty()) {
                 Person p = new Person(update.getNam().getText(), update.getNif().getText());
                 if (update.getDateOfBirth().getModel().getValue() != null) {
@@ -335,8 +306,8 @@ public class ControllerImplementation implements IController, ActionListener {
             } else {
                 JOptionPane.showMessageDialog(update, "Wrong arguments: data marked with * are required.", "Update - Peoplev1.0", JOptionPane.WARNING_MESSAGE);
             }
-        } else if (e.getSource()
-                == menu.getReadAll()) {
+        //Events for the readAll option
+        } else if (e.getSource()== menu.getReadAll()) {
             ArrayList<Person> s = readAll();
             if (s.isEmpty()) {
                 JOptionPane.showMessageDialog(readAll, "There are not people in BBDD", "Read All", JOptionPane.WARNING_MESSAGE);
@@ -354,14 +325,12 @@ public class ControllerImplementation implements IController, ActionListener {
                     }
                     if (s.get(i).getPhoto() != null) {
                         model.setValueAt("yes", i, 3);
-//                        s.get(i).getPhoto().
                     } else {
                         model.setValueAt("no", i, 3);
                     }
                 }
                 readAll.setVisible(true);
             }
-
         }
 
 //        } else if (e.getSource() == menuStu.getDeleteAll()) {
