@@ -8,8 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Fran Perez
+ * This class defines the main menu of the application.
+ * @author Francesc Perez
+ * @version 1.0
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -18,9 +19,8 @@ public class Menu extends javax.swing.JFrame {
          try {
             setIconImage(new ImageIcon(ImageIO.read(new File("images/logo.png"))).getImage());
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Application logo is not available", "WARNING MESSAGE", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Application logo is not available", "WARNING MESSAGE", JOptionPane.WARNING_MESSAGE);
         }
-        this.pack();
     }
 
     public JButton getInsert() {
@@ -34,7 +34,6 @@ public class Menu extends javax.swing.JFrame {
     public JButton getDelete() {
         return delete;
     }
-
 
     public JButton getUpdate() {
         return update;
@@ -149,42 +148,6 @@ public class Menu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    //This main only allows us to make a "run file" from netbeans.
-    //Sometimes is for developtmnet purposes like in this application.
-    //We don't need them, although if they are they don't bother
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        System.out.println("No entramos nunca");
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                //We use by default the Nimbus platform for the "Look and Feel" of the application.
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(StudentMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(StudentMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(StudentMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(StudentMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(() -> {
-//            new StudentMenu().setVisible(true);
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton delete;
