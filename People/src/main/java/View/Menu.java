@@ -8,7 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
- * This class defines the main menu of the application.
+ * This class defines the main menu of the application. Actions that can be 
+ * done: insert, read, delete, update, readAll.
  * @author Francesc Perez
  * @version 1.0
  */
