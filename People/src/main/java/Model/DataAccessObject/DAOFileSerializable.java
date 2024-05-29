@@ -15,11 +15,11 @@ public class DAOFileSerializable implements IDAO {
 
     String sep = File.separator;
     String projectPath = System.getProperty("user.dir");
-    String folderPath = projectPath + sep + "People";
+    String folderPath = projectPath + sep + "PeopleFileS";
     File folderProject = new File(folderPath);
-    String folderPhotoPath = folderPath + sep + "Photos";
+    String folderPhotoPath = folderPath + sep + "PhotosFileS";
     File folderPhotoProject = new File(folderPhotoPath);
-    String filePath = folderPath + sep + "PeopleSerializable.dat";
+    String filePath = folderPath + sep + "PeopleFileS.txt";
     File fileProject = new File(filePath);
 
     @Override

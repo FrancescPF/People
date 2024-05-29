@@ -35,15 +35,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.jdatepicker.DateModel;
 
-
 /**
  * This class starts the visual part of the application and programs and manages
- * all the events that it can receive from it. For each event received the 
+ * all the events that it can receive from it. For each event received the
  * controller performs an action.
+ *
  * @author Francesc Perez
  * @version 1.0
  */
- 
 public class ControllerImplementation implements IController, ActionListener {
 
     //Instance variables used so that both the visual and model parts can be 
@@ -57,21 +56,20 @@ public class ControllerImplementation implements IController, ActionListener {
     private Update update;
     private ReadAll readAll;
 
-    //Para conectarnos a la base de datos
-    //Variables para la conexión segura contra el servidor (sin especificar DDBB)
+    //Variables for secure connection against the server, DDBB and table.
     private final String JDBC_URL = "jdbc:mysql://localhost:3306";
     private final String JDBC_COMMU_OPT = "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private final String JDBC_USER = "root";
     private final String JDBC_PASSWORD = "";
-    //Especificamos la base de Datos
     private final String JDBC_DDBB = "people";
     private final String JDBC_TABLE = "person";
     private final String JDBC_DDBB_TABLE = JDBC_DDBB + "." + JDBC_TABLE;
 
     /**
-     * This constructor allows the controller to know which data storage option 
-     * the user has chosen. Schedule an event to deploy when the user has made 
+     * This constructor allows the controller to know which data storage option
+     * the user has chosen. Schedule an event to deploy when the user has made
      * the selection.
+     *
      * @param dSS
      * @author Francesc Perez
      * @version 1.0
@@ -80,10 +78,11 @@ public class ControllerImplementation implements IController, ActionListener {
         this.dSS = dSS;
         ((JButton) (dSS.getAccept()[0])).addActionListener(this);
     }
-    
+
     /**
-     * With this method, the application is started, asking the user for the 
+     * With this method, the application is started, asking the user for the
      * chosen storage system.
+     *
      * @author Francesc Perez
      * @version 1.0
      */
@@ -130,18 +129,22 @@ public class ControllerImplementation implements IController, ActionListener {
         update.getPhoto().setIcon(null);
     }
 
+    /**
+     * This receives method handles the events of the part. Each event has an
+     * associated action.
+     *
+     * @param e The event generated in the visual part
+     * @author Francesc Perez
+     * @version 1.0
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Depending on the data storage option selected by the user, the 
+        //controller generates a DAO object of one type or another.Through this 
+        //object you can do the CRUD of the person entities
         if (e.getSource() == (dSS.getAccept()[0])) {
             String daoSelected = ((javax.swing.JCheckBox) (dSS.getAccept()[1])).getText();
             dSS.dispose();
-            menu = new Menu();
-            menu.setVisible(true);
-            menu.getInsert().addActionListener(this);
-            menu.getRead().addActionListener(this);
-            menu.getUpdate().addActionListener(this);
-            menu.getDelete().addActionListener(this);
-            menu.getReadAll().addActionListener(this);
             if (daoSelected.equals("ArrayList")) {
                 dao = new DAOArrayList();
             } else if (daoSelected.equals("HashMap")) {
@@ -149,128 +152,61 @@ public class ControllerImplementation implements IController, ActionListener {
             } else if (daoSelected.equals("File")) {
                 String sep = File.separator;
                 String projectPath = System.getProperty("user.dir");
-                String folderPath = projectPath + sep + "People";
+                String folderPath = projectPath + sep + "PeopleFile";
                 File folderProject = new File(folderPath);
-                String folderPhotoPath = folderPath + sep + "Photos";
+                String folderPhotoPath = folderPath + sep + "PhotosFile";
                 File folderPhotoProject = new File(folderPhotoPath);
-                String filePath = folderPath + sep + "People.txt";
+                String filePath = folderPath + sep + "PeopleFile.txt";
                 File fileProject = new File(filePath);
-                if (!folderProject.exists()) {
+                folderProject.mkdir();
+                folderPhotoProject.mkdir();
+                if (!fileProject.exists()) {
                     try {
-                        folderProject.mkdir();
-                        System.out.println("Creating folder project" + folderPath);
-                        folderPhotoProject.mkdir();
-                        System.out.println("Creating folder project" + folderPhotoPath);
                         fileProject.createNewFile();
-                        System.out.println("Creating file project" + folderPath);
                     } catch (IOException ex) {
-                        System.out.println("Can not create project file");
+                        JOptionPane.showMessageDialog(dSS, "Could not create files. Closing application.", "File - People v1.0", JOptionPane.ERROR_MESSAGE);
                         System.exit(0);
-                    }
-                } else if (!folderPhotoProject.exists()) {
-                    folderPhotoProject.mkdir();
-                    System.out.println("Creating folder project" + folderPhotoPath);
-                    if (!fileProject.exists()) {
-                        try {
-                            fileProject.createNewFile();
-                            System.out.println("Creating file project" + folderPath);
-                        } catch (IOException ex) {
-                            System.out.println("Can not create project file");
-                            System.exit(0);
-                        }
-                    } else {
-                        System.out.println("Folder " + folderPath + " exists.");
-                        if (!fileProject.exists()) {
-                            try {
-                                fileProject.createNewFile();
-                                System.out.println("Creating file project" + folderPath);
-                            } catch (IOException ex) {
-                                System.out.println("Can not create project file");
-                                System.exit(0);
-                            }
-                        }
                     }
                 }
                 dao = new DAOFile();
             } else if (daoSelected.equals("File (Serialization)")) {
                 String sep = File.separator;
                 String projectPath = System.getProperty("user.dir");
-                String folderPath = projectPath + sep + "People";
+                String folderPath = projectPath + sep + "PeopleFileS";
                 File folderProject = new File(folderPath);
-                String folderPhotoPath = folderPath + sep + "Photos";
+                String folderPhotoPath = folderPath + sep + "PhotosFileS";
                 File folderPhotoProject = new File(folderPhotoPath);
-                String filePath = folderPath + sep + "PeopleSerializable.dat";
+                String filePath = folderPath + sep + "PeopleFileS.txt";
                 File fileProject = new File(filePath);
-                if (!folderProject.exists()) {
+               folderProject.mkdir();
+                folderPhotoProject.mkdir();
+                if (!fileProject.exists()) {
                     try {
-                        folderProject.mkdir();
-                        System.out.println("Creating folder project" + folderPath);
-                        folderPhotoProject.mkdir();
-                        System.out.println("Creating folder project" + folderPhotoPath);
                         fileProject.createNewFile();
-                        System.out.println("Creating file project" + folderPath);
                     } catch (IOException ex) {
-                        System.out.println("Can not create project file");
+                        JOptionPane.showMessageDialog(dSS, "Could not create files. Closing application.", "FileS - People v1.0", JOptionPane.ERROR_MESSAGE);
                         System.exit(0);
-                    }
-
-                    if (!folderPhotoProject.exists()) {
-                        folderPhotoProject.mkdir();
-                        System.out.println("Creating folder project" + folderPhotoPath);
-                        if (!fileProject.exists()) {
-                            try {
-                                fileProject.createNewFile();
-                                System.out.println("Creating file project" + folderPath);
-                            } catch (IOException ex) {
-                                System.out.println("Can not create project file");
-                                System.exit(0);
-                            }
-                            System.out.println("Folder " + folderPath + " exists.");
-                            if (!fileProject.exists()) {
-                                try {
-                                    fileProject.createNewFile();
-                                    System.out.println("Creating file project" + folderPath);
-                                } catch (IOException ex) {
-                                    System.out.println("Can not create project file");
-                                    System.exit(0);
-                                }
-                            }
-                        }
                     }
                 }
                 dao = new DAOFileSerializable();
-
             } else if (daoSelected.equals("Database")) {
-
-                //Creo la carpeta donde se almacenan las fotos
                 String sep = File.separator;
                 String projectPath = System.getProperty("user.dir");
-                String folderPath = projectPath + sep + "People";
+                String folderPath = projectPath + sep + "PeopleDDBB";
                 File folderProject = new File(folderPath);
-                String folderPhotoPath = folderPath + sep + "PhotosBBDD";
+                String folderPhotoPath = folderPath + sep + "PhotosDDBB";
                 File folderPhotoProject = new File(folderPhotoPath);
-                if (!folderProject.exists()) {
-                    folderProject.mkdir();
-                    System.out.println("Creating folder project" + folderPath);
-                    folderPhotoProject.mkdir();
-                    System.out.println("Creating folder project" + folderPhotoPath);
-                } else if (!folderPhotoProject.exists()) {
-                    folderPhotoProject.mkdir();
-                }
-                System.out.println("Creating folder project" + folderPhotoPath);
-
+                folderProject.mkdir();
+                folderPhotoProject.mkdir();
                 try {
-                    //Creo la BBDD y las tablas
                     Connection conn = null;
                     conn = DriverManager.getConnection(JDBC_URL + JDBC_COMMU_OPT, JDBC_USER, JDBC_PASSWORD);
                     if (conn != null) {
-                        //Creamos la BBDD si no existe
                         String instruction = "create database if not exists " + JDBC_DDBB + ";";
                         Statement stmt = null;
                         stmt = conn.createStatement();
                         stmt.executeUpdate(instruction);
                         stmt.close();
-                        //Creamos la tabla si no existe
                         String query = "create table if not exists " + JDBC_DDBB + "." + JDBC_TABLE + "("
                                 + "nif varchar(9) primary key not null, "
                                 + "name varchar(50), "
@@ -283,12 +219,21 @@ public class ControllerImplementation implements IController, ActionListener {
                         conn.close();
                     }
                 } catch (SQLException ex) {
-                    System.out.println("No se ha podido crear la base de datos o la tabla");
+                    JOptionPane.showMessageDialog(dSS, "Something has gone wrong with the database. Closing application.", "DDBB - People v1.0", JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
                 }
                 dao = new DAOSQL();
             } else if (daoSelected.equals("Database (Serialization)")) {
-
+                //Has to be done
             }
+            dSS.dispose();
+            menu = new Menu();
+            menu.setVisible(true);
+            menu.getInsert().addActionListener(this);
+            menu.getRead().addActionListener(this);
+            menu.getUpdate().addActionListener(this);
+            menu.getDelete().addActionListener(this);
+            menu.getReadAll().addActionListener(this);
         } else if (e.getSource()
                 == menu.getInsert()) {
             insert = new Insert(menu, true);
@@ -418,7 +363,6 @@ public class ControllerImplementation implements IController, ActionListener {
             }
 
         }
-
 
 //        } else if (e.getSource() == menuStu.getDeleteAll()) {
 //            int optionSelected = JOptionPane.showConfirmDialog(menuStu,

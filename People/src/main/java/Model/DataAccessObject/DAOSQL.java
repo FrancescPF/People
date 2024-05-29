@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model.DataAccessObject;
 
 import Model.Class.Person;
@@ -244,9 +240,9 @@ public class DAOSQL implements IDAO {
             if (p.getPhoto() != null) {
                 String sep = File.separator;
                 String projectPath = System.getProperty("user.dir");
-                String folderPath = projectPath + sep + "People";
+                String folderPath = projectPath + sep + "PeopleDDBB";
                 File folderProject = new File(folderPath);
-                String folderPhotoPath = folderPath + sep + "PhotosBBDD";
+                String folderPhotoPath = folderPath + sep + "PhotosDDBB";
                 File imagePerson = new File(folderPhotoPath + sep + p.getNif() + ".gif");
                 FileOutputStream out = null;
                 BufferedOutputStream outB = null;
@@ -316,9 +312,9 @@ public class DAOSQL implements IDAO {
             if (person.getPhoto() != null) {
                 String sep = File.separator;
                 String projectPath = System.getProperty("user.dir");
-                String folderPath = projectPath + sep + "People";
+                String folderPath = projectPath + sep + "PeopleDDBB";
                 File folderProject = new File(folderPath);
-                String folderPhotoPath = folderPath + sep + "PhotosBBDD";
+                String folderPhotoPath = folderPath + sep + "PhotosDDBB";
                 File imagePerson = new File(folderPhotoPath + sep + person.getNif() + ".gif");
                 FileOutputStream out = null;
                 BufferedOutputStream outB = null;

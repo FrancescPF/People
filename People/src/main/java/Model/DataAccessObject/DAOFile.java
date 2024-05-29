@@ -29,11 +29,11 @@ public class DAOFile implements IDAO {
 
     String sep = File.separator;
     String projectPath = System.getProperty("user.dir");
-    String folderPath = projectPath + sep + "People";
+    String folderPath = projectPath + sep + "PeopleFile";
     File folderProject = new File(folderPath);
-    String folderPhotoPath = folderPath + sep + "Photos";
+    String folderPhotoPath = folderPath + sep + "PhotosFile";
     File folderPhotoProject = new File(folderPhotoPath);
-    String filePath = folderPath + sep + "People.txt";
+    String filePath = folderPath + sep + "PeopleFile.txt";
     File fileProject = new File(filePath);
     
     
