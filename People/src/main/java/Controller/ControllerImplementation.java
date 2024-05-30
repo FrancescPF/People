@@ -208,7 +208,6 @@ public class ControllerImplementation implements IController, ActionListener {
             } else if (daoSelected.equals("Database (Serialization)")) {
                 //Has to be done
             }
-            dSS.dispose();
             //Showing the menu and schedule the events
             menu = new Menu();
             menu.setVisible(true);
