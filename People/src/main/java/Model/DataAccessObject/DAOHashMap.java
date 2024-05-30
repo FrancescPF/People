@@ -4,6 +4,13 @@ import Model.Class.Person;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class implements the IDAO interface and completes the function code 
+ * blocks so that they can operate with a HashMap structure. The NIF is used as 
+ * the key.
+ * @author Francesc Perez 
+ * @version 1.0
+ */
 public class DAOHashMap implements IDAO{
     
     HashMap <String, Person> people = new HashMap();

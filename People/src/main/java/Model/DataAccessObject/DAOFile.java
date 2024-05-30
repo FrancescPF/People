@@ -25,22 +25,29 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+/**
+ * This class implements the IDAO interface and completes the code of the 
+ * functions so that they can work with files. User data is saved in the 
+ * "PeopleFile.txt" file and the associated photos, if any, are saved with the 
+ * name NIF.png in the "PhotosFile" folder.
+ * @author Fran Perez
+ * @version 1.0
+ */
 public class DAOFile implements IDAO {
 
+    //Variables with information about file locations
     String sep = File.separator;
     String projectPath = System.getProperty("user.dir");
     String folderPath = projectPath + sep + "PeopleFile";
-    File folderProject = new File(folderPath);
     String folderPhotoPath = folderPath + sep + "PhotosFile";
     File folderPhotoProject = new File(folderPhotoPath);
     String filePath = folderPath + sep + "PeopleFile.txt";
     File fileProject = new File(filePath);
-    
-    
+   
     @Override
     public ArrayList<Person> readAll(){
         ArrayList<Person> people = new ArrayList<>();
-        FileReader fr = null;
+        FileReader fr;
         BufferedReader br = null;
         try {
             fr = new FileReader(fileProject);
@@ -49,8 +56,6 @@ public class DAOFile implements IDAO {
             line = br.readLine();
             while (line != null) {
                 String data[] = line.split("\t");
-                String dni = data[0];
-                String name = data[1];
                 Date date = null;
                 if (!data[2].equals("null")) {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -63,18 +68,14 @@ public class DAOFile implements IDAO {
                 people.add(new Person(data[0], data[1], date, photo));
                 line = br.readLine();
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Project file not found");
-        } catch (IOException ex) {
-            System.out.println("Can access project file");
-        } catch (ParseException ex) {
-            System.out.println("Can not convert Date");
+        } catch (IOException | ParseException ex) {
+            //Decide what to do
         } finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(DAOFile.class.getName()).log(Level.SEVERE, null, ex);
+                    //Decide what to do
                 }
             }
         }
@@ -84,7 +85,7 @@ public class DAOFile implements IDAO {
     @Override
     public Person read(Person p) {
         Person personToReturn = null;
-        FileReader fr = null;
+        FileReader fr;
         BufferedReader br = null;
         try {
             fr = new FileReader(fileProject);
@@ -109,29 +110,26 @@ public class DAOFile implements IDAO {
                 }
                 line = br.readLine();
             }
-        } catch (FileNotFoundException ex) {
-            System.out.println("Project file not found");
-        } catch (IOException ex) {
-            System.out.println("Can access project file");
-        } catch (ParseException ex) {
-            System.out.println("Can not convert Date");
-        } finally {
+        } catch (IOException | ParseException ex) {
+            //Decide what to do
+        }
+        //Decide what to do
+         finally {
             if (br != null) {
                 try {
                     br.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(DAOFile.class.getName()).log(Level.SEVERE, null, ex);
+                    //Decide what to do
                 }
             }
         }
-        System.out.println(personToReturn);
         return personToReturn;
     }
 
     @Override
     public int insert(Person p) {
         int returnValue = 0;
-        FileWriter fw = null;
+        FileWriter fw;
         BufferedWriter bw = null;
         try {
             fw = new FileWriter(fileProject, true);
@@ -144,7 +142,7 @@ public class DAOFile implements IDAO {
                 bw.write(p.getName() + "\t" + p.getNif() + "\t" + "null" + "\t");
             }
             if (p.getPhoto() != null) {
-                FileOutputStream out = null;
+                FileOutputStream out;
                 BufferedOutputStream outB = null;
                 try {
                     out = new FileOutputStream(folderPhotoProject + sep + p.getNif() + ".png");
@@ -157,7 +155,7 @@ public class DAOFile implements IDAO {
                     try {
                         ImageIO.write(bi, "png", baos);
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        //Decide what to do
                     }
                     byte[] img = baos.toByteArray();
                     for (int i = 0; i < img.length; i++) {
@@ -174,13 +172,13 @@ public class DAOFile implements IDAO {
             }
             returnValue = 1;
         } catch (IOException ex) {
-            System.out.println("Error accesing fileProject");
+            //Decide what to do
         } finally {
             if (bw != null) {
                 try {
                     bw.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(DAOFile.class.getName()).log(Level.SEVERE, null, ex);
+                    //Decide what to do
                 }
             }
         }
