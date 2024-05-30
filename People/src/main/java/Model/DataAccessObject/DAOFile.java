@@ -113,7 +113,6 @@ public class DAOFile implements IDAO {
         } catch (IOException | ParseException ex) {
             //Decide what to do
         }
-        //Decide what to do
          finally {
             if (br != null) {
                 try {
@@ -201,26 +200,25 @@ public class DAOFile implements IDAO {
                     textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3] + "\n";
                 }
             }
-            //Vacio el archivo
+            //Clearing file
             rafRW.setLength(0);
-            //Escribo el archivo sin el usuario a actualizar
+            //Writing the file without the user to update
             System.out.println(textoNuevo);
             rafRW.writeBytes(textoNuevo);
-//            rafRW.writeUTF(textoNuevo);
         } catch (FileNotFoundException ex) {
-            System.out.println("Algo pasa abriendo el archivo");
-            return -1;
+            //Decide what to do
+            return 0;
         } catch (IOException ex) {
-            System.out.println("No se puede leer el archivo");
-            return -1;
+            //Decide what to do
+            return 0;
         } finally {
             if (rafRW != null) {
                 try {
                     rafRW.close();
-                    //Inserto el usuario nuevo con las modificaciones
+                    //Inserting the new user with the modifications
                     insert(p);
                 } catch (IOException ex) {
-                    Logger.getLogger(RandomAccess.class.getName()).log(Level.SEVERE, null, ex);
+                    //Decide what to do
                 }
             }
         }
@@ -245,29 +243,25 @@ public class DAOFile implements IDAO {
                     textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3] + "\n";
                 }
             }
-            //Vacio el archivo
+            //Clearaing file
             rafRW.setLength(0);
-            //Escribo el archivo sin el usuario a actualizar
-            System.out.println(textoNuevo);
             rafRW.writeBytes(textoNuevo);
-//            rafRW.writeUTF(textoNuevo);
         } catch (FileNotFoundException ex) {
-            System.out.println("Algo pasa abriendo el archivo");
-            return -1;
+            //Decide what to do
+            return 0;
         } catch (IOException ex) {
-            System.out.println("No se puede leer el archivo");
-            return -1;
+            //Decide what to do;
+            return 0;
         } finally {
             if (rafRW != null) {
                 try {
                     rafRW.close();
                     if(foundPerson != null){
                         File photoFile = new File(folderPhotoPath + sep + p.getNif() + ".png");
-                        System.out.println(photoFile.getAbsolutePath());
                         photoFile.delete();
                     }
                 } catch (IOException ex) {
-                    Logger.getLogger(RandomAccess.class.getName()).log(Level.SEVERE, null, ex);
+                    //Decide waht to do
                 }
             }
         }
