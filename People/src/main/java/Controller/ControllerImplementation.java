@@ -330,7 +330,6 @@ public class ControllerImplementation implements IController, ActionListener {
                     }
                 }
                 readAll.setVisible(true);
-                System.out.println("gdfgdfgf");
             }
         }
 
