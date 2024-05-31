@@ -19,9 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.RandomAccess;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -186,6 +183,7 @@ public class DAOFile implements IDAO {
 
     @Override
     public int update(Person p) {
+        int returnValue = 0;
         RandomAccessFile rafRW = null;
         try {
             rafRW = new RandomAccessFile(filePath, "rw");
@@ -207,51 +205,47 @@ public class DAOFile implements IDAO {
             rafRW.writeBytes(textoNuevo);
         } catch (FileNotFoundException ex) {
             //Decide what to do
-            return 0;
         } catch (IOException ex) {
             //Decide what to do
-            return 0;
         } finally {
             if (rafRW != null) {
                 try {
                     rafRW.close();
                     //Inserting the new user with the modifications
                     insert(p);
+                    returnValue = 1;
                 } catch (IOException ex) {
                     //Decide what to do
                 }
             }
         }
-        return 1;
+        return returnValue;
     }
 
     @Override
     public int delete(Person p) {
+        int returnValue = 0;
         RandomAccessFile rafRW = null;
         String foundPerson = null;
         try {
             rafRW = new RandomAccessFile(filePath, "rw");
-            System.out.println(rafRW);
             String textoNuevo = "";
             while (rafRW.getFilePointer() < rafRW.length()) {
                 String l = rafRW.readLine();
                 String d[] = l.split("\t");
                 if (p.getNif().equals(d[1])) {
-                    System.out.println("Persona a actualizar encontrada");
                     foundPerson = d[3];
                 } else {
                     textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3] + "\n";
                 }
             }
-            //Clearaing file
+            //Clearing file
             rafRW.setLength(0);
             rafRW.writeBytes(textoNuevo);
         } catch (FileNotFoundException ex) {
             //Decide what to do
-            return 0;
         } catch (IOException ex) {
             //Decide what to do;
-            return 0;
         } finally {
             if (rafRW != null) {
                 try {
@@ -259,13 +253,14 @@ public class DAOFile implements IDAO {
                     if(foundPerson != null){
                         File photoFile = new File(folderPhotoPath + sep + p.getNif() + ".png");
                         photoFile.delete();
+                        returnValue = 1;
                     }
                 } catch (IOException ex) {
                     //Decide waht to do
                 }
             }
         }
-        return 1;
+        return returnValue;
     }
 
 }
