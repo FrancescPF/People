@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * storage device chosen by the user before starting to interact with the 
  * application.
  * @author Francesc Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class DataStorageSelection extends javax.swing.JFrame {
     

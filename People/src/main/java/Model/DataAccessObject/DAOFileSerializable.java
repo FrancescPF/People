@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * saved with the name NIF.png in the "PhotosFileS" folder.
  *
  * @author Fran Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class DAOFileSerializable implements IDAO {
 

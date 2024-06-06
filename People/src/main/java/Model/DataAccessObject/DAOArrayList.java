@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * to the overriding of the equals method in the Person class, the ArrayList 
  * will not be able to contain objects with the same NIF.
  * @author Francesc Perez 
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class DAOArrayList implements IDAO{
     

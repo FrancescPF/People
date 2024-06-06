@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  * @author Francesc Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class ReadAll extends javax.swing.JDialog {
 

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 /**
  * @author Francesc Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class Delete extends javax.swing.JDialog {
 

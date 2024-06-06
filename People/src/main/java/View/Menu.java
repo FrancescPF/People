@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * This class defines the main menu of the application. Actions that can be 
  * done: insert, read, delete, update, readAll.
  * @author Francesc Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class Menu extends javax.swing.JFrame {
 

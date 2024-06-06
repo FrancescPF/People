@@ -41,7 +41,7 @@ import org.jdatepicker.DateModel;
  * controller performs an action.
  *
  * @author Francesc Perez
- * @version 1.1.0
+ * @version 1.0.0
  */
 public class ControllerImplementation implements IController, ActionListener {
 
