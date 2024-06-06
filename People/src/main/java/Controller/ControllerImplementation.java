@@ -38,7 +38,7 @@ import org.jdatepicker.DateModel;
 /**
  * This class starts the visual part of the application and programs and manages
  * all the events that it can receive from it. For each event received the
- * controller performs an action...
+ * controller performs an action.
  *
  * @author Francesc Perez
  * @version 1.0
