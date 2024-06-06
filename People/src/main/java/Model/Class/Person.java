@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 /**
  * Encapsulated class that defines the type of entity that will manage the application.
  * @author Fran Perez
- * @version 1.0
+ * @version 1.1.0
  */
 public class Person implements Serializable{
 

@@ -28,7 +28,7 @@ import javax.swing.ImageIcon;
  * "PeopleFile.txt" file and the associated photos, if any, are saved with the 
  * name NIF.png in the "PhotosFile" folder.
  * @author Fran Perez
- * @version 1.0
+ * @version 1.1.0
  */
 public class DAOFile implements IDAO {
 

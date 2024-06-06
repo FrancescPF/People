@@ -24,7 +24,7 @@ import javax.swing.ImageIcon;
  * primary key.
  *
  * @author Francesc Perez
- * @version 1.0
+ * @version 1.1.0
  */
 public class DAOSQL implements IDAO {
 

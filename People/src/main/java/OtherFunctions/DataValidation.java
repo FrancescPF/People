@@ -5,8 +5,8 @@
 package OtherFunctions;
 
 /**
- *
- * @author Fran Perez
+ * @author Francesc Perez 
+ * @version 1.1.0
  */
 public class DataValidation {
 

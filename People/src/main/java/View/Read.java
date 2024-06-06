@@ -3,14 +3,11 @@ package View;
 import static OtherFunctions.DataValidation.calculateNifLetter;
 import static OtherFunctions.DataValidation.validateNifNumber;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,8 +16,8 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
- *
- * @author Fran Perez
+ * @author Francesc Perez
+ * @version 1.1.0
  */
 public class Read extends javax.swing.JDialog {
 

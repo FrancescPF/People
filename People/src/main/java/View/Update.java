@@ -18,8 +18,8 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
- *
- * @author Fran Perez
+ * @author Francesc Perez
+ * @version 1.1.0
  */
 public class Update extends javax.swing.JDialog {
 

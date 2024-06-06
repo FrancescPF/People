@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * data storage system chosen by the user. Depending on the system, the 
  * implementation varies.
  * @author Francesc Perez 
- * @version 1.0
+ * @version 1.1.0
  */
 public interface IDAO { 
     /**

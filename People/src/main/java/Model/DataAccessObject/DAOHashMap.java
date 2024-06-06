@@ -9,7 +9,7 @@ import java.util.HashMap;
  * blocks so that they can operate with a HashMap structure. The NIF is used as 
  * the key.
  * @author Francesc Perez 
- * @version 1.0
+ * @version 1.1.0
  */
 public class DAOHashMap implements IDAO{
     

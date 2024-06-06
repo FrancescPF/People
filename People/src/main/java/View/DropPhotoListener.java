@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
-//import org.apache.commons.io.FilenameUtils;
 import java.awt.Image;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -23,8 +17,8 @@ import javax.swing.JOptionPane;
 import org.apache.commons.io.FilenameUtils;
 
 /**
- *
- * @author Fran Perez
+ * @author Francesc Perez
+ * @version 1.1.0
  */
 public class DropPhotoListener implements DropTargetListener {
 

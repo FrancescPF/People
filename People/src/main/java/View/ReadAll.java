@@ -8,8 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- *
- * @author Fran Perez
+ * @author Francesc Perez
+ * @version 1.1.0
  */
 public class ReadAll extends javax.swing.JDialog {
 

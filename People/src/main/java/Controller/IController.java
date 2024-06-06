@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Interface that defines the type of operations that the controller and 
  * therefore the application can perform.
  * @author Francesc Perez
- * @version 1.0
+ * @version 1.1.0
  */
 public interface IController {
     public abstract Person read(Person p);
