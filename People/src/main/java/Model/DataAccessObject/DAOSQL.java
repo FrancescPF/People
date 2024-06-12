@@ -60,18 +60,33 @@ public class DAOSQL implements IDAO {
         while (rs.next()) {
             String nif = rs.getString("nif");
             String name = rs.getString("name");
+            pReturn = new Person(name, nif);
             Date date = rs.getDate("dateOfBirth");
+            if(date != null)
+                pReturn.setDateOfBirth(date);                
             String photo = rs.getString("photo");
-            if (photo != null) {
-                pReturn = new Person(nif, name, date, new ImageIcon(photo));
-            } else {
-                pReturn = new Person(nif, name, date, null);
-            }
+            if (photo != null) 
+                pReturn.setPhoto(new ImageIcon(photo));
         }
         rs.close();
         instruction.close();
         disconnect(conn);
         return pReturn;
+    }
+
+    @Override
+    public void delete(Person p) throws SQLException {
+        Connection conn;
+        PreparedStatement instruction;
+        conn = connect();
+        String query = SQL_DELETE + "'" + p.getNif() + "'" + ");";
+        instruction = conn.prepareStatement(query);
+        instruction.executeUpdate();
+        instruction.close();
+        disconnect(conn);
+            File photoFile = new File(Routes.DB.getFolderPhotos() + File.separator + p.getNif()
+                    + ".png");
+            photoFile.delete();
     }
 
     @Override
@@ -82,7 +97,11 @@ public class DAOSQL implements IDAO {
         instruction = conn.prepareStatement(SQL_INSERT);
         instruction.setString(1, p.getNif());
         instruction.setString(2, p.getName());
-        instruction.setDate(3, new java.sql.Date((p.getDateOfBirth()).getTime()));
+        if (p.getDateOfBirth() != null) {
+           instruction.setDate(3, new java.sql.Date((p.getDateOfBirth()).getTime())); 
+        }else{
+            instruction.setDate(3, null); 
+        }
         if (p.getPhoto() != null) {
             String sep = File.separator;
             File photo = new File(Routes.DB.getFolderPhotos() + sep + p.getNif() + ".png");
@@ -175,31 +194,6 @@ public class DAOSQL implements IDAO {
         instruction.executeUpdate();
         instruction.close();
         disconnect(conn);
-    }
-
-    @Override
-    public void delete(Person person) {
-        Connection conn = null;
-        PreparedStatement instruction = null;
-        int registers = 0;
-        try {
-            conn = connect();
-            String query = SQL_DELETE + "'" + person.getNif() + "'" + ");";
-            instruction = conn.prepareStatement(query);
-            registers = instruction.executeUpdate();
-        } catch (SQLException ex) {
-            //Decide what to do
-        } finally {
-            try {
-                if (instruction != null) {
-                    instruction.close();
-                }
-                disconnect(conn);
-            } catch (SQLException ex) {
-                //Decide what to do
-            }
-        }
-//        return registers;
     }
 
 }

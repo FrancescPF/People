@@ -45,6 +45,37 @@ public class DAOFileSerializable implements IDAO {
     }
 
     @Override
+    public void delete(Person p) throws IOException, ClassNotFoundException {
+        ArrayList<Person> peopleRead = new ArrayList<>();
+        FileInputStream fIS;
+        ObjectInputStream ois;
+        try {
+            fIS = new FileInputStream(Routes.FILES.getDataFile());
+            ois = new ObjectInputStream(fIS);
+            Person pr;
+            while ((pr = (Person) ois.readObject()) != null) {
+                if (!pr.getNif().equals(p.getNif())) {
+                    peopleRead.add(pr);
+                }
+            }
+            ois.close();
+        } catch (java.io.EOFException ex) {
+            //Do nothing
+//            System.out.println("El archivo está vacío y no se puede crear"
+//                    + "el objeto ObjectInputStream");
+        }
+        ObjectOutputStream oos;
+        FileOutputStream fOS;
+        fOS = new FileOutputStream(Routes.FILES.getDataFile());
+        oos = new ObjectOutputStream(fOS);
+        for (Person pf : peopleRead) {
+            oos.writeObject(pf);
+        }
+        oos.flush();
+        oos.close();
+    }
+
+    @Override
     public void insert(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> personRead = new ArrayList<>();
         try {
@@ -115,34 +146,6 @@ public class DAOFileSerializable implements IDAO {
         oos = new ObjectOutputStream(fOS);
         personRead.add(p);
         for (Person pf : personRead) {
-            oos.writeObject(pf);
-        }
-        oos.flush();
-        oos.close();
-    }
-
-    @Override
-    public void delete(Person p) throws IOException, ClassNotFoundException, PersonException {
-        ArrayList<Person> peopleRead = new ArrayList<>();
-        FileInputStream fIS;
-        ObjectInputStream ois;
-        fIS = new FileInputStream(Routes.FILES.getDataFile());
-        ois = new ObjectInputStream(fIS);
-        Person pr;
-        while ((pr = (Person) ois.readObject()) != null) {
-            peopleRead.add(pr);
-        }
-        ois.close();
-        if (!peopleRead.remove(p)) {
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be DELETED");
-        }
-        ObjectOutputStream oos;
-        FileOutputStream fOS;
-        fOS = new FileOutputStream(Routes.FILES.getDataFile());
-        oos = new ObjectOutputStream(fOS);
-        peopleRead.add(p);
-        for (Person pf : peopleRead) {
             oos.writeObject(pf);
         }
         oos.flush();
