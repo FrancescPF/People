@@ -83,7 +83,6 @@ public class Menu extends javax.swing.JFrame {
 
         delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         delete.setText("DELETE");
-        delete.setEnabled(false);
         delete.setMaximumSize(new java.awt.Dimension(120, 50));
         delete.setMinimumSize(new java.awt.Dimension(120, 50));
         delete.setPreferredSize(new java.awt.Dimension(120, 50));

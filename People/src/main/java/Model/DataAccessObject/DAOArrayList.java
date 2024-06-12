@@ -26,7 +26,10 @@ public class DAOArrayList implements IDAO{
         people.add(p);
     }
     
-    
+    @Override
+    public void delete(Person p){
+        people.remove(p);
+    }
     
     
     
@@ -62,12 +65,6 @@ public class DAOArrayList implements IDAO{
         }
     }
 
-    @Override
-    public void delete(Person p) throws PersonException {
-        if(!people.remove(p)){
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be DELETED");
-        }
-    }
+
     
 }

@@ -28,6 +28,7 @@ import javax.swing.ImageIcon;
  * functions so that they can work with files. User data is saved in the
  * "dataFile.txt" file and the associated photos, if any, are saved with the
  * name NIF.png in the "Photos" folder.
+ *
  * @author Francesc Perez
  * @version 1.1.0
  */
@@ -63,7 +64,7 @@ public class DAOFile implements IDAO {
         br.close();
         return personToRead;
     }
-    
+
     @Override
     public void insert(Person p) throws IOException {
         String sep = File.separator;
@@ -103,11 +104,32 @@ public class DAOFile implements IDAO {
         bw.flush();
         bw.close();
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public void delete(Person p) throws IOException, PersonException {
+        String sep = File.separator;
+        RandomAccessFile rafRW;
+        rafRW = new RandomAccessFile(Routes.FILE.getDataFile(), "rw");
+        String textoNuevo = "";
+        while (rafRW.getFilePointer() < rafRW.length()) {
+            String l = rafRW.readLine();
+            String d[] = l.split("\t");
+            if (p.getNif().equals(d[1])) {
+                if (!d[3].equals("null")) {
+                    File photoFile = new File(Routes.FILE.getFolderPhotos() + sep + p.getNif()
+                            + ".png");
+                    photoFile.delete();
+                }
+            } else {
+                textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3]
+                        + "\n";
+            }
+        }
+        rafRW.setLength(0);
+        rafRW.writeBytes(textoNuevo);
+        rafRW.close();
+    }
+
     @Override
     public ArrayList<Person> readAll() throws FileNotFoundException, IOException, ParseException, PersonException {
         String sep = File.separator;
@@ -140,10 +162,6 @@ public class DAOFile implements IDAO {
         return people;
     }
 
-    
-
-    
-
     @Override
     public void update(Person p) throws IOException, PersonException {
         boolean updatePerson = false;
@@ -156,13 +174,13 @@ public class DAOFile implements IDAO {
             String d[] = l.split("\t");
             if (p.getNif().equals(d[1])) {
                 updatePerson = true;
-                if(!d[3].equals("null")){
+                if (!d[3].equals("null")) {
                     File photoFile = new File(Routes.FILE.getFolderPhotos() + sep + p.getNif()
                             + ".png");
                     photoFile.delete();
                 }
             } else {
-                textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3] 
+                textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3]
                         + "\n";
             }
         }
@@ -177,37 +195,4 @@ public class DAOFile implements IDAO {
         insert(p);
     }
 
-    @Override
-    public void delete(Person p) throws IOException, PersonException {
-        String sep = File.separator;
-        boolean deletePerson = false;
-        RandomAccessFile rafRW;
-        rafRW = new RandomAccessFile(Routes.FILE.getDataFile(), "rw");
-        String textoNuevo = "";
-        while (rafRW.getFilePointer() < rafRW.length()) {
-            String l = rafRW.readLine();
-            String d[] = l.split("\t");
-            if (p.getNif().equals(d[1])) {
-                deletePerson = true;
-                if(!d[3].equals("null")){
-                    File photoFile = new File(Routes.FILE.getFolderPhotos() + sep + p.getNif()
-                            + ".png");
-                    photoFile.delete();
-                }
-            } else {
-                textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3] 
-                        + "\n";
-            }
-        }
-        if (deletePerson) {
-            rafRW.setLength(0);
-            rafRW.writeBytes(textoNuevo);
-            rafRW.close();
-        } else {
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be DELETED");
-        }
-    }
 }
-
-

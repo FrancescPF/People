@@ -27,6 +27,10 @@ public class DAOHashMap implements IDAO {
         people.put(p.getNif(), p);
     }
     
+    @Override
+    public void delete(Person p){
+        people.remove(p.getNif());
+    }
     
     
     
@@ -68,12 +72,6 @@ public class DAOHashMap implements IDAO {
         }
     }
 
-    @Override
-    public void delete(Person p) throws PersonException {
-        if (people.remove(p.getNif()) == null) {
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be DELETED");
-        }
-    }
+
 
 }

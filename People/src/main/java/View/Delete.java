@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 /**
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Delete extends javax.swing.JDialog {
 
@@ -35,6 +35,9 @@ public class Delete extends javax.swing.JDialog {
         return nif;
     }
 
+    public JButton getReset() {
+        return reset;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,11 +53,11 @@ public class Delete extends javax.swing.JDialog {
         delete = new javax.swing.JButton();
         nif = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Delete - People v1.0");
+        setTitle("Delete - People v1.1.0");
         setMinimumSize(new java.awt.Dimension(350, 200));
-        setPreferredSize(new java.awt.Dimension(350, 200));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -72,6 +75,7 @@ public class Delete extends javax.swing.JDialog {
 
         delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         delete.setText("DELETE");
+        delete.setEnabled(false);
         delete.setMaximumSize(new java.awt.Dimension(187, 33));
         delete.setMinimumSize(new java.awt.Dimension(187, 33));
         delete.setPreferredSize(new java.awt.Dimension(187, 33));
@@ -80,12 +84,12 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(delete, gridBagConstraints);
 
-        nif.setMaximumSize(new java.awt.Dimension(200, 22));
-        nif.setMinimumSize(new java.awt.Dimension(200, 22));
-        nif.setPreferredSize(new java.awt.Dimension(200, 22));
+        nif.setMaximumSize(new java.awt.Dimension(400, 22));
+        nif.setMinimumSize(new java.awt.Dimension(400, 22));
+        nif.setPreferredSize(new java.awt.Dimension(400, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -100,6 +104,7 @@ public class Delete extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 24);
@@ -107,15 +112,33 @@ public class Delete extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
+
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        reset.setText("RESET");
+        reset.setMaximumSize(new java.awt.Dimension(187, 33));
+        reset.setMinimumSize(new java.awt.Dimension(187, 33));
+        reset.setPreferredSize(new java.awt.Dimension(187, 33));
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
+        getContentPane().add(reset, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,20 +156,32 @@ public class Delete extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_nifKeyPressed
-
+   
     private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
+            nif.setEnabled(false);
+            delete.setEnabled(true);
+        }else{
+            delete.setEnabled(false);
         }
     }//GEN-LAST:event_nifKeyReleased
 
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
         if(nif.getText().length()==8){
             nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
-        }  
+            nif.setEnabled(false);
+            delete.setEnabled(true);
+        }else{
+            delete.setEnabled(false);
+        }
     }//GEN-LAST:event_nifKeyTyped
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        nif.setText("");
+        nif.setEnabled(true);
+        delete.setEnabled(false);
+    }//GEN-LAST:event_resetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,5 +193,6 @@ public class Delete extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField nif;
+    private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 }

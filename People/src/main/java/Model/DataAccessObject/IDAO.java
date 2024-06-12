@@ -52,7 +52,7 @@ public interface IDAO {
     /**
      * This function receives the person (NIF) and deletes it from the storage 
      * system, if it does not exist generates a PersonException object that has 
-     * to be manage by the controller.
+     * to be manage by the Controller.
      * @param p Person
      * @throws java.lang.Exception
      */

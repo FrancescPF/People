@@ -78,7 +78,7 @@ public class Read extends javax.swing.JDialog {
         reset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Read - People v1.0");
+        setTitle("Read - People v1.1.0");
         setMinimumSize(new java.awt.Dimension(660, 220));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -201,7 +201,7 @@ public class Read extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
