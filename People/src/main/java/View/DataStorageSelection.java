@@ -115,7 +115,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         getContentPane().add(fileCheck, gridBagConstraints);
 
         dataBaseCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        dataBaseCheck.setText("Database");
+        dataBaseCheck.setText("SQL - Database");
         dataBaseCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dataBaseCheckActionPerformed(evt);

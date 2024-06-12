@@ -60,13 +60,6 @@ public class ControllerImplementation implements IController, ActionListener {
     private Update update;
     private ReadAll readAll;
 
-    //Variables for secure connection against the server, DDBB and table.
-//    private final String JDBC_URL = "jdbc:mysql://localhost:3306";
-//    private final String JDBC_COMMU_OPT = "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-//    private final String JDBC_USER = "root";
-//    private final String JDBC_PASSWORD = "";
-//    private final String JDBC_DDBB = "people";
-//    private final String JDBC_TABLE = "person";
     /**
      * This constructor allows the controller to know which data storage option
      * the user has chosen.Schedule an event to deploy when the user has made
@@ -112,6 +105,7 @@ public class ControllerImplementation implements IController, ActionListener {
     /**
      * This receives method handles the events of the visual part. Each event
      * has an associated action.
+     *
      * @param e The event generated in the visual part
      */
     @Override
@@ -139,7 +133,7 @@ public class ControllerImplementation implements IController, ActionListener {
                         try {
                             dataFile.createNewFile();
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(dSS, "Could not create files. Closing application.", "File - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(dSS, "File structure not created. Closing application.", "File - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                             System.exit(0);
                         }
                     }
@@ -147,56 +141,48 @@ public class ControllerImplementation implements IController, ActionListener {
                     break;
                 case "File (Serialization)":
                     folderPath = new File(Routes.FILES.getFolderPath());
-                    folderPhotos = new File(Routes.FILES.getFolderPhotos());
                     dataFile = new File(Routes.FILES.getDataFile());
                     folderPath.mkdir();
-                    folderPhotos.mkdir();
                     if (!dataFile.exists()) {
                         try {
                             dataFile.createNewFile();
                         } catch (IOException ex) {
-                            JOptionPane.showMessageDialog(dSS, "Could not create files. Closing application.", "FileSer - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(dSS, "File structure not created. Closing application.", "FileSer - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                             System.exit(0);
                         }
                     }
                     dao = new DAOFileSerializable();
                     break;
-//                String sep = File.separator;
-//                String projectPath = System.getProperty("user.dir");
-//                String folderPath = projectPath + sep + "PeopleDDBB";
-//                File folderProject = new File(folderPath);
-//                String folderPhotoPath = folderPath + sep + "PhotosDDBB";
-//                File folderPhotoProject = new File(folderPhotoPath);
-//                folderProject.mkdir();
-//                folderPhotoProject.mkdir();
-//                try {
-//                    Connection conn = null;
-//                    conn = DriverManager.getConnection(JDBC_URL + JDBC_COMMU_OPT, JDBC_USER, JDBC_PASSWORD);
-//                    if (conn != null) {
-//                        String instruction = "create database if not exists " + JDBC_DDBB + ";";
-//                        Statement stmt = null;
-//                        stmt = conn.createStatement();
-//                        stmt.executeUpdate(instruction);
-//                        stmt.close();
-//                        String query = "create table if not exists " + JDBC_DDBB + "." + JDBC_TABLE + "("
-//                                + "nif varchar(9) primary key not null, "
-//                                + "name varchar(50), "
-//                                + "dateOfBirth DATE, "
-//                                + "photo varchar(200) );";
-//                        stmt = null;
-//                        stmt = conn.createStatement();
-//                        stmt.executeUpdate(query);
-//                        stmt.close();
-//                        conn.close();
-//                    }
-//                } catch (SQLException ex) {
-//                    JOptionPane.showMessageDialog(dSS, "Something has gone wrong with the database. Closing application.", "DDBB - People v1.0", JOptionPane.ERROR_MESSAGE);
-//                    System.exit(0);
-//                }
-//                dao = new DAOSQL();
-                case "Database":
+                case "SQL - Database":
+                    folderPath = new File(Routes.DB.getFolderPath());
+                    folderPhotos = new File(Routes.DB.getFolderPhotos());
+                    folderPath.mkdir();
+                    folderPhotos.mkdir();
+                    try {
+                        Connection conn;
+                        conn = DriverManager.getConnection(Routes.DB.getDbServerAddress() + Routes.DB.getDbServerComOpt(), Routes.DB.getDbServerUser(), Routes.DB.getDbServerPassword());
+                        if (conn != null) {
+                            String instruction = "create database if not exists " + Routes.DB.getDbServerDB() + ";";
+                            Statement stmt;
+                            stmt = conn.createStatement();
+                            stmt.executeUpdate(instruction);
+                            stmt.close();
+                            String query = "create table if not exists " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + "("
+                                    + "nif varchar(9) primary key not null, "
+                                    + "name varchar(50), "
+                                    + "dateOfBirth DATE, "
+                                    + "photo varchar(200) );";
+                            stmt = conn.createStatement();
+                            stmt.executeUpdate(query);
+                            stmt.close();
+                            conn.close();
+                        }
+                    } catch (SQLException ex) {
+                        JOptionPane.showMessageDialog(dSS, "SQL-DDBB structure not created. Closing application.", "SQL_DDBB - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
+                    dao = new DAOSQL();
                     break;
-                //Has to be done
                 case "Database (Serialization)":
                     break;
                 default:
@@ -346,8 +332,9 @@ public class ControllerImplementation implements IController, ActionListener {
         } catch (Exception ex) {
             //Exceptions generated by file read/write access. If something goes 
             // wrong the application closes.
-            if (ex instanceof FileNotFoundException || ex instanceof IOException 
-                    || ex instanceof ParseException || ex instanceof ClassNotFoundException) {
+            if (ex instanceof FileNotFoundException || ex instanceof IOException
+                    || ex instanceof ParseException || ex instanceof ClassNotFoundException
+                    || ex instanceof SQLException) {
                 JOptionPane.showMessageDialog(read, ex.getMessage() + ex.getClass() + " Closing application.", "Insert - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
@@ -361,6 +348,7 @@ public class ControllerImplementation implements IController, ActionListener {
      * This function returns the Person object with the requested NIF, if it
      * exists. Otherwise it returns null. If there is any access problem with
      * the storage device, the program stops.
+     *
      * @param p Person to read
      * @return Person or null
      */
@@ -375,7 +363,8 @@ public class ControllerImplementation implements IController, ActionListener {
             //Exceptions generated by file read access. If something goes wrong 
             //reading the file, the application closes.
             if (ex instanceof FileNotFoundException || ex instanceof IOException
-                    || ex instanceof ParseException || ex instanceof ClassNotFoundException) {
+                    || ex instanceof ParseException || ex instanceof ClassNotFoundException
+                    || ex instanceof SQLException) {
                 JOptionPane.showMessageDialog(read, ex.getMessage() + " Closing application.", "Read - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }

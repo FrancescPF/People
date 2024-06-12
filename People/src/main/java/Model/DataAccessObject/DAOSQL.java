@@ -2,6 +2,7 @@ package Model.DataAccessObject;
 
 import Model.Class.Person;
 import Model.Class.PersonException;
+import Start.Routes;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -26,89 +27,26 @@ import javax.swing.ImageIcon;
  * primary key.
  *
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class DAOSQL implements IDAO {
 
-    private final String JDBC_URL = "jdbc:mysql://localhost:3306";
-    private final String JDBC_COMMU_OPT = "?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private final String JDBC_USER = "root";
-    private final String JDBC_PASSWORD = "";
+    private final String SQL_SELECT_ALL = "SELECT * FROM " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + ";";
+    private final String SQL_SELECT = "SELECT * FROM " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " WHERE (nif = ?);";
+    private final String SQL_INSERT = "INSERT INTO " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " (nif, name, dateOfBirth, photo) VALUES (?, ?, ?, ?);";
+    private final String SQL_UPDATE = "UPDATE " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " SET name = ? dateOfBirth = ? SET photo = ? WHERE (nif = ?);";
+    private final String SQL_DELETE = "DELETE FROM " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " WHERE (nif = ";
 
-    private final String JDBC_DDBB = "people";
-    private final String JDBC_TABLE = "person";
-    private final String JDBC_DDBB_TABLE = JDBC_DDBB + "." + JDBC_TABLE;
-
-    private final String SQL_SELECT_ALL = "SELECT * FROM " + JDBC_DDBB_TABLE + ";";
-    private final String SQL_SELECT = "SELECT * FROM " + JDBC_DDBB_TABLE + " WHERE (nif = ?);";
-    private final String SQL_INSERT = "INSERT INTO " + JDBC_DDBB_TABLE + " (nif, name, dateOfBirth, photo) VALUES (?, ?, ?, ?);";
-    private final String SQL_UPDATE = "UPDATE " + JDBC_DDBB_TABLE + " SET name = ? dateOfBirth = ? SET photo = ? WHERE (nif = ?);";
-    private final String SQL_DELETE = "DELETE FROM " + JDBC_DDBB_TABLE + " WHERE (nif = ";
-
-    public Connection connect() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(JDBC_URL + JDBC_COMMU_OPT, JDBC_USER, JDBC_PASSWORD);
-            createDB(conn);
-            createTable(conn);
-        } catch (SQLException ex) {
-            //Decide what to do
-        }
+    public Connection connect() throws SQLException {
+        Connection conn;
+        conn = DriverManager.getConnection(Routes.DB.getDbServerAddress() + Routes.DB.getDbServerComOpt(), Routes.DB.getDbServerUser(), Routes.DB.getDbServerPassword());
         return conn;
     }
 
-    private void createDB(Connection conn) {
-        String instruction = "create database if not exists " + JDBC_DDBB + ";";
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(instruction);
-        } catch (SQLException ex) {
-            //Decide what to do
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    //Decide what to do
-                }
-            }
-        }
+    public void disconnect(Connection conn) throws SQLException {
+        conn.close();
     }
 
-    private void createTable(Connection conn) {
-        String query = "create table if not exists " + JDBC_DDBB + "." + JDBC_TABLE + "("
-                + "nif varchar(9) primary key not null, "
-                + "name varchar(50), "
-                + "dateOfBirth DATE, "
-                + "photo varchar(200) );";
-        Statement stmt = null;
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(query);
-        } catch (SQLException ex) {
-            //Decide what to do
-        } finally {
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException ex) {
-                    //Decide what to do
-                }
-            }
-        }
-    }
-
-    public void disconnect(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                //Decide what to do
-            }
-        }
-    }
-    
     @Override
     public Person read(Person p) throws SQLException {
         Person pReturn = null;
@@ -147,13 +85,10 @@ public class DAOSQL implements IDAO {
         instruction.setDate(3, new java.sql.Date((p.getDateOfBirth()).getTime()));
         if (p.getPhoto() != null) {
             String sep = File.separator;
-            String projectPath = System.getProperty("user.dir");
-            String folderPath = projectPath + sep + "PeopleDDBB";
-            String folderPhotoPath = folderPath + sep + "PhotosDDBB";
-            File imagePerson = new File(folderPhotoPath + sep + p.getNif() + ".gif");
+            File photo = new File(Routes.DB.getFolderPhotos() + sep + p.getNif() + ".png");
             FileOutputStream out;
             BufferedOutputStream outB;
-            out = new FileOutputStream(imagePerson);
+            out = new FileOutputStream(photo);
             outB = new BufferedOutputStream(out);
             BufferedImage bi = new BufferedImage(p.getPhoto().getImage().getWidth(null),
                     p.getPhoto().getImage().getHeight(null),
@@ -166,7 +101,7 @@ public class DAOSQL implements IDAO {
                 outB.write(img[i]);
             }
             outB.close();
-            instruction.setString(4, imagePerson.getPath());
+            instruction.setString(4, photo.getPath());
         } else {
             instruction.setString(4, null);
         }
@@ -174,8 +109,6 @@ public class DAOSQL implements IDAO {
         instruction.close();
         disconnect(conn);
     }
-    
-    
 
     @Override
     public ArrayList<Person> readAll() throws SQLException, PersonException {
@@ -245,7 +178,7 @@ public class DAOSQL implements IDAO {
     }
 
     @Override
-    public int delete(Person person) {
+    public void delete(Person person) {
         Connection conn = null;
         PreparedStatement instruction = null;
         int registers = 0;
@@ -266,7 +199,7 @@ public class DAOSQL implements IDAO {
                 //Decide what to do
             }
         }
-        return registers;
+//        return registers;
     }
 
 }

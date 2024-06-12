@@ -16,15 +16,16 @@ import java.util.ArrayList;
  * functions so that they can work with files to store objects. User data is
  * saved in the "dataFileS.ser" file and the associated photos, if any, are
  * saved with the name NIF.png in the "Photos" folder.
+ *
  * @author Francesc Perez
  * @version 1.1.0
  */
 public class DAOFileSerializable implements IDAO {
 
     @Override
-    public Person read(Person p) {
+    public Person read(Person p) throws IOException, ClassNotFoundException {
         Person personToRead = null;
-        try{
+        try {
             FileInputStream fIS = new FileInputStream(Routes.FILES.getDataFile());
             ObjectInputStream o = new ObjectInputStream(fIS);
             Person pr;
@@ -35,9 +36,10 @@ public class DAOFileSerializable implements IDAO {
                 }
             }
             o.close();
-        }catch(Exception ex){
-            System.out.println("El archivo está vacío y no se puede crear"
-                    + "el objeto ObjectInputStream");
+        } catch (java.io.EOFException ex) {
+            //Do nothing
+//            System.out.println("El archivo está vacío y no se puede crear"
+//                    + "el objeto ObjectInputStream");
         }
         return personToRead;
     }
@@ -45,17 +47,19 @@ public class DAOFileSerializable implements IDAO {
     @Override
     public void insert(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> personRead = new ArrayList<>();
-        ObjectInputStream ois;
-        FileInputStream fIS;
-        fIS = new FileInputStream(Routes.FILES.getDataFile());
-        System.out.println(fIS);
-        ois = new ObjectInputStream(fIS);
-        System.out.println(ois);
-        Person pr;
-        while ((pr = (Person) ois.readObject()) != null) {
-            personRead.add(pr);
+        try {
+            FileInputStream fIS = new FileInputStream(Routes.FILES.getDataFile());
+            ObjectInputStream ois = new ObjectInputStream(fIS);
+            Person pr;
+            while ((pr = (Person) ois.readObject()) != null) {
+                personRead.add(pr);
+            }
+            ois.close();
+        } catch (java.io.EOFException ex) {
+            //Do nothing
+//            System.out.println("El archivo está vacío y no se puede crear"
+//                   + "el objeto ObjectInputStream");
         }
-        ois.close();
         ObjectOutputStream oos;
         FileOutputStream fOS;
         fOS = new FileOutputStream(Routes.FILES.getDataFile());
