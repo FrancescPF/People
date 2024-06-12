@@ -7,7 +7,7 @@ import View.DataStorageSelection;
 /**
  * This class contains the main method, the entry point to the application.
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Start {
     
@@ -18,7 +18,7 @@ public class Start {
      * first determine what type of storage system to use.
      * @param args The application does not need input parameters to run
      * @author Francesc Perez
-     * @version 1.0
+     * @version 1.1.0
      */
     public static void main(String[] args) {
         DataStorageSelection dSS = new DataStorageSelection();      

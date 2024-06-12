@@ -1,5 +1,6 @@
 package View;
 
+import Start.Routes;
 import java.awt.Component;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import javax.swing.JOptionPane;
  * storage device chosen by the user before starting to interact with the 
  * application.
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class DataStorageSelection extends javax.swing.JFrame {
     
@@ -23,17 +24,15 @@ public class DataStorageSelection extends javax.swing.JFrame {
     /**
      * Function that loads the Data Storage System Selection Menu View.
      * @author Francesc Perez
-     * @version 1.0
+     * @version 1.1.0
      */
     public DataStorageSelection() {
         initComponents();
-        String projectDir = System.getProperty("user.dir");
-        String s = File.separator;
-        String pathImageLogo = projectDir + s + "images" + s + "logo.png";
+        String pathImageLogo = Routes.APPIMAGES.getFolderPath()+ File.separator + "logo.png";
         try {
             setIconImage(new ImageIcon(ImageIO.read(new File(pathImageLogo))).getImage());
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Application logo is not available. Can not be found in " + pathImageLogo, "Logo - People v1.0", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Application logo is not available. Can not be found in " + pathImageLogo, "Logo - People v1.1.0", JOptionPane.WARNING_MESSAGE);
         }
         setLocationRelativeTo(null);
         arrayListCheck.setSelected(true);
@@ -62,7 +61,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         cancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Data Storage Selection - People v1.0");
+        setTitle("Data Storage Selection - People v1.1.0");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -178,7 +177,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
 
         authorMail.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         authorMail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        authorMail.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        authorMail.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -221,7 +220,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
      * activated so that the event can be sent to the controller.
      * @param jcb checkbox selected by user
      * @author Francesc Perez
-     * @version 1.0
+     * @version 1.1.0
      */
     private void JCB(javax.swing.JCheckBox jcb) {
         if (jcb.isSelected()) {
@@ -243,7 +242,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
      * the user.
      * @return c Returns the accept button and the selected chechbox.
      * @author Francesc Perez
-     * @version 1.0
+     * @version 1.1.0
      */
     public Component [] getAccept() {
         Component c [] = new Component[2];

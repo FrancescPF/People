@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface IController {
     public abstract Person read(Person p);
     public abstract ArrayList<Person> readAll();
-    public abstract void insert(Person p);
+    public abstract void insert(Person p) throws Exception;
     public abstract void update(Person p);
     public abstract void delete(Person p);
     public abstract void start();

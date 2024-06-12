@@ -1,8 +1,10 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
-import java.io.File;
+import Model.Class.PersonException;
+import Start.Routes;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,237 +14,135 @@ import java.util.ArrayList;
 /**
  * This class implements the IDAO interface and completes the code of the
  * functions so that they can work with files to store objects. User data is
- * saved in the "PeopleFileS.txt" file and the associated photos, if any, are
- * saved with the name NIF.png in the "PhotosFileS" folder.
- *
- * @author Fran Perez
- * @version 1.0.0
+ * saved in the "dataFileS.ser" file and the associated photos, if any, are
+ * saved with the name NIF.png in the "Photos" folder.
+ * @author Francesc Perez
+ * @version 1.1.0
  */
 public class DAOFileSerializable implements IDAO {
 
-    String sep = File.separator;
-    String projectPath = System.getProperty("user.dir");
-    String folderPath = projectPath + sep + "PeopleFileS";
-    String filePath = folderPath + sep + "PeopleFileS.txt";
-    File fileProject = new File(filePath);
-
     @Override
-    public ArrayList<Person> readAll() {
-        ArrayList<Person> people = new ArrayList<>();
-        if (fileProject.exists()) {
-            ObjectInputStream ois = null;
-            FileInputStream fIS;
-            try {
-                fIS = new FileInputStream(fileProject);
-                System.out.println(fIS);
-                ois = new ObjectInputStream(fIS);
-                System.out.println(ois);
-                Person pr;
-                while ((pr = (Person) ois.readObject()) != null) {
-                    people.add(pr);
-                }
-            } catch (IOException | ClassNotFoundException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (ois != null) {
-                        ois.close();
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
+    public Person read(Person p) {
+        Person personToRead = null;
+        try{
+            FileInputStream fIS = new FileInputStream(Routes.FILES.getDataFile());
+            ObjectInputStream o = new ObjectInputStream(fIS);
+            Person pr;
+            while ((pr = (Person) o.readObject()) != null) {
+                if (pr.getNif().equals(p.getNif())) {
+                    personToRead = pr;
+                    break;
                 }
             }
+            o.close();
+        }catch(Exception ex){
+            System.out.println("El archivo está vacío y no se puede crear"
+                    + "el objeto ObjectInputStream");
+        }
+        return personToRead;
+    }
+
+    @Override
+    public void insert(Person p) throws IOException, ClassNotFoundException {
+        ArrayList<Person> personRead = new ArrayList<>();
+        ObjectInputStream ois;
+        FileInputStream fIS;
+        fIS = new FileInputStream(Routes.FILES.getDataFile());
+        System.out.println(fIS);
+        ois = new ObjectInputStream(fIS);
+        System.out.println(ois);
+        Person pr;
+        while ((pr = (Person) ois.readObject()) != null) {
+            personRead.add(pr);
+        }
+        ois.close();
+        ObjectOutputStream oos;
+        FileOutputStream fOS;
+        fOS = new FileOutputStream(Routes.FILES.getDataFile());
+        oos = new ObjectOutputStream(fOS);
+        personRead.add(p);
+        for (Person pf : personRead) {
+            oos.writeObject(pf);
+        }
+        oos.flush();
+        oos.close();
+    }
+
+    @Override
+    public ArrayList<Person> readAll() throws IOException, ClassNotFoundException, PersonException {
+        ArrayList<Person> people = new ArrayList<>();
+        ObjectInputStream ois;
+        FileInputStream fIS;
+        fIS = new FileInputStream(Routes.FILES.getDataFile());
+        ois = new ObjectInputStream(fIS);
+        Person pr;
+        while ((pr = (Person) ois.readObject()) != null) {
+            people.add(pr);
+        }
+        ois.close();
+        if (people.isEmpty()) {
+            throw new PersonException("There aren't people registered "
+                    + "yet.");
         }
         return people;
     }
 
     @Override
-    public Person read(Person p) {
-        Person personToReturn = null;
-        if (fileProject.exists()) {
-            System.out.println("READ");
-            ObjectInputStream ois = null;
-            FileInputStream fIS;
-            try {
-                fIS = new FileInputStream(fileProject);
-                System.out.println(fIS);
-                ois = new ObjectInputStream(fIS);
-                System.out.println(ois);
-                Person pr;
-                while ((pr = (Person) ois.readObject()) != null) {
-                    System.out.println("READ");
-                    System.out.println(p);
-                    System.out.println(pr);
-                    if (pr.getNif().equals(p.getNif())) {
-                        personToReturn = pr;
-                        break;
-                    }
-                }
-            } catch (IOException | ClassNotFoundException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (ois != null) {
-                        ois.close();
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
-        }
-        return personToReturn;
-    }
-
-    @Override
-    public int insert(Person p) {
+    public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException, PersonException {
         ArrayList<Person> personRead = new ArrayList<>();
-        if (fileProject.exists()) {
-            ObjectInputStream ois = null;
-            FileInputStream fIS;
-            try {
-                fIS = new FileInputStream(fileProject);
-                ois = new ObjectInputStream(fIS);
-                Person pr;
-                while ((pr = (Person) ois.readObject()) != null) {
-                    personRead.add(pr);
-                }
-            } catch (IOException | ClassNotFoundException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (ois != null) {
-                        ois.close();
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
-            ObjectOutputStream oos = null;
-            FileOutputStream fOS;
-            try {
-                fOS = new FileOutputStream(fileProject);
-                oos = new ObjectOutputStream(fOS);
-                personRead.add(p);
-                for (Person pf : personRead) {
-                    oos.writeObject(pf);
-                }
-            } catch (IOException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (oos != null) {
-                        oos.flush();
-                        oos.close();
-                        return 1;
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
+        ObjectInputStream ois;
+        FileInputStream fIS;
+        fIS = new FileInputStream(Routes.FILES.getDataFile());
+        ois = new ObjectInputStream(fIS);
+        Person pr;
+        while ((pr = (Person) ois.readObject()) != null) {
+            personRead.add(pr);
         }
-        return 0;
-    }
-
-    @Override
-    public int update(Person p) {
-        ArrayList<Person> personRead = new ArrayList<>();
-        if (fileProject.exists()) {
-            ObjectInputStream ois = null;
-            FileInputStream fIS;
-            try {
-                fIS = new FileInputStream(fileProject);
-                ois = new ObjectInputStream(fIS);
-                Person pr;
-                while ((pr = (Person) ois.readObject()) != null) {
-                    personRead.add(pr);
-                }
-            } catch (IOException | ClassNotFoundException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (ois != null) {
-                        ois.close();
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
+        ois.close();
+        try {
             personRead.set(personRead.indexOf(new Person(p.getNif())), p);
-            ObjectOutputStream oos = null;
-            FileOutputStream fOS;
-            try {
-                fOS = new FileOutputStream(fileProject);
-                oos = new ObjectOutputStream(fOS);
-                personRead.add(p);
-                for (Person pf : personRead) {
-                    oos.writeObject(pf);
-                }
-            } catch (IOException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (oos != null) {
-                        oos.flush();
-                        oos.close();
-                        return 1;
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
+        } catch (IndexOutOfBoundsException ex) {
+            throw new PersonException(p.getNif() + " is not registered and can "
+                    + "not be UPDATED");
         }
-        return 1;
+        ObjectOutputStream oos;
+        FileOutputStream fOS;
+        fOS = new FileOutputStream(Routes.FILES.getDataFile());
+        oos = new ObjectOutputStream(fOS);
+        personRead.add(p);
+        for (Person pf : personRead) {
+            oos.writeObject(pf);
+        }
+        oos.flush();
+        oos.close();
     }
 
     @Override
-    public int delete(Person p) {
-        ArrayList<Person> personRead = new ArrayList<>();
-        if (fileProject.exists()) {
-            ObjectInputStream ois = null;
-            FileInputStream fIS;
-            try {
-                fIS = new FileInputStream(fileProject);
-                ois = new ObjectInputStream(fIS);
-                Person pr;
-                while ((pr = (Person) ois.readObject()) != null) {
-                    personRead.add(pr);
-                }
-            } catch (IOException | ClassNotFoundException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (ois != null) {
-                        ois.close();
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
-            personRead.remove(p);
-            ObjectOutputStream oos = null;
-            FileOutputStream fOS;
-            try {
-                fOS = new FileOutputStream(fileProject);
-                oos = new ObjectOutputStream(fOS);
-                personRead.add(p);
-                for (Person pf : personRead) {
-                    oos.writeObject(pf);
-                }
-            } catch (IOException ex) {
-                //Decide what to do
-            } finally {
-                try {
-                    if (oos != null) {
-                        oos.flush();
-                        oos.close();
-                        return 1;
-                    }
-                } catch (IOException ex) {
-                    //Decide what to do
-                }
-            }
+    public void delete(Person p) throws IOException, ClassNotFoundException, PersonException {
+        ArrayList<Person> peopleRead = new ArrayList<>();
+        FileInputStream fIS;
+        ObjectInputStream ois;
+        fIS = new FileInputStream(Routes.FILES.getDataFile());
+        ois = new ObjectInputStream(fIS);
+        Person pr;
+        while ((pr = (Person) ois.readObject()) != null) {
+            peopleRead.add(pr);
         }
-        return 0;
+        ois.close();
+        if (!peopleRead.remove(p)) {
+            throw new PersonException(p.getNif() + " is not registered and can "
+                    + "not be DELETED");
+        }
+        ObjectOutputStream oos;
+        FileOutputStream fOS;
+        fOS = new FileOutputStream(Routes.FILES.getDataFile());
+        oos = new ObjectOutputStream(fOS);
+        peopleRead.add(p);
+        for (Person pf : peopleRead) {
+            oos.writeObject(pf);
+        }
+        oos.flush();
+        oos.close();
     }
 
 }

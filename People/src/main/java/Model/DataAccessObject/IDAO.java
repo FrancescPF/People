@@ -8,46 +8,53 @@ import java.util.ArrayList;
  * data storage system chosen by the user. Depending on the system, the 
  * implementation varies.
  * @author Francesc Perez 
- * @version 1.0.0
+ * @version 1.1.0
  */
 public interface IDAO { 
     /**
      * This function returns, if it exists, the registered person whose NIF 
      * matches the NIF assigned to the person entered as an input argument and 
-     * returns, if it does not exist, "null".
+     * if it does not exist generates a PersonException object that has to be 
+     * manage by the controller. 
      * @param p Person
      * @return Person or null
+     * @throws java.lang.Exception
      */
-    public abstract Person read (Person p);
+    public abstract Person read (Person p) throws Exception;
     
     /**
-     * This function returns an ArrayList<Person> of all registered persons.
-     * If there're not registered person returns an empty ArrayList<Person>
-     * @return ArrayList<Person>
+     * This function returns an ArrayList<> of all registered persons.If 
+     * there're not registered person returns a PersonException object that has 
+     * to be manage by the controller.
+     * @return ArrayList<>
+     * @throws java.lang.Exception
      */
-    public abstract ArrayList<Person> readAll();
+    public abstract ArrayList<Person> readAll() throws Exception;
     
     /**
      * This function receives the person who must enter the storage system and 
-     * returns a 1 on success or a 0 otherwise.
+     * store it into the ArrayList, if it is not possible generates a 
+     * PersonException object that has to be manage by the controller. 
      * @param p Person
-     * @return int
+     * @throws java.lang.Exception
      */
-    public abstract int insert(Person p);
+    public abstract void insert(Person p) throws Exception;
     
     /**
      * This function receives the person with the updated data and enters it 
-     * into the storage system and returns a 1 on success or a 0 otherwise.
+     * into the storage system, if it does not exist generates a 
+     * PersonException object that has to be manage by the controller.
      * @param p Person
-     * @return int
+     * @throws java.lang.Exception
      */
-    public abstract int update (Person p);   
+    public abstract void update (Person p) throws Exception;   
     
     /**
      * This function receives the person (NIF) and deletes it from the storage 
-     * system. Returns a 1 on success or a 0 otherwise.
+     * system, if it does not exist generates a PersonException object that has 
+     * to be manage by the controller.
      * @param p Person
-     * @return int
+     * @throws java.lang.Exception
      */
-    public abstract int delete (Person p);
+    public abstract void delete (Person p) throws Exception;
 }

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * This class defines the main menu of the application. Actions that can be 
  * done: insert, read, delete, update, readAll.
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -62,12 +62,10 @@ public class Menu extends javax.swing.JFrame {
         readAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Menu - People v1.0");
+        setTitle("Menu - People v1.1.0");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        setMaximumSize(new java.awt.Dimension(300, 450));
         setMinimumSize(new java.awt.Dimension(300, 450));
-        setPreferredSize(new java.awt.Dimension(300, 450));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         read.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -85,6 +83,7 @@ public class Menu extends javax.swing.JFrame {
 
         delete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         delete.setText("DELETE");
+        delete.setEnabled(false);
         delete.setMaximumSize(new java.awt.Dimension(120, 50));
         delete.setMinimumSize(new java.awt.Dimension(120, 50));
         delete.setPreferredSize(new java.awt.Dimension(120, 50));
@@ -98,6 +97,7 @@ public class Menu extends javax.swing.JFrame {
 
         update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         update.setText("UPDATE");
+        update.setEnabled(false);
         update.setMaximumSize(new java.awt.Dimension(120, 50));
         update.setMinimumSize(new java.awt.Dimension(120, 50));
         update.setPreferredSize(new java.awt.Dimension(120, 50));
@@ -124,7 +124,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        jLabel1.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -135,6 +135,7 @@ public class Menu extends javax.swing.JFrame {
 
         readAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         readAll.setText("READ ALL");
+        readAll.setEnabled(false);
         readAll.setMaximumSize(new java.awt.Dimension(120, 50));
         readAll.setMinimumSize(new java.awt.Dimension(120, 50));
         readAll.setPreferredSize(new java.awt.Dimension(120, 50));
