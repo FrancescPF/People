@@ -48,7 +48,7 @@ public class ReadAll extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Read All - People v1.0");
+        setTitle("Read All - People v1.1.0");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,7 +88,7 @@ public class ReadAll extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         jLabel2.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

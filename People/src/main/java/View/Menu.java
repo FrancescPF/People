@@ -96,7 +96,6 @@ public class Menu extends javax.swing.JFrame {
 
         update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         update.setText("UPDATE");
-        update.setEnabled(false);
         update.setMaximumSize(new java.awt.Dimension(120, 50));
         update.setMinimumSize(new java.awt.Dimension(120, 50));
         update.setPreferredSize(new java.awt.Dimension(120, 50));

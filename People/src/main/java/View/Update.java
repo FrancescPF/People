@@ -28,8 +28,9 @@ public class Update extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         DropPhotoListener d = new DropPhotoListener(photo, this);
-        DropTarget dropTarget = new DropTarget(this, d);
+        DropTarget dropTarget = new DropTarget(photo, d);
         read.setVisible(false);
+        update.setEnabled(false);
     }
 
     public JButton getUpdate() {
@@ -56,8 +57,8 @@ public class Update extends javax.swing.JDialog {
         return photo;
     }
 
-    public JButton getUpdateReset() {
-        return updateReset;
+    public JButton getReset() {
+        return reset;
     }
 
     /**
@@ -78,14 +79,13 @@ public class Update extends javax.swing.JDialog {
         name = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         dateOfBirth = new org.jdatepicker.JDatePicker();
-        updateReset = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         read = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Update - People v1.0");
+        setTitle("Update - People v1.1.0");
         setMinimumSize(new java.awt.Dimension(810, 280));
-        setPreferredSize(new java.awt.Dimension(810, 280));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         update.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -175,6 +175,9 @@ public class Update extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nameKeyReleased(evt);
+            }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -211,14 +214,14 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(dateOfBirth, gridBagConstraints);
 
-        updateReset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        updateReset.setText("RESET");
-        updateReset.setMaximumSize(new java.awt.Dimension(194, 33));
-        updateReset.setMinimumSize(new java.awt.Dimension(194, 33));
-        updateReset.setPreferredSize(new java.awt.Dimension(194, 33));
-        updateReset.addActionListener(new java.awt.event.ActionListener() {
+        reset.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        reset.setText("RESET");
+        reset.setMaximumSize(new java.awt.Dimension(194, 33));
+        reset.setMinimumSize(new java.awt.Dimension(194, 33));
+        reset.setPreferredSize(new java.awt.Dimension(194, 33));
+        reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateResetActionPerformed(evt);
+                resetActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -227,7 +230,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
-        getContentPane().add(updateReset, gridBagConstraints);
+        getContentPane().add(reset, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -289,10 +292,15 @@ public class Update extends javax.swing.JDialog {
         }             // TODO add your handling code here:
     }//GEN-LAST:event_nifKeyTyped
 
-    private void updateResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateResetActionPerformed
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         nif.setEditable(true);
         nif.setText("");
         name.setText("");
+        dateOfBirth.getModel().setValue(null);
+        photo.setIcon(null); 
+        name.setEnabled(false);
+        dateOfBirth.setEnabled(false);
+        photo.setEnabled(false);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
         ZoneId systemTimeZone = ZoneId.systemDefault();
@@ -303,9 +311,9 @@ public class Update extends javax.swing.JDialog {
         DateModel<Calendar> dateModel = (DateModel<Calendar>) dateOfBirth.getModel();
         dateModel.setValue(calendar);
         //... but do not display it in the JDatePicker box
-        dateOfBirth.getModel().setValue(null);
-        photo.setIcon(null);        // TODO add your handling code here:
-    }//GEN-LAST:event_updateResetActionPerformed
+       // TODO add your handling code here:
+        update.setEnabled(false);
+    }//GEN-LAST:event_resetActionPerformed
 
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
         if (!validateNameLetter(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
@@ -318,6 +326,14 @@ public class Update extends javax.swing.JDialog {
             name.setText(newName.deleteCharAt(posDelete).toString());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_nameKeyPressed
+
+    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
+        if (name.getText().length() == 0) {
+            update.setEnabled(false);
+        }else if(!nif.getText().isEmpty()){
+            update.setEnabled(true);
+        }
+    }//GEN-LAST:event_nameKeyReleased
 
     /**
      * @param args the command line arguments
@@ -333,7 +349,7 @@ public class Update extends javax.swing.JDialog {
     private javax.swing.JTextField nif;
     private javax.swing.JLabel photo;
     private javax.swing.JButton read;
+    private javax.swing.JButton reset;
     private javax.swing.JButton update;
-    private javax.swing.JButton updateReset;
     // End of variables declaration//GEN-END:variables
 }

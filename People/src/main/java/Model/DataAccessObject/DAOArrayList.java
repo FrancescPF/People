@@ -31,6 +31,10 @@ public class DAOArrayList implements IDAO{
         people.remove(p);
     }
     
+    @Override
+    public void update(Person p){
+        people.set(people.indexOf(p), p);
+    }
     
     
     
@@ -55,15 +59,7 @@ public class DAOArrayList implements IDAO{
     
     
 
-    @Override
-    public void update(Person p) throws PersonException{
-        try{
-            people.set(people.indexOf(p), p);
-        }catch(IndexOutOfBoundsException ex){
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be UPDATED");
-        }
-    }
+
 
 
     

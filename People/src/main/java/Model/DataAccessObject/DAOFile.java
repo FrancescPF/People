@@ -28,7 +28,6 @@ import javax.swing.ImageIcon;
  * functions so that they can work with files. User data is saved in the
  * "dataFile.txt" file and the associated photos, if any, are saved with the
  * name NIF.png in the "Photos" folder.
- *
  * @author Francesc Perez
  * @version 1.1.0
  */
@@ -131,6 +130,12 @@ public class DAOFile implements IDAO {
     }
 
     @Override
+    public void update(Person p) throws IOException, PersonException {
+        delete(p);
+        insert(p);
+    }
+
+    @Override
     public ArrayList<Person> readAll() throws FileNotFoundException, IOException, ParseException, PersonException {
         String sep = File.separator;
         ArrayList<Person> people = new ArrayList<>();
@@ -160,39 +165,6 @@ public class DAOFile implements IDAO {
                     + "yet.");
         }
         return people;
-    }
-
-    @Override
-    public void update(Person p) throws IOException, PersonException {
-        boolean updatePerson = false;
-        String sep = File.separator;
-        RandomAccessFile rafRW;
-        rafRW = new RandomAccessFile(Routes.FILE.getDataFile(), "rw");
-        String textoNuevo = "";
-        while (rafRW.getFilePointer() < rafRW.length()) {
-            String l = rafRW.readLine();
-            String d[] = l.split("\t");
-            if (p.getNif().equals(d[1])) {
-                updatePerson = true;
-                if (!d[3].equals("null")) {
-                    File photoFile = new File(Routes.FILE.getFolderPhotos() + sep + p.getNif()
-                            + ".png");
-                    photoFile.delete();
-                }
-            } else {
-                textoNuevo += d[0] + "\t" + d[1] + "\t" + d[2] + "\t" + d[3]
-                        + "\n";
-            }
-        }
-        if (updatePerson) {
-            rafRW.setLength(0);
-            rafRW.writeBytes(textoNuevo);
-            rafRW.close();
-        } else {
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be UPDATED");
-        }
-        insert(p);
     }
 
 }

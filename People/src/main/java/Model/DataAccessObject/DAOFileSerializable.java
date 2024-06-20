@@ -104,6 +104,12 @@ public class DAOFileSerializable implements IDAO {
     }
 
     @Override
+    public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException, PersonException {
+        delete(p);
+        insert(p);
+    }
+    
+    @Override
     public ArrayList<Person> readAll() throws IOException, ClassNotFoundException, PersonException {
         ArrayList<Person> people = new ArrayList<>();
         ObjectInputStream ois;
@@ -120,36 +126,6 @@ public class DAOFileSerializable implements IDAO {
                     + "yet.");
         }
         return people;
-    }
-
-    @Override
-    public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException, PersonException {
-        ArrayList<Person> personRead = new ArrayList<>();
-        ObjectInputStream ois;
-        FileInputStream fIS;
-        fIS = new FileInputStream(Routes.FILES.getDataFile());
-        ois = new ObjectInputStream(fIS);
-        Person pr;
-        while ((pr = (Person) ois.readObject()) != null) {
-            personRead.add(pr);
-        }
-        ois.close();
-        try {
-            personRead.set(personRead.indexOf(new Person(p.getNif())), p);
-        } catch (IndexOutOfBoundsException ex) {
-            throw new PersonException(p.getNif() + " is not registered and can "
-                    + "not be UPDATED");
-        }
-        ObjectOutputStream oos;
-        FileOutputStream fOS;
-        fOS = new FileOutputStream(Routes.FILES.getDataFile());
-        oos = new ObjectOutputStream(fOS);
-        personRead.add(p);
-        for (Person pf : personRead) {
-            oos.writeObject(pf);
-        }
-        oos.flush();
-        oos.close();
     }
 
 }

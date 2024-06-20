@@ -81,27 +81,6 @@ public class ControllerImplementation implements IController, ActionListener {
         dSS.setVisible(true);
     }
 
-    private void resetUpdated() {
-//        update.getNif().setEnabled(true);
-//        update.getNif().setEditable(true);
-//        update.getNam().setEnabled(false);
-//        update.getDateOfBirth().setEnabled(false);
-//        update.getPhoto().setEnabled(false);
-//        update.getNam().setText("");
-//        update.getNif().setText("");
-//        LocalDate dateLocate = LocalDate.now();
-//        ZoneId systemTimeZone = ZoneId.systemDefault();
-//        ZonedDateTime zonedDateTime = dateLocate.atStartOfDay(systemTimeZone);
-//        Date dateUtil = java.sql.Date.from(zonedDateTime.toInstant());
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(dateUtil);
-//        DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
-//        dateModel.setValue(calendar);
-//        //... but do not display it in the JDatePicker box
-//        update.getDateOfBirth().getModel().setValue(null);
-//        update.getPhoto().setIcon(null);
-    }
-
     /**
      * This receives method handles the events of the visual part. Each event
      * has an associated action.
@@ -217,7 +196,7 @@ public class ControllerImplementation implements IController, ActionListener {
             read.getRead().addActionListener(this);
             read.setVisible(true);
         } else if (read != null && e.getSource() == read.getRead()) {
-            read.getNif().setText(read.getNif().getText());
+//            read.getNif().setText(read.getNif().getText());
             Person p = new Person(read.getNif().getText());
             Person pNew = read(p);
             if (pNew != null) {
@@ -244,42 +223,40 @@ public class ControllerImplementation implements IController, ActionListener {
             delete.getReset().doClick();
 //            //Events for the update option
         } else if (e.getSource() == menu.getUpdate()) {
-//            update = new Update(menu, true);
-//            update.getUpdate().addActionListener(this);
-//            update.getRead().addActionListener(this);
-//            update.getUpdateReset().addActionListener(this);
-//            update.setVisible(true);
+            update = new Update(menu, true);
+            update.getUpdate().addActionListener(this);
+            update.getRead().addActionListener(this);
+            update.setVisible(true);
         } else if (update != null && e.getSource() == update.getRead()) {
-//            Person p = new Person(update.getNif().getText());
-//            Person pNew = read(p);
-//            if (pNew != null) {
-//                update.getNam().setText(pNew.getName());
-//                if (pNew.getDateOfBirth() != null) {
-//                    Calendar calendar = Calendar.getInstance();
-//                    calendar.setTime(pNew.getDateOfBirth());
-//                    DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
-//                    dateModel.setValue(calendar);
-//                }
-//                update.getPhoto().setIcon(pNew.getPhoto());
-//            } else {
-//                update.getUpdateReset().doClick();
-//            }
-        } else if (update != null && e.getSource() == update.getUpdateReset()) {
-//            resetUpdated();
+//            update.getNif().setText(update.getNif().getText());
+            update.getUpdate().setEnabled(true);
+            Person p = new Person(update.getNif().getText());
+            Person pNew = read(p);
+            if (pNew != null) {
+                update.getNam().setText(pNew.getName());
+                if (pNew.getDateOfBirth() != null) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(pNew.getDateOfBirth());
+                    DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
+                    dateModel.setValue(calendar);
+                }
+                update.getPhoto().setIcon(pNew.getPhoto());
+                System.out.println(update.getPhoto());
+            } else {
+                JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist. Reseting NIF.", "Update - People v1.1.0", JOptionPane.WARNING_MESSAGE);
+                update.getReset().doClick();
+            }
         } else if (update != null && e.getSource() == update.getUpdate()) {
-//            if (!update.getNam().getText().isEmpty()) {
-//                Person p = new Person(update.getNam().getText(), update.getNif().getText());
-//                if (update.getDateOfBirth().getModel().getValue() != null) {
-//                    p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
-//                }
-//                if ((ImageIcon) update.getPhoto().getIcon() != null) {
-//                    p.setPhoto((ImageIcon) update.getPhoto().getIcon());
-//                }
-//                update(p);
-//                update.getUpdateReset().doClick();
-//            } else {
-//                JOptionPane.showMessageDialog(update, "Wrong arguments: data marked with * are required.", "Update - Peoplev1.0", JOptionPane.WARNING_MESSAGE);
-//            }
+            Person p = new Person(update.getNam().getText(), update.getNif().getText());
+            if (update.getDateOfBirth().getModel().getValue() != null) {
+                p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
+            }
+            if ((ImageIcon) update.getPhoto().getIcon() != null) {
+                p.setPhoto((ImageIcon) update.getPhoto().getIcon());
+                System.out.println(update.getPhoto());  
+            }
+            update(p);
+            update.getReset().doClick();
             //Events for the readAll option
         } else if (e.getSource() == menu.getReadAll()) {
 //            ArrayList<Person> s = readAll();
@@ -309,7 +286,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     /**
-     * This function insert the Person object with the requested NIF, if it
+     * This function inserts the Person object with the requested NIF, if it
      * doesn't exist. If there is any access problem with the storage device,
      * the program stops.
      *
@@ -339,9 +316,31 @@ public class ControllerImplementation implements IController, ActionListener {
         }
     }
 
+     /**
+     * This function updates the Person object with the requested NIF, if it
+     * doesn't exist. NIF can not be aupdated. If there is any access problem 
+     * with the storage device, the program stops.
+     * @param p Person to update
+     */
+    @Override
+    public void update(Person p) {
+        try {
+            dao.update(p);
+        } catch (Exception ex) {
+            //Exceptions generated by file read/write access. If something goes 
+            // wrong the application closes.
+            if (ex instanceof FileNotFoundException || ex instanceof IOException
+                    || ex instanceof ParseException || ex instanceof ClassNotFoundException
+                    || ex instanceof SQLException) {
+                JOptionPane.showMessageDialog(read, ex.getMessage() + ex.getClass() + " Closing application.", "Insert - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+        }
+    }
+
     /**
-     * This function deltes the Person object with the requested NIF, if it
-     * exists. If there is any access problem with the storage device, the 
+     * This function deletes the Person object with the requested NIF, if it
+     * exists. If there is any access problem with the storage device, the
      * program stops.
      * @param p Person to read
      */
@@ -373,7 +372,6 @@ public class ControllerImplementation implements IController, ActionListener {
      * This function returns the Person object with the requested NIF, if it
      * exists. Otherwise it returns null. If there is any access problem with
      * the storage device, the program stops.
-     *
      * @param p Person to read
      * @return Person or null
      */
@@ -421,14 +419,4 @@ public class ControllerImplementation implements IController, ActionListener {
 //        }
 //    }
 //
-    @Override
-    public void update(Person personToUpdate) {
-//        if (dao.read(personToUpdate) == null) {
-//            JOptionPane.showMessageDialog(update, "There is NOT a person with NIF " + personToUpdate.getNif() + " registered.", "Update - People v1.0", JOptionPane.WARNING_MESSAGE);
-//        } else {
-//            dao.update(personToUpdate);
-//            JOptionPane.showMessageDialog(update, personToUpdate.getNif() + " has been updated.", "Update - People v1.0", JOptionPane.INFORMATION_MESSAGE);
-//        }
-    }
-
 }
