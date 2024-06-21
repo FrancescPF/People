@@ -1,7 +1,7 @@
 package View;
 
 import static OtherFunctions.DataValidation.calculateNifLetter;
-import static OtherFunctions.DataValidation.validateNifNumber;
+import static OtherFunctions.DataValidation.isNumber;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,8 +16,9 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
+ * Interface used to read a person. It is mandatory to enter the NIF.
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Read extends javax.swing.JDialog {
 
@@ -25,7 +26,6 @@ public class Read extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         read.setVisible(false);
-        pack();
     }
 
     public JButton getRead() {
@@ -112,12 +112,6 @@ public class Read extends javax.swing.JDialog {
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nifKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nifKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nifKeyTyped(evt);
             }
@@ -233,33 +227,16 @@ public class Read extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
-        if (nif.isEditable()) {
-            if (!validateNifNumber(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
-                    && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
-                    && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
-                    && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
-                JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", "Read - People v1.0", JOptionPane.WARNING_MESSAGE);
-                int posDelete = nif.getText().indexOf(evt.getKeyChar());
-                StringBuilder newNif = new StringBuilder(nif.getText());
-                nif.setText(newNif.deleteCharAt(posDelete).toString());
-            }
-        }
-    }//GEN-LAST:event_nifKeyPressed
-
-    private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
-        if (nif.getText().length() == 8) {
-            nif.setText(calculateNifLetter(nif.getText()));
-            read.doClick();
-        }
-    }//GEN-LAST:event_nifKeyReleased
-
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
+        if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
+            JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
             read.doClick();
-        }       
+            nif.setEditable(false);
+        }
     }//GEN-LAST:event_nifKeyTyped
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
@@ -267,6 +244,7 @@ public class Read extends javax.swing.JDialog {
         nif.setEditable(true);
         nif.setText("");
         name.setText("");
+        photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
         ZoneId systemTimeZone = ZoneId.systemDefault();
@@ -278,7 +256,6 @@ public class Read extends javax.swing.JDialog {
         dateModel.setValue(calendar);
         //... but do not display it in the JDatePicker box
         dateOfBirth.getModel().setValue(null);
-        photo.setIcon(null);
     }//GEN-LAST:event_resetActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
