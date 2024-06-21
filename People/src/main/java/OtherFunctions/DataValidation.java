@@ -10,11 +10,11 @@ package OtherFunctions;
  */
 public class DataValidation {
 
-    public static boolean validateNifNumber(char c) {
+    public static boolean isNumber(char c) {
         return (48 <= c && c <= 57);
     }
 
-    public static boolean validateNameLetter(char c) {
+    public static boolean isLetter(char c) {
         //The name can contain uppercase and lowercase letters, whitespace, 
         //hyphens and code control
 //        return (97 <= c && c <= 122) || (65 <= c && c <= 90) || (c == 32) || (c == 45);

@@ -229,6 +229,7 @@ public class ControllerImplementation implements IController, ActionListener {
             update.setVisible(true);
         } else if (update != null && e.getSource() == update.getRead()) {
 //            update.getNif().setText(update.getNif().getText());
+            System.out.println(update.getNif().getText());
             update.getUpdate().setEnabled(true);
             Person p = new Person(update.getNif().getText());
             Person pNew = read(p);
@@ -241,19 +242,20 @@ public class ControllerImplementation implements IController, ActionListener {
                     dateModel.setValue(calendar);
                 }
                 update.getPhoto().setIcon(pNew.getPhoto());
-                System.out.println(update.getPhoto());
+                System.out.println(pNew.getPhoto().toString()); 
             } else {
                 JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist. Reseting NIF.", "Update - People v1.1.0", JOptionPane.WARNING_MESSAGE);
                 update.getReset().doClick();
             }
         } else if (update != null && e.getSource() == update.getUpdate()) {
+            System.out.println(update.getNif().getText());
             Person p = new Person(update.getNam().getText(), update.getNif().getText());
             if (update.getDateOfBirth().getModel().getValue() != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
             }
             if ((ImageIcon) update.getPhoto().getIcon() != null) {
                 p.setPhoto((ImageIcon) update.getPhoto().getIcon());
-                System.out.println(update.getPhoto());  
+                System.out.println(p.getPhoto().toString()); 
             }
             update(p);
             update.getReset().doClick();

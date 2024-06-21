@@ -22,15 +22,13 @@ import org.apache.commons.io.FilenameUtils;
  */
 public class DropPhotoListener implements DropTargetListener {
 
-    JDialog insert;
+    JDialog jDialog;
     JLabel label;
-    String dragText = "Drag photo here!";
-    String initText;
+    String dragText = "<html><center>PHOTO</center></br><br><center> <i>Supported format: PNG.</i></center></br><br><center><i>Max. size 64KB</i></center></html>";
 
-    public DropPhotoListener(JLabel label, JDialog insert) {
+    public DropPhotoListener(JLabel label, JDialog jDialog) {
         this.label = label;
-        this.insert = insert;
-        initText = label.getText();   
+        this.jDialog = jDialog;
     }
 
     @Override
@@ -48,50 +46,38 @@ public class DropPhotoListener implements DropTargetListener {
 
     @Override
     public void dragExit(DropTargetEvent dte) {
-        label.setText(initText);
     }
 
     @Override
     public void drop(DropTargetDropEvent ev) {
         ev.acceptDrop(DnDConstants.ACTION_COPY);
-        //WE GET DROPPED ITEM
         Transferable t = ev.getTransferable();
-        //GET DATA FORMAT OF THE ITEM
-        DataFlavor df[] = t.getTransferDataFlavors();   
-        //LOOP THROUGH FLAVORS
-        for(DataFlavor f : df){
-            try{
-//                //CHECK IF ITEMS ARE FILE TYPES
-                if(f.isFlavorJavaFileListType()){
-//                    //GET LIST OF ITEMS
-                    List<File> files = (List<File>)t.getTransferData(f);
-//                    //LOOP THROUGH THEM
-                    for(File file : files){
+        DataFlavor df[] = t.getTransferDataFlavors();
+        for (DataFlavor f : df) {
+            try {
+                if (f.isFlavorJavaFileListType()) {
+                    List<File> files = (List<File>) t.getTransferData(f);
+                    for (File file : files) {
                         String extension = FilenameUtils.getExtension(file.getName());
-                        if(file.length() <= 64000 && (extension.equals("gif") || extension.equals("png") ||
-                                extension.equals("jfif") || extension.equals("jpg")))
+                        if (file.length() < 64000 && extension.equals("png")) {
                             displayImage(file.getPath());
-                        else
-                            throw new Exception("The image must be less than 64KB and in the specified format");
+                        } else {
+                            throw new Exception("Photo must be PNG format and less than 64KB.");
+                        }
                     }
                 }
-            }catch ( Exception ex){
-                JOptionPane.showMessageDialog(insert,ex.getMessage() , "WRONG FILE", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(jDialog, ex.getMessage(), jDialog.getTitle(), JOptionPane.ERROR_MESSAGE);
             }
-        }      
+        }
     }
 
     private void displayImage(String path) {
-        try {
-            //Supported GIF, PNG, JPEG, BMP, WBMP 
-            ImageIcon icon = new ImageIcon(path);
-            Image img = icon.getImage();
-            img = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT);
-            icon = new ImageIcon(img);
-            label.setIcon(icon);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(insert, "Only .GIF, .JPEG, .PNG, .BMP and .WBMP images can be readed", "WRONG FILE FORMAT", JOptionPane.ERROR_MESSAGE);
-        }
+        ImageIcon icon = new ImageIcon(path);
+        Image img = icon.getImage();
+        img = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT);
+        icon = new ImageIcon(img);
+        label.setIcon(icon);
     }
 
 }

@@ -1,8 +1,8 @@
 package View;
 
 import static OtherFunctions.DataValidation.calculateNifLetter;
-import static OtherFunctions.DataValidation.validateNifNumber;
-import static OtherFunctions.DataValidation.validateNameLetter;
+import static OtherFunctions.DataValidation.isNumber;
+import static OtherFunctions.DataValidation.isLetter;
 import java.awt.dnd.DropTarget;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
@@ -18,6 +18,8 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
+ * Interface used to register a person. It is mandatory to enter at least the 
+ * NIF and the name.
  * @author Francesc Perez
  * @version 1.1.0
  */
@@ -29,7 +31,6 @@ public class Insert extends javax.swing.JDialog {
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
         insert.setEnabled(false);
-        pack();
     }
 
     public JButton getReset() {
@@ -112,11 +113,11 @@ public class Insert extends javax.swing.JDialog {
         name.setMinimumSize(new java.awt.Dimension(400, 22));
         name.setPreferredSize(new java.awt.Dimension(400, 22));
         name.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nameKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nameKeyTyped(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -150,11 +151,16 @@ public class Insert extends javax.swing.JDialog {
         photo.setBackground(new java.awt.Color(255, 255, 255));
         photo.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         photo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        photo.setText("<html><center>PHOTO</center></br><br><center> <i>Supported formats: .GIF, .PNG, .JFIF, .JPG</i></center></br><br><center><i>Maximum size 64KB</i></center></html>");
+        photo.setText("<html><center>PHOTO</center></br><br><center> <i>Supported format: PNG.</i></center></br><br><center><i>Max. size 64KB</i></center></html>");
         photo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         photo.setMaximumSize(new java.awt.Dimension(150, 135));
         photo.setMinimumSize(new java.awt.Dimension(150, 135));
         photo.setPreferredSize(new java.awt.Dimension(150, 135));
+        photo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                photoMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -181,12 +187,6 @@ public class Insert extends javax.swing.JDialog {
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                nifKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                nifKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nifKeyTyped(evt);
             }
@@ -240,42 +240,6 @@ public class Insert extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
-        if (!validateNameLetter(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
-                && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
-                && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
-                && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
-            JOptionPane.showMessageDialog(this, "Type only uppercase or lowercase letters, hyphens, and whitespace.", "Insert - People v1.0", JOptionPane.ERROR_MESSAGE);
-            int posDelete = name.getText().indexOf(evt.getKeyChar());
-            StringBuilder newName = new StringBuilder(name.getText());
-            name.setText(newName.deleteCharAt(posDelete).toString());
-        } else if (validateNameLetter(evt.getKeyChar()) || evt.getKeyCode() != KeyEvent.VK_BACK_SPACE || evt.getKeyCode() != KeyEvent.VK_DELETE) {
-            showInsert();
-        }
-    }//GEN-LAST:event_nameKeyPressed
-
-    private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
-        if (nif.isEditable()) {
-            if (!validateNifNumber(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
-                    && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
-                    && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
-                    && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
-                JOptionPane.showMessageDialog(this, "Type only numbers [0-9].", "Insert - People v1.0", JOptionPane.ERROR_MESSAGE);
-                int posDelete = nif.getText().indexOf(evt.getKeyChar());
-                StringBuilder newNif = new StringBuilder(nif.getText());
-                nif.setText(newNif.deleteCharAt(posDelete).toString());
-            }
-        }
-    }//GEN-LAST:event_nifKeyPressed
-
-    private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
-        if (nif.getText().length() == 8) {
-            nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
-            showInsert();
-        }
-    }//GEN-LAST:event_nifKeyReleased
-
     private void showInsert() {
         if (!name.getText().isEmpty() && !nif.isEditable()) {
             insert.setEnabled(true);
@@ -285,10 +249,10 @@ public class Insert extends javax.swing.JDialog {
     }
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        name.setText("");
         nif.setEditable(true);
         nif.setText("");
-        insert.setEnabled(false);
+        name.setText("");
+        photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
         ZoneId systemTimeZone = ZoneId.systemDefault();
@@ -300,27 +264,37 @@ public class Insert extends javax.swing.JDialog {
         dateModel.setValue(calendar);
         //... but do not display it in the JDatePicker box
         dateOfBirth.getModel().setValue(null);
-        photo.setIcon(null);
+        insert.setEnabled(false);
     }//GEN-LAST:event_resetActionPerformed
 
-    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
-        showInsert();
-    }//GEN-LAST:event_nameKeyReleased
-
-    /**
-     * En el evento KeyTyped el evt.getKeyCode siempre es 0 y no se conoce la
-     * tecla pulsada. Calcula automaticamente la letra del NIF si pulso la 
-     * tecla numerica de forma continua
-     * @param evt
-     */
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
+        if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
+            JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
             nif.setEditable(false);
             showInsert();
         }
-
     }//GEN-LAST:event_nifKeyTyped
+
+    private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
+        if (!isLetter(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
+            JOptionPane.showMessageDialog(this, "Type only uppercase or lowercase letters, hyphens, and whitespace.", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        } else if (isLetter(evt.getKeyChar()) || evt.getKeyChar() == KeyEvent.VK_BACK_SPACE || evt.getKeyChar() == KeyEvent.VK_DELETE) {
+            showInsert();
+        }
+    }//GEN-LAST:event_nameKeyTyped
+
+    private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
+        showInsert();
+    }//GEN-LAST:event_nameKeyReleased
+
+    private void photoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_photoMouseClicked
+        photo.setIcon(null);
+    }//GEN-LAST:event_photoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
