@@ -104,7 +104,8 @@ public class DAOSQL implements IDAO {
         }
         if (p.getPhoto() != null) {
             String sep = File.separator;
-            File photo = new File(Routes.DB.getFolderPhotos() + sep + p.getNif() + ".png");
+            String filePath = Routes.DB.getFolderPhotos() + sep + p.getNif() + ".png";
+            File photo = new File(filePath);
             FileOutputStream out;
             BufferedOutputStream outB;
             out = new FileOutputStream(photo);
