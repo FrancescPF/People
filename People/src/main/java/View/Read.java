@@ -112,6 +112,12 @@ public class Read extends javax.swing.JDialog {
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nifKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nifKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nifKeyTyped(evt);
             }
@@ -232,17 +238,11 @@ public class Read extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             evt.consume();
         }
-        if (nif.getText().length() == 8) {
-            nif.setText(calculateNifLetter(nif.getText()));
-            read.doClick();
-            nif.setEditable(false);
-        }
     }//GEN-LAST:event_nifKeyTyped
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
-        // TODO add your handling code here:read.getNam().setText("");
-        nif.setEditable(true);
         nif.setText("");
+        nif.setEditable(true);
         name.setText("");
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
@@ -257,6 +257,23 @@ public class Read extends javax.swing.JDialog {
         //... but do not display it in the JDatePicker box
         dateOfBirth.getModel().setValue(null);
     }//GEN-LAST:event_resetActionPerformed
+
+    private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
+        if (nif.getText().length() == 8) {
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            read.doClick();
+        }
+    }//GEN-LAST:event_nifKeyReleased
+
+    private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
+        if (nif.getText().length() == 8) {
+            evt.consume();
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            read.doClick();
+        }
+    }//GEN-LAST:event_nifKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;

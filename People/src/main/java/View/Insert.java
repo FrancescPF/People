@@ -187,6 +187,12 @@ public class Insert extends javax.swing.JDialog {
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nifKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nifKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nifKeyTyped(evt);
             }
@@ -272,11 +278,6 @@ public class Insert extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             evt.consume();
         }
-        if (nif.getText().length() == 8) {
-            nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
-            showInsert();
-        }
     }//GEN-LAST:event_nifKeyTyped
 
     private void nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyTyped
@@ -295,6 +296,23 @@ public class Insert extends javax.swing.JDialog {
     private void photoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_photoMouseClicked
         photo.setIcon(null);
     }//GEN-LAST:event_photoMouseClicked
+
+    private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
+        if (nif.getText().length() == 8) {
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            showInsert();
+        }
+    }//GEN-LAST:event_nifKeyReleased
+
+    private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
+        if (nif.getText().length() == 8) {
+            evt.consume();
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            showInsert();
+        }
+    }//GEN-LAST:event_nifKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;

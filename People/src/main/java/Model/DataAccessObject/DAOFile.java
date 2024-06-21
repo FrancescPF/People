@@ -53,7 +53,7 @@ public class DAOFile implements IDAO {
                 }
                 ImageIcon photo = null;
                 if (!data[3].equals("null")) {
-                    photo = new ImageIcon(Routes.FILE.getFolderPhotos() + sep + data[3] + ".png");
+                    photo = new ImageIcon(data[3]);
                 }
                 personToRead = new Person(data[0], data[1], date, photo);
                 break;
@@ -72,16 +72,17 @@ public class DAOFile implements IDAO {
         fw = new FileWriter(Routes.FILE.getDataFile(), true);
         bw = new BufferedWriter(fw);
         if (p.getDateOfBirth() != null) {
-            DateFormat formato = new SimpleDateFormat("yyy/MM/dd");
-            String fechaComoString = formato.format(p.getDateOfBirth());
-            bw.write(p.getName() + "\t" + p.getNif() + "\t" + fechaComoString + "\t");
+            DateFormat dateFormat = new SimpleDateFormat("yyy/MM/dd");
+            String dateAsString = dateFormat.format(p.getDateOfBirth());
+            bw.write(p.getName() + "\t" + p.getNif() + "\t" + dateAsString + "\t");
         } else {
             bw.write(p.getName() + "\t" + p.getNif() + "\t" + "null" + "\t");
         }
         if (p.getPhoto() != null) {
             FileOutputStream out;
             BufferedOutputStream outB;
-            out = new FileOutputStream(Routes.FILE.getFolderPhotos() + sep + p.getNif() + ".png");
+            String fileName = Routes.FILE.getFolderPhotos() + sep + p.getNif() + ".png";
+            out = new FileOutputStream(fileName);
             outB = new BufferedOutputStream(out);
             BufferedImage bi = new BufferedImage(p.getPhoto().getImage().getWidth(null),
                     p.getPhoto().getImage().getHeight(null),
@@ -94,11 +95,9 @@ public class DAOFile implements IDAO {
                 outB.write(img[i]);
             }
             outB.close();
-            bw.write(p.getNif() + "\n");
+            bw.write(fileName + "\n");
         } else {
-            bw.write("""
-                     null
-                     """);
+            bw.write("null" + "\n");
         }
         bw.flush();
         bw.close();
