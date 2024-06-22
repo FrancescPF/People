@@ -6,13 +6,14 @@
 package View;
 
 import static OtherFunctions.DataValidation.calculateNifLetter;
-import static OtherFunctions.DataValidation.validateNifNumber;
+import static OtherFunctions.DataValidation.isNumber;
 import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
+ * Interface used to delete a person. It is mandatory to enter the NIF.
  * @author Francesc Perez
  * @version 1.1.0
  */
@@ -20,6 +21,8 @@ public class Delete extends javax.swing.JDialog {
 
     /**
      * Creates new form StudentDelete
+     * @param parent
+     * @param modal
      */
     public Delete(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -144,42 +147,32 @@ public class Delete extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
-        if (nif.isEditable()) {
-            if (!validateNifNumber(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
-                    && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
-                    && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
-                    && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
-                JOptionPane.showMessageDialog(this, "Nif field can only contain numbers.", "Nif validation - People v1.0", JOptionPane.ERROR_MESSAGE);
-                int posDelete = nif.getText().indexOf(evt.getKeyChar());
-                StringBuilder newNif = new StringBuilder(nif.getText());
-                nif.setText(newNif.deleteCharAt(posDelete).toString());
-            }
+        if (nif.getText().length() == 8) {
+            evt.consume();
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            delete.setEnabled(true);
         }
     }//GEN-LAST:event_nifKeyPressed
    
     private void nifKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyReleased
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEnabled(false);
+            nif.setEditable(false);
             delete.setEnabled(true);
-        }else{
-            delete.setEnabled(false);
         }
     }//GEN-LAST:event_nifKeyReleased
 
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
-        if(nif.getText().length()==8){
-            nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEnabled(false);
-            delete.setEnabled(true);
-        }else{
-            delete.setEnabled(false);
+        if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
+            JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            evt.consume();
         }
     }//GEN-LAST:event_nifKeyTyped
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         nif.setText("");
-        nif.setEnabled(true);
+        nif.setEditable(true);
         delete.setEnabled(false);
     }//GEN-LAST:event_resetActionPerformed
 

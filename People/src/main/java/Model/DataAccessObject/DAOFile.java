@@ -54,6 +54,7 @@ public class DAOFile implements IDAO {
                 ImageIcon photo = null;
                 if (!data[3].equals("null")) {
                     photo = new ImageIcon(data[3]);
+                    System.out.println(data[3]);
                 }
                 personToRead = new Person(data[0], data[1], date, photo);
                 break;

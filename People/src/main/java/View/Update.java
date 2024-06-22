@@ -1,8 +1,8 @@
 package View;
 
 import static OtherFunctions.DataValidation.calculateNifLetter;
-import static OtherFunctions.DataValidation.validateNameLetter;
-import static OtherFunctions.DataValidation.validateNifNumber;
+import static OtherFunctions.DataValidation.isLetter;
+import static OtherFunctions.DataValidation.isNumber;
 import java.awt.dnd.DropTarget;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
@@ -18,6 +18,7 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 
 /**
+ * Interface used to updated a person. It is mandatory to enter the NIF.
  * @author Francesc Perez
  * @version 1.1.0
  */
@@ -139,12 +140,17 @@ public class Update extends javax.swing.JDialog {
 
         photo.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         photo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        photo.setText("<html><center>PHOTO</center></br><br><center> <i>Supported formats: .GIF, .PNG, .JFIF, .JPG</i></center></br><br><center><i>Maximum size 64KB</i></center></html>");
+        photo.setText("<html><center>PHOTO</center></br><br><center> <i>Supported formats: PNG.</i></center></br><br><center><i>Max. size 64KB</i></center></html>");
         photo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         photo.setEnabled(false);
         photo.setMaximumSize(new java.awt.Dimension(150, 135));
         photo.setMinimumSize(new java.awt.Dimension(150, 135));
         photo.setPreferredSize(new java.awt.Dimension(150, 135));
+        photo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                photoMouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -257,16 +263,15 @@ public class Update extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyPressed
-        if (nif.isEditable()) {
-            if (!validateNifNumber(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
-                    && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
-                    && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
-                    && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
-                JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", "Read - People v1.0", JOptionPane.WARNING_MESSAGE);
-                int posDelete = nif.getText().indexOf(evt.getKeyChar());
-                StringBuilder newNif = new StringBuilder(nif.getText());
-                nif.setText(newNif.deleteCharAt(posDelete).toString());
-            }
+        if (nif.getText().length() == 8) {
+            evt.consume();
+            nif.setText(calculateNifLetter(nif.getText()));
+            nif.setEditable(false);
+            name.setEnabled(true);
+            dateOfBirth.setEnabled(true);
+            photo.setEnabled(true);
+            update.setEnabled(true);   
+            read.doClick();
         }
     }//GEN-LAST:event_nifKeyPressed
 
@@ -277,19 +282,16 @@ public class Update extends javax.swing.JDialog {
             name.setEnabled(true);
             dateOfBirth.setEnabled(true);
             photo.setEnabled(true);
+            update.setEnabled(true);
             read.doClick();
         }
     }//GEN-LAST:event_nifKeyReleased
 
     private void nifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nifKeyTyped
-        if (nif.getText().length() == 8) {
-            nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
-            name.setEnabled(true);
-            dateOfBirth.setEnabled(true);
-            photo.setEnabled(true);
-            read.doClick();
-        }             // TODO add your handling code here:
+        if (!isNumber(evt.getKeyChar()) && evt.getKeyChar() != KeyEvent.VK_BACK_SPACE && evt.getKeyChar() != KeyEvent.VK_DELETE) {
+            JOptionPane.showMessageDialog(this, "Type only numbers [0-9]", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
     }//GEN-LAST:event_nifKeyTyped
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
@@ -299,7 +301,6 @@ public class Update extends javax.swing.JDialog {
         dateOfBirth.getModel().setValue(null);
         photo.setIcon(null); 
         name.setEnabled(false);
-        dateOfBirth.setEnabled(false);
         photo.setEnabled(false);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -311,12 +312,12 @@ public class Update extends javax.swing.JDialog {
         DateModel<Calendar> dateModel = (DateModel<Calendar>) dateOfBirth.getModel();
         dateModel.setValue(calendar);
         //... but do not display it in the JDatePicker box
-       // TODO add your handling code here:
+        dateOfBirth.getModel().setValue(null);
         update.setEnabled(false);
     }//GEN-LAST:event_resetActionPerformed
 
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
-        if (!validateNameLetter(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
+        if (!isLetter(evt.getKeyChar()) && evt.getKeyCode() != KeyEvent.VK_UP
                 && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT
                 && evt.getKeyCode() != KeyEvent.VK_RIGHT && evt.getKeyCode() != KeyEvent.VK_SHIFT
                 && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE && evt.getKeyCode() != KeyEvent.VK_DELETE) {
@@ -334,6 +335,10 @@ public class Update extends javax.swing.JDialog {
             update.setEnabled(true);
         }
     }//GEN-LAST:event_nameKeyReleased
+
+    private void photoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_photoMouseClicked
+        photo.setIcon(null);
+    }//GEN-LAST:event_photoMouseClicked
 
     /**
      * @param args the command line arguments

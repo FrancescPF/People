@@ -220,15 +220,13 @@ public class ControllerImplementation implements IController, ActionListener {
             Person p = new Person(delete.getNif().getText());
             delete(p);
             delete.getReset().doClick();
-//            //Events for the update option
+            //Events for the update option
         } else if (e.getSource() == menu.getUpdate()) {
             update = new Update(menu, true);
             update.getUpdate().addActionListener(this);
             update.getRead().addActionListener(this);
             update.setVisible(true);
         } else if (update != null && e.getSource() == update.getRead()) {
-//            update.getNif().setText(update.getNif().getText());
-            System.out.println(update.getNif().getText());
             update.getUpdate().setEnabled(true);
             Person p = new Person(update.getNif().getText());
             Person pNew = read(p);
@@ -240,21 +238,18 @@ public class ControllerImplementation implements IController, ActionListener {
                     DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
                     dateModel.setValue(calendar);
                 }
-                update.getPhoto().setIcon(pNew.getPhoto());
-                System.out.println(pNew.getPhoto().toString()); 
+                update.getPhoto().setIcon(pNew.getPhoto()); 
             } else {
-                JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist. Reseting NIF.", "Update - People v1.1.0", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist.", update.getTitle(), JOptionPane.WARNING_MESSAGE);
                 update.getReset().doClick();
             }
         } else if (update != null && e.getSource() == update.getUpdate()) {
-            System.out.println(update.getNif().getText());
             Person p = new Person(update.getNam().getText(), update.getNif().getText());
             if (update.getDateOfBirth().getModel().getValue() != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
             }
             if ((ImageIcon) update.getPhoto().getIcon() != null) {
                 p.setPhoto((ImageIcon) update.getPhoto().getIcon());
-                System.out.println(p.getPhoto().toString()); 
             }
             update(p);
             update.getReset().doClick();
@@ -333,7 +328,7 @@ public class ControllerImplementation implements IController, ActionListener {
             if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
                     || ex instanceof SQLException) {
-                JOptionPane.showMessageDialog(read, ex.getMessage() + ex.getClass() + " Closing application.", "Insert - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(update, ex.getMessage() + ex.getClass() + " Closing application.", update.getTitle(), JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
         }
