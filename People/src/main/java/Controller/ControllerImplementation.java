@@ -227,10 +227,13 @@ public class ControllerImplementation implements IController, ActionListener {
             update.getRead().addActionListener(this);
             update.setVisible(true);
         } else if (update != null && e.getSource() == update.getRead()) {
-            update.getUpdate().setEnabled(true);
             Person p = new Person(update.getNif().getText());
             Person pNew = read(p);
             if (pNew != null) {
+                update.getNam().setEnabled(true);
+                update.getDateOfBirth().setEnabled(true);
+                update.getPhoto().setEnabled(true);
+                update.getUpdate().setEnabled(true);
                 update.getNam().setText(pNew.getName());
                 if (pNew.getDateOfBirth() != null) {
                     Calendar calendar = Calendar.getInstance();
@@ -238,17 +241,18 @@ public class ControllerImplementation implements IController, ActionListener {
                     DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
                     dateModel.setValue(calendar);
                 }
-                update.getPhoto().setIcon(pNew.getPhoto()); 
+//                update.getPhoto().setIcon(pNew.getPhoto());
+                update.getUpdate().setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist.", update.getTitle(), JOptionPane.WARNING_MESSAGE);
                 update.getReset().doClick();
             }
         } else if (update != null && e.getSource() == update.getUpdate()) {
             Person p = new Person(update.getNam().getText(), update.getNif().getText());
-            if (update.getDateOfBirth().getModel().getValue() != null) {
+            if ((update.getDateOfBirth().getModel().getValue()) != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
             }
-            if ((ImageIcon) update.getPhoto().getIcon() != null) {
+            if ((ImageIcon) (update.getPhoto().getIcon()) != null) {
                 p.setPhoto((ImageIcon) update.getPhoto().getIcon());
             }
             update(p);
@@ -312,10 +316,11 @@ public class ControllerImplementation implements IController, ActionListener {
         }
     }
 
-     /**
+    /**
      * This function updates the Person object with the requested NIF, if it
-     * doesn't exist. NIF can not be aupdated. If there is any access problem 
+     * doesn't exist. NIF can not be aupdated. If there is any access problem
      * with the storage device, the program stops.
+     *
      * @param p Person to update
      */
     @Override
@@ -338,6 +343,7 @@ public class ControllerImplementation implements IController, ActionListener {
      * This function deletes the Person object with the requested NIF, if it
      * exists. If there is any access problem with the storage device, the
      * program stops.
+     *
      * @param p Person to read
      */
     @Override
@@ -368,6 +374,7 @@ public class ControllerImplementation implements IController, ActionListener {
      * This function returns the Person object with the requested NIF, if it
      * exists. Otherwise it returns null. If there is any access problem with
      * the storage device, the program stops.
+     *
      * @param p Person to read
      * @return Person or null
      */

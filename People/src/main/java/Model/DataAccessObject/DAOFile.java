@@ -35,7 +35,6 @@ public class DAOFile implements IDAO {
 
     @Override
     public Person read(Person p) throws Exception {
-        String sep = File.separator;
         Person personToRead = null;
         FileReader fr;
         BufferedReader br;
@@ -92,6 +91,7 @@ public class DAOFile implements IDAO {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bi, "png", baos);
             byte[] img = baos.toByteArray();
+            baos.close();
             for (int i = 0; i < img.length; i++) {
                 outB.write(img[i]);
             }

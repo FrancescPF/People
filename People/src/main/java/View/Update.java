@@ -240,7 +240,7 @@ public class Update extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 2, 8)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.0");
+        jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -266,11 +266,7 @@ public class Update extends javax.swing.JDialog {
         if (nif.getText().length() == 8) {
             evt.consume();
             nif.setText(calculateNifLetter(nif.getText()));
-            nif.setEditable(false);
-            name.setEnabled(true);
-            dateOfBirth.setEnabled(true);
-            photo.setEnabled(true);
-            update.setEnabled(true);   
+            nif.setEditable(false);  
             read.doClick();
         }
     }//GEN-LAST:event_nifKeyPressed
@@ -279,10 +275,6 @@ public class Update extends javax.swing.JDialog {
         if (nif.getText().length() == 8) {
             nif.setText(calculateNifLetter(nif.getText()));
             nif.setEditable(false);
-            name.setEnabled(true);
-            dateOfBirth.setEnabled(true);
-            photo.setEnabled(true);
-            update.setEnabled(true);
             read.doClick();
         }
     }//GEN-LAST:event_nifKeyReleased
@@ -313,6 +305,7 @@ public class Update extends javax.swing.JDialog {
         dateModel.setValue(calendar);
         //... but do not display it in the JDatePicker box
         dateOfBirth.getModel().setValue(null);
+        dateOfBirth.setEnabled(false);
         update.setEnabled(false);
     }//GEN-LAST:event_resetActionPerformed
 
