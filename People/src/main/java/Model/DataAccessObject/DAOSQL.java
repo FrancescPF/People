@@ -62,16 +62,44 @@ public class DAOSQL implements IDAO {
             String name = rs.getString("name");
             pReturn = new Person(name, nif);
             Date date = rs.getDate("dateOfBirth");
-            if(date != null)
-                pReturn.setDateOfBirth(date);                
+            if (date != null) {
+                pReturn.setDateOfBirth(date);
+            }
             String photo = rs.getString("photo");
-            if (photo != null) 
+            if (photo != null) {
                 pReturn.setPhoto(new ImageIcon(photo));
+            }
         }
         rs.close();
         instruction.close();
         disconnect(conn);
         return pReturn;
+    }
+    
+    @Override
+    public ArrayList<Person> readAll() throws SQLException, PersonException {
+        ArrayList<Person> people = new ArrayList<>();
+        Connection conn;
+        Statement instruction;
+        ResultSet rs;
+        conn = connect();
+        instruction = conn.createStatement();
+        rs = instruction.executeQuery(SQL_SELECT_ALL);
+        while (rs.next()) {
+            String nif = rs.getString("nif");
+            String name = rs.getString("name");
+            Date date = rs.getDate("dateOfBirth");
+            String photo = rs.getString("photo");
+            if (photo != null) {
+                people.add(new Person(nif, name, date, new ImageIcon(photo)));
+            } else {
+                people.add(new Person(nif, name, date, null));
+            }
+        }
+        rs.close();
+        instruction.close();
+        disconnect(conn);
+        return people;
     }
 
     @Override
@@ -84,9 +112,9 @@ public class DAOSQL implements IDAO {
         instruction.executeUpdate();
         instruction.close();
         disconnect(conn);
-            File photoFile = new File(Routes.DB.getFolderPhotos() + File.separator + p.getNif()
-                    + ".png");
-            photoFile.delete();
+        File photoFile = new File(Routes.DB.getFolderPhotos() + File.separator + p.getNif()
+                + ".png");
+        photoFile.delete();
     }
 
     @Override
@@ -98,9 +126,9 @@ public class DAOSQL implements IDAO {
         instruction.setString(1, p.getNif());
         instruction.setString(2, p.getName());
         if (p.getDateOfBirth() != null) {
-           instruction.setDate(3, new java.sql.Date((p.getDateOfBirth()).getTime())); 
-        }else{
-            instruction.setDate(3, null); 
+            instruction.setDate(3, new java.sql.Date((p.getDateOfBirth()).getTime()));
+        } else {
+            instruction.setDate(3, null);
         }
         if (p.getPhoto() != null) {
             String sep = File.separator;
@@ -131,35 +159,6 @@ public class DAOSQL implements IDAO {
     }
 
     @Override
-    public ArrayList<Person> readAll() throws SQLException, PersonException {
-        ArrayList<Person> people = new ArrayList<>();
-        Connection conn;
-        Statement instruction;
-        ResultSet rs;
-        conn = connect();
-        instruction = conn.createStatement();
-        rs = instruction.executeQuery(SQL_SELECT_ALL);
-        while (rs.next()) {
-            String nif = rs.getString("nif");
-            String name = rs.getString("name");
-            Date date = rs.getDate("dateOfBirth");
-            String photo = rs.getString("photo");
-            if (photo != null) {
-                people.add(new Person(nif, name, date, new ImageIcon(photo)));
-            } else {
-                people.add(new Person(nif, name, date, null));
-            }
-        }
-        rs.close();
-        instruction.close();
-        disconnect(conn);
-        if (people.isEmpty()) {
-            throw new PersonException("There aren't people registered.");
-        }
-        return people;
-    }
-
-    @Override
     public void update(Person p) throws FileNotFoundException, SQLException, IOException {
         System.out.println("+" + p);
         Connection conn;
@@ -168,9 +167,9 @@ public class DAOSQL implements IDAO {
         instruction = conn.prepareStatement(SQL_UPDATE);
         instruction.setString(1, p.getName());
         if (p.getDateOfBirth() != null) {
-           instruction.setDate(2, new java.sql.Date((p.getDateOfBirth()).getTime())); 
-        }else{
-            instruction.setDate(2, null); 
+            instruction.setDate(2, new java.sql.Date((p.getDateOfBirth()).getTime()));
+        } else {
+            instruction.setDate(2, null);
         }
         if (p.getPhoto() != null) {
             String sep = File.separator;
@@ -193,6 +192,9 @@ public class DAOSQL implements IDAO {
             instruction.setString(3, imagePerson.getPath());
         } else {
             instruction.setString(3, null);
+            File photoFile = new File(Routes.DB.getFolderPhotos() + File.separator + p.getNif()
+                    + ".png");
+            photoFile.delete();
         }
         instruction.setString(4, p.getNif());
         instruction.executeUpdate();

@@ -133,7 +133,6 @@ public class Menu extends javax.swing.JFrame {
 
         readAll.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         readAll.setText("READ ALL");
-        readAll.setEnabled(false);
         readAll.setMaximumSize(new java.awt.Dimension(120, 50));
         readAll.setMinimumSize(new java.awt.Dimension(120, 50));
         readAll.setPreferredSize(new java.awt.Dimension(120, 50));

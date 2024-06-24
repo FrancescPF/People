@@ -36,31 +36,9 @@ public class DAOArrayList implements IDAO{
         people.set(people.indexOf(p), p);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @Override
     public ArrayList<Person> readAll() throws PersonException{
-        if(people.isEmpty())
-            throw new PersonException("There aren't people registered "
-                    + "yet.");
         return people;
     }
-    
-    
-
-
-
-
-    
+   
 }

@@ -50,6 +50,7 @@ public class DropPhotoListener implements DropTargetListener {
 
     @Override
     public void drop(DropTargetDropEvent ev) {
+        label.setIcon(null);
         ev.acceptDrop(DnDConstants.ACTION_COPY);
         Transferable t = ev.getTransferable();
         DataFlavor df[] = t.getTransferDataFlavors();

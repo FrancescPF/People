@@ -33,43 +33,13 @@ public class DAOHashMap implements IDAO {
     }
     
     @Override
-    public void update(Person p) throws PersonException {
+    public void update(Person p) {
         people.replace(p.getNif(), p);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     @Override
-    public ArrayList<Person> readAll() throws PersonException {
-        if (people.isEmpty()) {
-            throw new PersonException("There aren't people registered "
-                    + "yet.");
-        }
+    public ArrayList<Person> readAll() {
         return new ArrayList<>(people.values());
     }
-
-
-
-
-
-
 
 }

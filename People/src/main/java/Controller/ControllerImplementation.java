@@ -241,7 +241,7 @@ public class ControllerImplementation implements IController, ActionListener {
                     DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
                     dateModel.setValue(calendar);
                 }
-//                update.getPhoto().setIcon(pNew.getPhoto());
+                update.getPhoto().setIcon(pNew.getPhoto());
                 update.getUpdate().setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist.", update.getTitle(), JOptionPane.WARNING_MESSAGE);
@@ -259,29 +259,29 @@ public class ControllerImplementation implements IController, ActionListener {
             update.getReset().doClick();
             //Events for the readAll option
         } else if (e.getSource() == menu.getReadAll()) {
-//            ArrayList<Person> s = readAll();
-//            if (s.isEmpty()) {
-//                JOptionPane.showMessageDialog(readAll, "There are not people in BBDD", "Read All", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                readAll = new ReadAll(menu, true);
-//                DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
-//                for (int i = 0; i < s.size(); i++) {
-//                    model.addRow(new Object[i]);
-//                    model.setValueAt(s.get(i).getNif(), i, 0);
-//                    model.setValueAt(s.get(i).getName(), i, 1);
-//                    if (s.get(i).getDateOfBirth() != null) {
-//                        model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
-//                    } else {
-//                        model.setValueAt("", i, 2);
-//                    }
-//                    if (s.get(i).getPhoto() != null) {
-//                        model.setValueAt("yes", i, 3);
-//                    } else {
-//                        model.setValueAt("no", i, 3);
-//                    }
-//                }
-//                readAll.setVisible(true);
-//            }
+            ArrayList<Person> s = readAll();
+            if (s.isEmpty()) {
+                JOptionPane.showMessageDialog(readAll, "There are not people registered yet.", readAll.getTitle(), JOptionPane.WARNING_MESSAGE);
+            } else {
+                readAll = new ReadAll(menu, true);
+                DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
+                for (int i = 0; i < s.size(); i++) {
+                    model.addRow(new Object[i]);
+                    model.setValueAt(s.get(i).getNif(), i, 0);
+                    model.setValueAt(s.get(i).getName(), i, 1);
+                    if (s.get(i).getDateOfBirth() != null) {
+                        model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
+                    } else {
+                        model.setValueAt("", i, 2);
+                    }
+                    if (s.get(i).getPhoto() != null) {
+                        model.setValueAt("yes", i, 3);
+                    } else {
+                        model.setValueAt("no", i, 3);
+                    }
+                }
+                readAll.setVisible(true);
+            }
         }
     }
 
@@ -397,15 +397,25 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         return null;
     }
-
+    
+    /**
+     * This function returns the people registered. If there is any access 
+     * problem with the storage device, the program stops.
+     * @return ArrayList
+     */
     @Override
     public ArrayList<Person> readAll() {
         ArrayList<Person> people = new ArrayList<>();
-//        try {
-//            people = dao.readAll();
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(readAll, ex.getMessage(), "BBDD Problem", JOptionPane.ERROR_MESSAGE);
-//        }
+        try {
+            people = dao.readAll();
+        } catch (Exception ex) {
+             if (ex instanceof FileNotFoundException || ex instanceof IOException
+                    || ex instanceof ParseException || ex instanceof ClassNotFoundException
+                    || ex instanceof SQLException) {
+                JOptionPane.showMessageDialog(readAll, ex.getMessage() + " Closing application.", readAll.getTitle(), JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+        }
         return people;
     }
 

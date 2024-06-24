@@ -1,21 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package View;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
+ * Interface used to read all persons.
  * @author Francesc Perez
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class ReadAll extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ReadAll
-     */
     public ReadAll(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

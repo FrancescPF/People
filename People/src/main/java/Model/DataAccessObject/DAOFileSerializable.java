@@ -45,6 +45,27 @@ public class DAOFileSerializable implements IDAO {
     }
 
     @Override
+    public ArrayList<Person> readAll() throws IOException, ClassNotFoundException {
+        ArrayList<Person> people = new ArrayList<>();
+        try{
+            ObjectInputStream ois;
+            FileInputStream fIS;
+            fIS = new FileInputStream(Routes.FILES.getDataFile());
+            ois = new ObjectInputStream(fIS);
+            Person pr;
+            while ((pr = (Person) ois.readObject()) != null) {
+                people.add(pr);
+            }
+            ois.close();
+        } catch (java.io.EOFException ex) {
+            //Do nothing
+//            System.out.println("El archivo está vacío y no se puede crear"
+//                    + "el objeto ObjectInputStream");
+        }
+        return people;
+    }
+
+    @Override
     public void delete(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> peopleRead = new ArrayList<>();
         FileInputStream fIS;
@@ -107,25 +128,6 @@ public class DAOFileSerializable implements IDAO {
     public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException, PersonException {
         delete(p);
         insert(p);
-    }
-    
-    @Override
-    public ArrayList<Person> readAll() throws IOException, ClassNotFoundException, PersonException {
-        ArrayList<Person> people = new ArrayList<>();
-        ObjectInputStream ois;
-        FileInputStream fIS;
-        fIS = new FileInputStream(Routes.FILES.getDataFile());
-        ois = new ObjectInputStream(fIS);
-        Person pr;
-        while ((pr = (Person) ois.readObject()) != null) {
-            people.add(pr);
-        }
-        ois.close();
-        if (people.isEmpty()) {
-            throw new PersonException("There aren't people registered "
-                    + "yet.");
-        }
-        return people;
     }
 
 }

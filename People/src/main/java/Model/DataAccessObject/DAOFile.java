@@ -53,7 +53,6 @@ public class DAOFile implements IDAO {
                 ImageIcon photo = null;
                 if (!data[3].equals("null")) {
                     photo = new ImageIcon(data[3]);
-                    System.out.println(data[3]);
                 }
                 personToRead = new Person(data[0], data[1], date, photo);
                 break;
@@ -62,6 +61,33 @@ public class DAOFile implements IDAO {
         }
         br.close();
         return personToRead;
+    }
+    
+    @Override
+    public ArrayList<Person> readAll() throws FileNotFoundException, IOException, ParseException {
+        ArrayList<Person> people = new ArrayList<>();
+        FileReader fr;
+        BufferedReader br;
+        fr = new FileReader(Routes.FILE.getDataFile());
+        br = new BufferedReader(fr);
+        String line;
+        line = br.readLine();
+        while (line != null) {
+            String data[] = line.split("\t");
+            Date date = null;
+            if (!data[2].equals("null")) {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                date = dateFormat.parse(data[2]);
+            }
+            ImageIcon photo = null;
+            if (!data[3].equals("null")) {
+                photo = new ImageIcon(data[3]);
+            }
+            people.add(new Person(data[0], data[1], date, photo));
+            line = br.readLine();
+        }
+        br.close();
+        return people;
     }
 
     @Override
@@ -81,7 +107,7 @@ public class DAOFile implements IDAO {
         if (p.getPhoto() != null) {
             FileOutputStream out;
             BufferedOutputStream outB;
-            String fileName = Routes.FILE.getFolderPhotos() + sep + p.getNif() + ".png";
+            String fileName = Routes.FILE.getFolderPhotos() + sep + p.getNif() + ".png";         
             out = new FileOutputStream(fileName);
             outB = new BufferedOutputStream(out);
             BufferedImage bi = new BufferedImage(p.getPhoto().getImage().getWidth(null),
@@ -90,11 +116,13 @@ public class DAOFile implements IDAO {
             bi.getGraphics().drawImage(p.getPhoto().getImage(), 0, 0, null);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(bi, "png", baos);
+            baos.flush();
             byte[] img = baos.toByteArray();
             baos.close();
             for (int i = 0; i < img.length; i++) {
                 outB.write(img[i]);
             }
+            outB.flush();
             outB.close();
             bw.write(fileName + "\n");
         } else {
@@ -133,38 +161,6 @@ public class DAOFile implements IDAO {
     public void update(Person p) throws IOException, PersonException {
         delete(p);
         insert(p);
-    }
-
-    @Override
-    public ArrayList<Person> readAll() throws FileNotFoundException, IOException, ParseException, PersonException {
-        String sep = File.separator;
-        ArrayList<Person> people = new ArrayList<>();
-        FileReader fr;
-        BufferedReader br;
-        fr = new FileReader(Routes.FILE.getDataFile());
-        br = new BufferedReader(fr);
-        String line;
-        line = br.readLine();
-        while (line != null) {
-            String data[] = line.split("\t");
-            Date date = null;
-            if (!data[2].equals("null")) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                date = dateFormat.parse(data[2]);
-            }
-            ImageIcon photo = null;
-            if (!data[3].equals("null")) {
-                photo = new ImageIcon(Routes.FILE.getFolderPhotos() + sep + data[3] + ".png");
-            }
-            people.add(new Person(data[0], data[1], date, photo));
-            line = br.readLine();
-        }
-        br.close();
-        if (people.isEmpty()) {
-            throw new PersonException("There aren't people registered "
-                    + "yet.");
-        }
-        return people;
     }
 
 }
