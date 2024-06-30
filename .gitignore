@@ -1,3 +1,4 @@
-*.class
-*.png
 /People/target/
+/People/File/
+/People/FileSer/
+/People/SQL_DataBase/
