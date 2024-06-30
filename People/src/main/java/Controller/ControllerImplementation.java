@@ -206,6 +206,8 @@ public class ControllerImplementation implements IController, ActionListener {
                     DateModel<Calendar> dateModel = (DateModel<Calendar>) read.getDateOfBirth().getModel();
                     dateModel.setValue(calendar);
                 }
+                //To avoid charging former images
+                pNew.getPhoto().getImage().flush();
                 read.getPhoto().setIcon(pNew.getPhoto());
             } else {
                 JOptionPane.showMessageDialog(read, p.getNif() + " doesn't exist.", read.getTitle(), JOptionPane.WARNING_MESSAGE);
@@ -241,6 +243,8 @@ public class ControllerImplementation implements IController, ActionListener {
                     DateModel<Calendar> dateModel = (DateModel<Calendar>) update.getDateOfBirth().getModel();
                     dateModel.setValue(calendar);
                 }
+                //To avoid charging former images
+                pNew.getPhoto().getImage().flush();
                 update.getPhoto().setIcon(pNew.getPhoto());
                 update.getUpdate().setEnabled(true);
             } else {

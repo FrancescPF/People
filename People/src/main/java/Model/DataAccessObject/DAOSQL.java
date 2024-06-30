@@ -160,7 +160,6 @@ public class DAOSQL implements IDAO {
 
     @Override
     public void update(Person p) throws FileNotFoundException, SQLException, IOException {
-        System.out.println("+" + p);
         Connection conn;
         PreparedStatement instruction;
         conn = connect();
