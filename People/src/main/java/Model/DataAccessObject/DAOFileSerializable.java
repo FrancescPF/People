@@ -26,9 +26,11 @@ public class DAOFileSerializable implements IDAO {
     @Override
     public Person read(Person p) throws IOException, ClassNotFoundException {
         Person personToRead = null;
+        FileInputStream fIS = null;
+        ObjectInputStream o = null;
         try {
-            FileInputStream fIS = new FileInputStream(Routes.FILES.getDataFile());
-            ObjectInputStream o = new ObjectInputStream(fIS);
+            fIS = new FileInputStream(Routes.FILES.getDataFile());
+            o = new ObjectInputStream(fIS);
             Person pr;
             while ((pr = (Person) o.readObject()) != null) {
                 if (pr.getNif().equals(p.getNif())) {
@@ -41,6 +43,13 @@ public class DAOFileSerializable implements IDAO {
             //Do nothing
 //            System.out.println("El archivo está vacío y no se puede crear"
 //                    + "el objeto ObjectInputStream");
+        } finally {
+            if (o != null) {
+                o.close();
+            }
+            if (fIS != null) {
+                fIS.close();
+            }
         }
         return personToRead;
     }
@@ -48,9 +57,10 @@ public class DAOFileSerializable implements IDAO {
     @Override
     public ArrayList<Person> readAll() throws IOException, ClassNotFoundException {
         ArrayList<Person> people = new ArrayList<>();
-        try{
-            ObjectInputStream ois;
-            FileInputStream fIS;
+        ObjectInputStream ois = null;
+        FileInputStream fIS = null;
+        try {
+            
             fIS = new FileInputStream(Routes.FILES.getDataFile());
             ois = new ObjectInputStream(fIS);
             Person pr;
@@ -62,15 +72,23 @@ public class DAOFileSerializable implements IDAO {
             //Do nothing
 //            System.out.println("El archivo está vacío y no se puede crear"
 //                    + "el objeto ObjectInputStream");
+        } finally {
+            if (ois != null) {
+                ois.close();
+            }
+            if (fIS != null) {
+                fIS.close();
+            }
         }
+        
         return people;
     }
 
     @Override
     public void delete(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> peopleRead = new ArrayList<>();
-        FileInputStream fIS;
-        ObjectInputStream ois;
+        FileInputStream fIS = null;
+        ObjectInputStream ois = null;
         try {
             fIS = new FileInputStream(Routes.FILES.getDataFile());
             ois = new ObjectInputStream(fIS);
@@ -80,11 +98,17 @@ public class DAOFileSerializable implements IDAO {
                     peopleRead.add(pr);
                 }
             }
-            ois.close();
         } catch (java.io.EOFException ex) {
             //Do nothing
 //            System.out.println("El archivo está vacío y no se puede crear"
 //                    + "el objeto ObjectInputStream");
+        }finally {
+            if (ois != null) {
+                ois.close();
+            }
+            if (fIS != null) {
+                fIS.close();
+            }
         }
         ObjectOutputStream oos;
         FileOutputStream fOS;
@@ -99,27 +123,34 @@ public class DAOFileSerializable implements IDAO {
 
     @Override
     public void deleteAll() throws IOException, ClassNotFoundException {
-//        File file = new File(Routes.FILES.getDataFile());
-//        file.delete();
-//        file = new File(Routes.FILES.getDataFile());
-//        file.createNewFile();
+        File file = new File(Routes.FILES.getDataFile());
+        file.delete();
+        file.createNewFile();
     }
-    
+
     @Override
     public void insert(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> personRead = new ArrayList<>();
+        FileInputStream fIS = null;
+        ObjectInputStream ois = null;
         try {
-            FileInputStream fIS = new FileInputStream(Routes.FILES.getDataFile());
-            ObjectInputStream ois = new ObjectInputStream(fIS);
+            fIS = new FileInputStream(Routes.FILES.getDataFile());
+            ois = new ObjectInputStream(fIS);
             Person pr;
             while ((pr = (Person) ois.readObject()) != null) {
                 personRead.add(pr);
             }
-            ois.close();
         } catch (java.io.EOFException ex) {
             //Do nothing
 //            System.out.println("El archivo está vacío y no se puede crear"
 //                   + "el objeto ObjectInputStream");
+        } finally {
+            if (ois != null) {
+                ois.close();
+            }
+            if (fIS != null) {
+                fIS.close();
+            }
         }
         ObjectOutputStream oos;
         FileOutputStream fOS;
@@ -129,8 +160,10 @@ public class DAOFileSerializable implements IDAO {
         for (Person pf : personRead) {
             oos.writeObject(pf);
         }
+        fOS.flush();
         oos.flush();
         oos.close();
+        fOS.close();
     }
 
     @Override

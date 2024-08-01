@@ -208,8 +208,10 @@ public class ControllerImplementation implements IController, ActionListener {
                     dateModel.setValue(calendar);
                 }
                 //To avoid charging former images
-                pNew.getPhoto().getImage().flush();
-                read.getPhoto().setIcon(pNew.getPhoto());
+                if(pNew.getPhoto() != null){
+                    pNew.getPhoto().getImage().flush();
+                    read.getPhoto().setIcon(pNew.getPhoto());
+                }
             } else {
                 JOptionPane.showMessageDialog(read, p.getNif() + " doesn't exist.", read.getTitle(), JOptionPane.WARNING_MESSAGE);
                 read.getReset().doClick();
@@ -245,9 +247,11 @@ public class ControllerImplementation implements IController, ActionListener {
                     dateModel.setValue(calendar);
                 }
                 //To avoid charging former images
-                pNew.getPhoto().getImage().flush();
-                update.getPhoto().setIcon(pNew.getPhoto());
-                update.getUpdate().setEnabled(true);
+                if(pNew.getPhoto() != null){
+                    pNew.getPhoto().getImage().flush();
+                    update.getPhoto().setIcon(pNew.getPhoto());
+                    update.getUpdate().setEnabled(true);
+                }
             } else {
                 JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist.", update.getTitle(), JOptionPane.WARNING_MESSAGE);
                 update.getReset().doClick();
