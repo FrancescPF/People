@@ -175,6 +175,7 @@ public class ControllerImplementation implements IController, ActionListener {
             menu.getUpdate().addActionListener(this);
             menu.getDelete().addActionListener(this);
             menu.getReadAll().addActionListener(this);
+            menu.getDeleteAll().addActionListener(this);
             //Events for the insert option
         } else if (e.getSource() == menu.getInsert()) {
             insert = new Insert(menu, true);
@@ -265,7 +266,7 @@ public class ControllerImplementation implements IController, ActionListener {
         } else if (e.getSource() == menu.getReadAll()) {
             ArrayList<Person> s = readAll();
             if (s.isEmpty()) {
-                JOptionPane.showMessageDialog(readAll, "There are not people registered yet.", readAll.getTitle(), JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
             } else {
                 readAll = new ReadAll(menu, true);
                 DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
@@ -285,6 +286,12 @@ public class ControllerImplementation implements IController, ActionListener {
                     }
                 }
                 readAll.setVisible(true);
+            }
+        } else if (e.getSource() == menu.getDeleteAll()) {
+            int answer = JOptionPane.showConfirmDialog(menu, "Are you sure to delete all people registered?", "Delete All - People v1.1.0", 0, 0);
+            if(answer == 0){
+                //Delete All, but firts ask again
+                deleteAll();
             }
         }
     }
@@ -422,18 +429,23 @@ public class ControllerImplementation implements IController, ActionListener {
         }
         return people;
     }
+    
+    /**
+     * This function deletes all the people registered. If there is any access 
+     * problem with the storage device, the program stops.
+     */
+    @Override
+    public void deleteAll() {
+        try {
+            dao.deleteAll();
+        } catch (Exception ex) {
+             if (ex instanceof FileNotFoundException || ex instanceof IOException
+                    || ex instanceof ParseException || ex instanceof ClassNotFoundException
+                    || ex instanceof SQLException) {
+                JOptionPane.showMessageDialog(menu, ex.getMessage() + " Closing application.", "Delete All - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+        }
+    }
 
-//    @Override
-//    public void deleteAllStudents() {
-//        try {
-//            if (daoSt.deleteALL() >= 1) {
-//                JOptionPane.showMessageDialog(deleteAllStu, "All students from BBDD have been deleted", "Delete All", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(deleteAllStu, "There were no registered students", "Delete All", JOptionPane.INFORMATION_MESSAGE);
-//            }
-//        } catch (DAO_Excep ex) {
-//            JOptionPane.showMessageDialog(deleteAllStu, ex.getMessage(), "BBDD Problem", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
-//
 }

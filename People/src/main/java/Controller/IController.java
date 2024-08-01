@@ -16,4 +16,5 @@ public interface IController {
     public abstract void update(Person p);
     public abstract void delete(Person p);
     public abstract void start();
+    public abstract void deleteAll();
 }

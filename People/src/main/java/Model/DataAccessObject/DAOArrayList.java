@@ -32,6 +32,11 @@ public class DAOArrayList implements IDAO{
     }
     
     @Override
+    public void deleteAll(){
+        people.clear();
+    }
+    
+    @Override
     public void update(Person p){
         people.set(people.indexOf(p), p);
     }

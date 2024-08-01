@@ -57,4 +57,10 @@ public interface IDAO {
      * @throws java.lang.Exception
      */
     public abstract void delete (Person p) throws Exception;
+    
+     /**
+     * This function deletes all people registered in the application.
+     * @throws java.lang.Exception
+     */
+    public abstract void deleteAll () throws Exception;
 }

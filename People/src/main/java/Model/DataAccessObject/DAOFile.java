@@ -158,6 +158,16 @@ public class DAOFile implements IDAO {
     }
 
     @Override
+    public void deleteAll() throws IOException {
+        File file = new File(Routes.FILE.getDataFile());
+        file.delete();
+        file.createNewFile();
+        file = new File(Routes.FILE.getFolderPhotos());
+        for(File f : file.listFiles())
+            f.delete();
+    }
+    
+    @Override
     public void update(Person p) throws IOException, PersonException {
         delete(p);
         insert(p);

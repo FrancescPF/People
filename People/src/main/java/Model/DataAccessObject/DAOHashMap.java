@@ -33,6 +33,11 @@ public class DAOHashMap implements IDAO {
     }
     
     @Override
+    public void deleteAll(){
+        people.clear();
+    }
+    
+    @Override
     public void update(Person p) {
         people.replace(p.getNif(), p);
     }

@@ -3,6 +3,7 @@ package Model.DataAccessObject;
 import Model.Class.Person;
 import Model.Class.PersonException;
 import Start.Routes;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -96,6 +97,14 @@ public class DAOFileSerializable implements IDAO {
         oos.close();
     }
 
+    @Override
+    public void deleteAll() throws IOException, ClassNotFoundException {
+//        File file = new File(Routes.FILES.getDataFile());
+//        file.delete();
+//        file = new File(Routes.FILES.getDataFile());
+//        file.createNewFile();
+    }
+    
     @Override
     public void insert(Person p) throws IOException, ClassNotFoundException {
         ArrayList<Person> personRead = new ArrayList<>();
