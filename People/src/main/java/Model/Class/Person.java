@@ -3,6 +3,10 @@ package Model.Class;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Transient;
 import javax.swing.ImageIcon;
 
 /**
@@ -10,12 +14,17 @@ import javax.swing.ImageIcon;
  * @author Fran Perez
  * @version 1.1.0
  */
+@Entity
 public class Person implements Serializable{
 
-    private String name;
+    @Id 
     private String nif;
+    private String name;
     private Date dateOfBirth;
+    @Transient
     private ImageIcon photo;
+    @Lob
+    private byte[] photoOnlyJPA;
 
     public Person(){
         
@@ -87,7 +96,15 @@ public class Person implements Serializable{
     public void setPhoto(ImageIcon photo) {
         this.photo = photo;
     }
-    
+
+    public byte[] getPhotoOnlyJPA() {
+        return photoOnlyJPA;
+    }
+
+    public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
+        this.photoOnlyJPA = photoOnlyJPA;
+    }
+        
     /**
      * Function used to compare two Personas. There cannot be two or more people
      * with the same ID. Actually it isn't used in this project.

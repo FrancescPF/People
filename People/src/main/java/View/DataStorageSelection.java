@@ -160,8 +160,7 @@ public class DataStorageSelection extends javax.swing.JFrame {
         getContentPane().add(fileSerializationCheck, gridBagConstraints);
 
         dataBaseSerializationCheck.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        dataBaseSerializationCheck.setText("Database (Serialization)");
-        dataBaseSerializationCheck.setEnabled(false);
+        dataBaseSerializationCheck.setText("JPA - Database");
         dataBaseSerializationCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dataBaseSerializationCheckActionPerformed(evt);

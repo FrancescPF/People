@@ -6,6 +6,7 @@ import Model.DataAccessObject.DAOArrayList;
 import Model.DataAccessObject.DAOFile;
 import Model.DataAccessObject.DAOFileSerializable;
 import Model.DataAccessObject.DAOHashMap;
+import Model.DataAccessObject.DAOJPA;
 import Model.DataAccessObject.DAOSQL;
 import Model.DataAccessObject.IDAO;
 import Start.Routes;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.persistence.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -162,9 +164,17 @@ public class ControllerImplementation implements IController, ActionListener {
                     }
                     dao = new DAOSQL();
                     break;
-                case "Database (Serialization)":
-                    break;
-                default:
+                case "JPA - Database":
+                    try {
+                        EntityManagerFactory emf = Persistence.createEntityManagerFactory(Routes.DBO.getDbServerAddress());
+                        EntityManager em = emf.createEntityManager();
+                        em.close();
+                        emf.close();
+                    } catch (PersistenceException ex) {
+                        JOptionPane.showMessageDialog(dSS, "JPA_DDBB not created. Closing application.", "JPA_DDBB - People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
+                    dao = new DAOJPA();
                     break;
             }
             //Showing the menu and schedule the events
@@ -177,11 +187,14 @@ public class ControllerImplementation implements IController, ActionListener {
             menu.getReadAll().addActionListener(this);
             menu.getDeleteAll().addActionListener(this);
             //Events for the insert option
-        } else if (e.getSource() == menu.getInsert()) {
+        } else if (e.getSource()
+                == menu.getInsert()) {
             insert = new Insert(menu, true);
             insert.getInsert().addActionListener(this);
             insert.setVisible(true);
-        } else if (insert != null && e.getSource() == insert.getInsert()) {
+        } else if (insert
+                != null && e.getSource()
+                == insert.getInsert()) {
             Person p = new Person(insert.getNam().getText(), insert.getNif().getText());
             if (insert.getDateOfBirth().getModel().getValue() != null) {
                 p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
@@ -192,11 +205,14 @@ public class ControllerImplementation implements IController, ActionListener {
             insert(p);
             insert.getReset().doClick();
             //Events for the read option
-        } else if (e.getSource() == menu.getRead()) {
+        } else if (e.getSource()
+                == menu.getRead()) {
             read = new Read(menu, true);
             read.getRead().addActionListener(this);
             read.setVisible(true);
-        } else if (read != null && e.getSource() == read.getRead()) {
+        } else if (read
+                != null && e.getSource()
+                == read.getRead()) {
             Person p = new Person(read.getNif().getText());
             Person pNew = read(p);
             if (pNew != null) {
@@ -208,7 +224,7 @@ public class ControllerImplementation implements IController, ActionListener {
                     dateModel.setValue(calendar);
                 }
                 //To avoid charging former images
-                if(pNew.getPhoto() != null){
+                if (pNew.getPhoto() != null) {
                     pNew.getPhoto().getImage().flush();
                     read.getPhoto().setIcon(pNew.getPhoto());
                 }
@@ -217,21 +233,27 @@ public class ControllerImplementation implements IController, ActionListener {
                 read.getReset().doClick();
             }
             //Events for the delete option    
-        } else if (e.getSource() == menu.getDelete()) {
+        } else if (e.getSource()
+                == menu.getDelete()) {
             delete = new Delete(menu, true);
             delete.getDelete().addActionListener(this);
             delete.setVisible(true);
-        } else if (delete != null && e.getSource() == delete.getDelete()) {
+        } else if (delete
+                != null && e.getSource()
+                == delete.getDelete()) {
             Person p = new Person(delete.getNif().getText());
             delete(p);
             delete.getReset().doClick();
             //Events for the update option
-        } else if (e.getSource() == menu.getUpdate()) {
+        } else if (e.getSource()
+                == menu.getUpdate()) {
             update = new Update(menu, true);
             update.getUpdate().addActionListener(this);
             update.getRead().addActionListener(this);
             update.setVisible(true);
-        } else if (update != null && e.getSource() == update.getRead()) {
+        } else if (update
+                != null && e.getSource()
+                == update.getRead()) {
             Person p = new Person(update.getNif().getText());
             Person pNew = read(p);
             if (pNew != null) {
@@ -247,7 +269,7 @@ public class ControllerImplementation implements IController, ActionListener {
                     dateModel.setValue(calendar);
                 }
                 //To avoid charging former images
-                if(pNew.getPhoto() != null){
+                if (pNew.getPhoto() != null) {
                     pNew.getPhoto().getImage().flush();
                     update.getPhoto().setIcon(pNew.getPhoto());
                     update.getUpdate().setEnabled(true);
@@ -256,7 +278,9 @@ public class ControllerImplementation implements IController, ActionListener {
                 JOptionPane.showMessageDialog(update, p.getNif() + " doesn't exist.", update.getTitle(), JOptionPane.WARNING_MESSAGE);
                 update.getReset().doClick();
             }
-        } else if (update != null && e.getSource() == update.getUpdate()) {
+        } else if (update
+                != null && e.getSource()
+                == update.getUpdate()) {
             Person p = new Person(update.getNam().getText(), update.getNif().getText());
             if ((update.getDateOfBirth().getModel().getValue()) != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
@@ -267,7 +291,8 @@ public class ControllerImplementation implements IController, ActionListener {
             update(p);
             update.getReset().doClick();
             //Events for the readAll option
-        } else if (e.getSource() == menu.getReadAll()) {
+        } else if (e.getSource()
+                == menu.getReadAll()) {
             ArrayList<Person> s = readAll();
             if (s.isEmpty()) {
                 JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
@@ -291,9 +316,10 @@ public class ControllerImplementation implements IController, ActionListener {
                 }
                 readAll.setVisible(true);
             }
-        } else if (e.getSource() == menu.getDeleteAll()) {
+        } else if (e.getSource()
+                == menu.getDeleteAll()) {
             int answer = JOptionPane.showConfirmDialog(menu, "Are you sure to delete all people registered?", "Delete All - People v1.1.0", 0, 0);
-            if(answer == 0){
+            if (answer == 0) {
                 //Delete All, but firts ask again
                 deleteAll();
             }
@@ -321,7 +347,7 @@ public class ControllerImplementation implements IController, ActionListener {
             // wrong the application closes.
             if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(insert, ex.getMessage() + ex.getClass() + " Closing application.", insert.getTitle(), JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
@@ -347,7 +373,7 @@ public class ControllerImplementation implements IController, ActionListener {
             // wrong the application closes.
             if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(update, ex.getMessage() + ex.getClass() + " Closing application.", update.getTitle(), JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
@@ -375,7 +401,7 @@ public class ControllerImplementation implements IController, ActionListener {
             //goes wrong the application closes.
             if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(read, ex.getMessage() + ex.getClass() + " Closing application.", "Insert - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
@@ -401,21 +427,23 @@ public class ControllerImplementation implements IController, ActionListener {
                 return pTR;
             }
         } catch (Exception ex) {
+
             //Exceptions generated by file read access. If something goes wrong 
             //reading the file, the application closes.
             if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(read, ex.getMessage() + " Closing application.", read.getTitle(), JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
         }
         return null;
     }
-    
+
     /**
-     * This function returns the people registered. If there is any access 
+     * This function returns the people registered. If there is any access
      * problem with the storage device, the program stops.
+     *
      * @return ArrayList
      */
     @Override
@@ -424,18 +452,18 @@ public class ControllerImplementation implements IController, ActionListener {
         try {
             people = dao.readAll();
         } catch (Exception ex) {
-             if (ex instanceof FileNotFoundException || ex instanceof IOException
+            if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(readAll, ex.getMessage() + " Closing application.", readAll.getTitle(), JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
         }
         return people;
     }
-    
+
     /**
-     * This function deletes all the people registered. If there is any access 
+     * This function deletes all the people registered. If there is any access
      * problem with the storage device, the program stops.
      */
     @Override
@@ -443,9 +471,9 @@ public class ControllerImplementation implements IController, ActionListener {
         try {
             dao.deleteAll();
         } catch (Exception ex) {
-             if (ex instanceof FileNotFoundException || ex instanceof IOException
+            if (ex instanceof FileNotFoundException || ex instanceof IOException
                     || ex instanceof ParseException || ex instanceof ClassNotFoundException
-                    || ex instanceof SQLException) {
+                    || ex instanceof SQLException || ex instanceof PersistenceException) {
                 JOptionPane.showMessageDialog(menu, ex.getMessage() + " Closing application.", "Delete All - People v1.1.0", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
