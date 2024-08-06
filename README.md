@@ -1,4 +1,6 @@
-<img src="https://github.com/user-attachments/assets/e85bb60e-a100-4b73-b6e3-e13ff4aa1a94" justify-content ="center">
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e85bb60e-a100-4b73-b6e3-e13ff4aa1a94" alt="Descripción de la imagen">
+</p>
 <h1 align="center"> PEOPLE </h1>
 This desktop application is an academic example of the use of the Model-View-Controller (MVC) code organization system and uses Java as an object-oriented programming language. The application allows the user to do CRUD operations of the defined entity (Person :raising_hand:) and works with different storage systems, both temporary and persistent.
 <h2>
