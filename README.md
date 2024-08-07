@@ -27,8 +27,8 @@
 <div>
   <p>The application code is distributed in the following packages: </p>
     <p><b>📦 Model.Class</b></p>
-    <p><b>&nbsp;🗒️ Person.java</b></p> 
-    <p>&nbsp;&nbsp;Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity.</p> 
+    <p><b>🗒️ Person.java</b></p> 
+    <span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity.</span>
     <p>🗒️ PersonException.java: own exception thrown from the Controller package when an attempt is made to insert or delete a person who has not been previously     
           registered. The management of the exception is also carried out within the Controller package by displaying an alert message to the user. It is not necessary to                include it for the code to function, but since it is an academic activity it has been deemed appropriate to include it.</p>
   📦 Controller:
