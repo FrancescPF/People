@@ -14,7 +14,10 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/JDatePicker-2.0.3-white">
   <img src="https://img.shields.io/badge/Apache Commons_IO-2.5-brown">
   <img src="https://img.shields.io/badge/release-Latest version-brown">
-  <img alt="Downloads" src="https://img.shields.io/github/downloads/FrancescPerez/People/latest/total">
+  <img alt="Downloads" src="https://img.shields.io/github/downloads/FrancescPerez/People/releases">
+
+  [![Github all releases](https://img.shields.io/github/downloads/FrancescPF/People/total.svg)](https://GitHub.com//FrancescPF/People/releases/)
+
 </p>
 
 :hammer:App Features
