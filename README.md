@@ -3,7 +3,6 @@
 </p>
 <h1 align="center"> PEOPLE </h1>
 This desktop application is an academic example of the use of the Model-View-Controller (MVC) code organization system and uses Java as an object-oriented programming language. The application allows the user to do CRUD operations of the defined entity (Person :raising_hand:) and works with different storage systems, both temporary and persistent.
-<h2>
 <p align="center">
   <img src="https://img.shields.io/badge/License-GPL v3.0-blue">
   <img src="https://img.shields.io/badge/JDK->=17-red">
@@ -15,6 +14,6 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/Apache Commons_IO-2.5-brown">
   <img src="https://img.shields.io/badge/release-Latest version-black">
 </p>
-:hammer:App Features
-</h2>
+<h4>:hammer:How it works</h4>
+
 
