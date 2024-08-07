@@ -25,13 +25,12 @@
 </div>
 <h2>🛠️How it works</h2>
   <p>
-    The application code is distributed in the following packages:
-    :file_folder Model:
-    :file_folder Controller:
-    :file_folder View:
-    :file_folder Start:
-    :file_folder OtherFunctions:
-    
+    The application code is distributed in five packages:
+    1️⃣ Model:
+    2️⃣ Controller:
+    3️⃣ View:
+    4️⃣ Start:
+    5️⃣ OtherFunctions:
   </p>
 <h2>🚀Getting started</h2>
 
