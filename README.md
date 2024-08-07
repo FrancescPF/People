@@ -15,9 +15,7 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/Apache Commons_IO-2.5-brown">
   <img src="https://img.shields.io/badge/release-Latest version-brown">
   <img alt="Downloads" src="https://img.shields.io/github/downloads/FrancescPerez/People/releases">
-
-  [![Github all releases](https://img.shields.io/github/downloads/FrancescPF/People/total.svg)](https://GitHub.com//FrancescPF/People/releases/)
-
+  <img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/FrancescPF/People/total">
 </p>
 
 :hammer:App Features
