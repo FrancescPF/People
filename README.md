@@ -24,6 +24,15 @@
   </p>
 </div>
 <h2>🛠️How it works</h2>
+  <p>
+    The application code is distributed in the following packages:
+    :file_folder Model:
+    :file_folder Controller:
+    :file_folder View:
+    :file_folder Start:
+    :file_folder OtherFunctions:
+    
+  </p>
 <h2>🚀Getting started</h2>
 
 
