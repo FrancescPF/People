@@ -15,5 +15,6 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/release-Latest version-black">
 </p>
 <h2>:hammer:How it works</h2>
+<h2>:hammer:Getting started</h2>
 
 
