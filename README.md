@@ -14,6 +14,6 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/Apache Commons_IO-2.5-brown">
   <img src="https://img.shields.io/badge/release-Latest version-black">
 </p>
-<h4>:hammer:How it works</h4>
+<h2>:hammer:How it works</h2>
 
 
