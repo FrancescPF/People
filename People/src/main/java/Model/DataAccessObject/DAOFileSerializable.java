@@ -1,7 +1,6 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
-import Model.Class.PersonException;
 import Start.Routes;
 import java.io.File;
 import java.io.FileInputStream;
@@ -167,7 +166,7 @@ public class DAOFileSerializable implements IDAO {
     }
 
     @Override
-    public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException, PersonException {
+    public void update(Person p) throws FileNotFoundException, IOException, ClassNotFoundException{
         delete(p);
         insert(p);
     }

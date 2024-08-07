@@ -1,7 +1,6 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
-import Model.Class.PersonException;
 import java.util.ArrayList;
 import java.util.HashMap;
 

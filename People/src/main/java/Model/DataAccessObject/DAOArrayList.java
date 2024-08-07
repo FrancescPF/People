@@ -1,7 +1,6 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
-import Model.Class.PersonException;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +41,7 @@ public class DAOArrayList implements IDAO{
     }
     
     @Override
-    public ArrayList<Person> readAll() throws PersonException{
+    public ArrayList<Person> readAll(){
         return people;
     }
    

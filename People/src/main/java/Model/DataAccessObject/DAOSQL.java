@@ -78,7 +78,7 @@ public class DAOSQL implements IDAO {
     }
 
     @Override
-    public ArrayList<Person> readAll() throws SQLException, PersonException {
+    public ArrayList<Person> readAll() throws SQLException{
         ArrayList<Person> people = new ArrayList<>();
         Connection conn;
         Statement instruction;

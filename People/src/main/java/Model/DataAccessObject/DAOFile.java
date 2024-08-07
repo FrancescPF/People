@@ -1,7 +1,6 @@
 package Model.DataAccessObject;
 
 import Model.Class.Person;
-import Model.Class.PersonException;
 import Start.Routes;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
@@ -133,7 +132,7 @@ public class DAOFile implements IDAO {
     }
 
     @Override
-    public void delete(Person p) throws IOException, PersonException {
+    public void delete(Person p) throws IOException {
         String sep = File.separator;
         RandomAccessFile rafRW;
         rafRW = new RandomAccessFile(Routes.FILE.getDataFile(), "rw");
@@ -168,7 +167,7 @@ public class DAOFile implements IDAO {
     }
     
     @Override
-    public void update(Person p) throws IOException, PersonException {
+    public void update(Person p) throws IOException {
         delete(p);
         insert(p);
     }
