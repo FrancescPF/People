@@ -25,8 +25,10 @@
 </div>
 <h2>🛠️How it works</h2>
   <p>
-    The application code is distributed in five packages:
-    1️⃣ Model:
+    The application code is distributed in the following packages:
+    1️⃣ Model.Class:
+      -  Person.java: class that defines the type of object with which the application works. In our case it structures the person entity.
+      - PersonException: 
     2️⃣ Controller:
     3️⃣ View:
     4️⃣ Start:
