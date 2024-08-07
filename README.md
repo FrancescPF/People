@@ -11,6 +11,7 @@ This desktop application is an academic example of the use of the Model-View-Con
   <img src="https://img.shields.io/badge/OS-Windows, Linux-yellow">
   <img src="https://img.shields.io/badge/ObjectDB-2.9.0-orange">
   <img src="https://img.shields.io/badge/Version-1.1.0-purple">
+  <img src="https://img.shields.io/badge/MySQL_Connector-8.0.25-grey">
 
 </p>
 
