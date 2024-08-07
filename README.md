@@ -7,7 +7,7 @@
 </h1>
 <div>
   <p>
-    This desktop application is an academic example of the use of the Model-View-Controller (MVC) code organization system and uses Java as an object-oriented programming         language. The application allows the user to do CRUD operations of the defined entity (Person :raising_hand:) and works with different storage systems, both temporary       and persistent.
+    This desktop application is an academic example of the use of the Model-View-Controller (MVC) code organization system and uses Java as an object-oriented programming language. The application allows the user to do CRUD operations of the defined entity (Person :raising_hand:) and works with different storage systems, both temporary and persistent.
   </p>
 </div>
 <div>
