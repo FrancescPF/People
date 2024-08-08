@@ -28,11 +28,11 @@
   <p>The application code is distributed in the following packages: </p>
     <p><b>📦 Model.Class</b></p>
       <p><b>🗒️ Person.java</b></p> 
-        <span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The three main MVC packages 
-              do not exchange basic data but rather exchange objects of this class.</span>
+        <p><span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The three main MVC                         packages do not exchange basic data but rather exchange objects of this class.</span></p>
       <p><b>🗒️ PersonException.java</b></p>
-        <span>Own exception thrown from the Controller package when an attempt is made to insert or delete a person who has not been previously registered. The management of               the exception is also carried out within the Controller package by displaying an alert message to the user. It is not necessary to include it for the code to                 function, but since it is an academic activity it has been deemed appropriate to include it.</p>
-  <p><b>📦 Controller</b></p>
+        <p><span>Own exception thrown from the Controller package when an attempt is made to insert or delete a person who has not been previously registered. The management                   of the exception is also carried out within the Controller package by displaying an alert message to the user. It is not necessary to include it for the   
+                  code to function, but since it is an academic activity it has been deemed appropriate to include it.</span></p>
+    <p><b>📦 Controller</b></p>
 </div>
 <h2>🚀Getting started</h2>
 
