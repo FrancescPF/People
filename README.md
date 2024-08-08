@@ -43,6 +43,12 @@
       <p><b>🗒️ ControllerImplementation.java</b></p> 
         <p><span>Class that implements the IController.java interface. It is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
                   it is able to prepare the necessary structure for data storage, operate with these structures and show the information to the user if necessary. This block                   also manages exceptions that are mainly related to information access problems.</span></p>
+    <p><b>📦 Model.DataAccessObject</b></p>
+      <p><b>🗒️ IDAO.java</b></p> 
+        <p><span>This interface defines the operations that will have to be performed on the data storage system chosen by the user. Depending on the system, the     
+                  implementation varies. These operations are: read one or all people, register a person, update a person, and delete one or all people.The use of an 
+                  interface allows different classes to be implemented with the appropriate code for data access according to the selected storage structure with minimal 
+                  impact on the rest of the blocks. This way, the code is better organized and easier to read.</span></p>
 </div>
 <h2>🚀Getting started</h2>
 
