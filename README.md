@@ -41,7 +41,7 @@
                   application. The use of an interface isolates the Controller package code from the rest of the application packages, minimizing the impact on future     
                   software updates.</span></p>
       <p><b>🗒️ ControllerImplementation.java</b></p> 
-        <p><span>Class that implements the IController.java interface. She is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
+        <p><span>Class that implements the IController.java interface. It is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
                   it is able to prepare the necessary structure for data storage, operate with these structures and show the information to the user if necessary. This block                   also manages exceptions that are mainly related to information access problems.</span></p>
 </div>
 <h2>🚀Getting started</h2>
