@@ -28,11 +28,18 @@
   <p>The application code is distributed in the following packages: </p>
     <p><b>📦 Model.Class</b></p>
       <p><b>🗒️ Person.java</b></p> 
-        <p><span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The three main MVC                         packages do not exchange basic data but rather exchange objects of this class.</span></p>
+        <p><span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The key attribute that   
+                  distinguishes one person from another is their NIF. People with the same NIF cannot exist in the applicationThe three main MVC packages do not exchange     
+                  basic data but rather exchange objects of this class.</span></p>
       <p><b>🗒️ PersonException.java</b></p>
         <p><span>Own exception thrown from the Controller package when an attempt is made to insert or delete a person who has not been previously registered. The management                   of the exception is also carried out within the Controller package by displaying an alert message to the user. It is not necessary to include it for the   
                   code to function, but since it is an academic activity it has been deemed appropriate to include it.</span></p>
     <p><b>📦 Controller</b></p>
+      <p><b>🗒️ IController.java</b></p> 
+        <p><span>Interface that defines the operations that the controller, and therefore the application, can perform regardless of the type of storage selected. These   
+                  operations are: read one or all people, register a person, update a person, and delete one or all people. The "start()" method allows you to start the 
+                  application. The use of an interface isolates the Driver package code from the rest of the application packages, minimizing the impact on future software 
+                  updates.</span></p>
 </div>
 <h2>🚀Getting started</h2>
 
