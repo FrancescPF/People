@@ -38,8 +38,11 @@
       <p><b>🗒️ IController.java</b></p> 
         <p><span>Interface that defines the operations that the controller, and therefore the application, can perform regardless of the type of storage selected. These   
                   operations are: read one or all people, register a person, update a person, and delete one or all people. The "start()" method allows you to start the 
-                  application. The use of an interface isolates the Driver package code from the rest of the application packages, minimizing the impact on future software 
-                  updates.</span></p>
+                  application. The use of an interface isolates the Controller package code from the rest of the application packages, minimizing the impact on future     
+                  software updates.</span></p>
+      <p><b>🗒️ ControllerImplementation.java</b></p> 
+        <p><span>Class that implements the IController.java interface. She is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
+                  it is able to prepare the necessary structure for data storage, operate with these structures and show the information to the user if necessary. This block                   also manages exceptions that are mainly related to information access problems.</span></p>
 </div>
 <h2>🚀Getting started</h2>
 
