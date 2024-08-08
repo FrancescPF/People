@@ -49,6 +49,10 @@
                   implementation varies. These operations are: read one or all people, register a person, update a person, and delete one or all people.The use of an 
                   interface allows different classes to be implemented with the appropriate code for data access according to the selected storage structure with minimal 
                   impact on the rest of the blocks. This way, the code is better organized and easier to read.</span></p>
+      <p><b>🗒️ DAOArrayList.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with an ArrayList structure where objects                     are referenced.</span></p>
+      <p><b>🗒️ DAOFile.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code of the functions so that they can work with files. Each object is decomposed into basic data                   and saved in the "dataFile.txt" file and the associated photo, if any, is saved with the name NIF.png in the "Photos" folder. Both the "dataFile.txt" file                    and the "Photos" folder are located under the "File" folder within the application's working folder.</span></p>
 </div>
 <h2>🚀Getting started</h2>
 
