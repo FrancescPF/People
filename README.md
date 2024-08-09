@@ -62,6 +62,26 @@
         <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with a database designed for object storage                   using the Java Persistence API.</span></p>
       <p><b>🗒️ DAOSQL.java</b></p> 
         <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with a relational SQL database using the                     Java Database Connector (JDBC) API. In this type of storage, objects are broken down into basic elements and stored in tables, except for photos of people,                   which, if present, are stored in the "Photo" folder under the "SQL_Database" directory in the application's working folder. Only the paths to the images are                 stored in the database.</span></p>
+      <p><b>📦 View</b></p>
+         <p><span>The files in this package contain the graphical part of the application. They have been created with the Swing API. One of the functions of this block is                     to validate that the data entered by the user is correct.</span></p>
+      <p><b>🗒️ DataStorageSelection.java</b></p> 
+        <p><span>Class that allows the user to select the data storage system that the application will use.</span></p>
+      <p><b>🗒️ Menu.java</b></p> 
+        <p><span>Class that defines the main panel where the buttons with all the options implemented in the application are displayed and that the user can execute. If this 
+                  panel is closed, the application also closes.</span></p>
+      <p><b>🗒️ DropPhotoListener.java</b></p> 
+        <p><span>Class that implements the DropTargetListener interface and allows the user to drag&drop images.</span></p>
+      <p><b>🗒️ Delete.java</b></p> 
+        <p><span>Class that allows deleting a person from their NIF</span></p>
+      <p><b>🗒️ Insert.java</b></p> 
+        <p><span>Class that allows a person to be registered, with the NIF and name being mandatory elements.</span></p>
+      <p><b>🗒️ Read.java</b></p> 
+        <p><span>Class that allows you to search for a person based on their NIF.</span></p>
+      <p><b>🗒️ ReadAll.java</b></p> 
+        <p><span>Class that shows all registered people</span></p>
+      <p><b>🗒️ Update.java</b></p> 
+        <p><span>Class that allows you to update all of a person's data, except their NIF.</span></p>
+      
 </div>
 <h2>🚀Getting started</h2>
 
