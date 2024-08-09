@@ -72,13 +72,13 @@
       <p><b>🗒️ DropPhotoListener.java</b></p> 
         <p><span>Class that implements the DropTargetListener interface and allows the user to drag&drop images.</span></p>
       <p><b>🗒️ Delete.java</b></p> 
-        <p><span>Class that allows deleting a person from their NIF</span></p>
+        <p><span>Class that allows deleting a person from their NIF.</span></p>
       <p><b>🗒️ Insert.java</b></p> 
         <p><span>Class that allows a person to be registered, with the NIF and name being mandatory elements.</span></p>
       <p><b>🗒️ Read.java</b></p> 
         <p><span>Class that allows you to search for a person based on their NIF.</span></p>
       <p><b>🗒️ ReadAll.java</b></p> 
-        <p><span>Class that shows all registered people</span></p>
+        <p><span>Class that shows all registered people.</span></p>
       <p><b>🗒️ Update.java</b></p> 
         <p><span>Class that allows you to update all of a person's data, except their NIF.</span></p>
       
