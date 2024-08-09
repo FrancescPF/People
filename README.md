@@ -53,6 +53,15 @@
         <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with an ArrayList structure where objects                     are referenced.</span></p>
       <p><b>🗒️ DAOFile.java</b></p> 
         <p><span>This class implements the IDAO interface and completes the code of the functions so that they can work with files. Each object is decomposed into basic data                   and saved in the "dataFile.txt" file and the associated photo, if any, is saved with the name NIF.png in the "Photos" folder. Both the "dataFile.txt" file                    and the "Photos" folder are located under the "File" folder within the application's working folder.</span></p>
+      <p><b>🗒️ DAOFileSerializable.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code of the functions so that they can work with files. Each object is saved in the       
+                  "dataFile.ser" file. The "dataFile.ser" file is located under the "FileSer" folder within the application's working folder.</span></p>
+      <p><b>🗒️ DAOHashMap.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with an HashMap structure where objects                     are referenced.</span></p>
+      <p><b>🗒️ DAOJPA.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with a database designed for object storage                   using the Java Persistence API.</span></p>
+      <p><b>🗒️ DAOSQL.java</b></p> 
+        <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with a relational SQL database using the                     Java Database Connector (JDBC) API. In this type of storage, objects are broken down into basic elements and stored in tables, except for photos of people,                   which, if present, are stored in the "Photo" folder under the "SQL_Database" directory in the application's working folder. Only the paths to the images are                 stored in the database.</span></p>
 </div>
 <h2>🚀Getting started</h2>
 
