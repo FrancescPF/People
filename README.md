@@ -64,8 +64,7 @@
     <p><b>📦 View</b></p>
       <p><span>The files in this package contain the graphical part of the application. They have been created with the Swing API. One of the functions of this block is                     to validate that the data entered by the user is correct.</span></p>
         <p><b>🗒️ DataStorageSelection.java</b></p> 
-          <p><span>Class that allows the user to select the data storage system that the application will use. You can choose between volatile storage systems that     
-                    reference "Person" objects such as ArrayList and HashMap and non-volatile ones. Within the latter group you can choose between systems that store the                        information broken down into objects such as files (File) and relational databases (SQL) or systems that store objects such as files combined with                           serialization (File - Serialization) and object-oriented databases (JPA).</span></p>
+          <p><span>Class that allows the user to select the data storage system that the application will use. You can choose between volatile storage systems that                             reference "Person" objects such as ArrayList and HashMap and non-volatile ones. Within this last group you can choose between systems that store object                      information in a fractional way in simple data such as files (File) and relational databases (SQL) or systems that store objects as files combined with                      serialization (File - Serialization) and object-oriented databases (JPA).</span></p>
         <p><b>🗒️ Menu.java</b></p> 
           <p><span>Class that defines the main panel where the buttons with all the options implemented in the application are displayed and that the user can execute. If                       this panel is closed, the application also closes.</span></p>
         <p><b>🗒️ DropPhotoListener.java</b></p> 
