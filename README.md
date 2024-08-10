@@ -91,14 +91,18 @@
 <h1></h1>
  <p>The application flow control is detailed below:</p>
     <p>1️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that             receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                from DSS0 when the user has selected which storage system to work with.</p>
-    <p align="center"><img width="359" alt="image" src="https://github.com/user-attachments/assets/cf714817-eb7e-4831-87cd-50d6ceee14c9"></p>
+      <p align="center"><img width="359" alt="image" src="https://github.com/user-attachments/assets/cf714817-eb7e-4831-87cd-50d6ceee14c9"></p>
     <p>2️⃣ Once the user has selected the storage system, the CIO prepares, with the help of the Routes.java file, and certifies that the system is available and generates             a DAO object to be able to access the methods that allow CRUD operations to be performed. If the system is available, the CIO shows the user the main screen of              the application (Menu.java); otherwise, the user is informed and the application is closed. If during the execution of the application the storage system becomes            unavailable, the application will also close after informing the user.</p>
-    <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6">
-      <img width="234" alt="image" src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47"></p>
-    <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen with         a suitable format so that the user can enter the data and carry out the relevant option. Once the user has selected an option from the menu, the CIO opens a new             window and programs the "listeners" that allow him to perform the relevant operations against the storage system thanks to the DAO object.</p>
+      <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6">
+        <img width="234" alt="image" src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47"></p>
+      <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen               with a suitable format so that the user can enter the data and carry out the relevant option. Once the user has selected an option from the menu, the CIO opens a            new window and programs the "listeners" that allow him to perform the relevant operations against the storage system thanks to the DAO object.</p>
     <p>3️⃣ INSERT: in order to register a person, it is mandatory to enter the NIF and the name. If you try to register a person with an existing NIF, the application does             not allow it.</p>
      <p align="center"><img width="587" alt="image" src="https://github.com/user-attachments/assets/839dddbe-7ef8-41a0-b1e7-24500c60c404">
        <img width="265" alt="image" src="https://github.com/user-attachments/assets/103df1d6-c1b1-4a78-ad14-3787c0934ed3"></p>
+    <p>34️⃣ READ: to search for a person you need to enter their NIF and the application will display the data they have registered. If there is no person registered                 with the NIF entered, the user will be informed.</p>
+      <p align="center"><img width="589" alt="image" src="https://github.com/user-attachments/assets/162fac68-e791-468d-bfc3-5bb10015de7a">
+        <img width="191" alt="image" src="https://github.com/user-attachments/assets/a7497a64-5e41-476c-83ed-44e1f50b74cc">
+      </p>
     
 
 
