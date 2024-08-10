@@ -37,7 +37,7 @@
     <p><b>📦 Controller</b></p>
       <p><b>🗒️ IController.java</b></p> 
         <p><span>Interface that defines the operations that the controller, and therefore the application, can perform regardless of the type of storage selected. These   
-                  operations are: read one or all people, register a person, update a person, and delete one or all people. The use of an interface isolates the Controller   
+                  operations are: read one or all people, register a person, update a person, and delete one or all people. The use of an interface isolates the Controller  
                   package code from the rest of the application packages, minimizing the impact on future software updates.</span></p>
       <p><b>🗒️ ControllerImplementation.java</b></p> 
         <p><span>Class that implements the IController.java interface. It is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
@@ -90,9 +90,12 @@
 </div>
 <h1></h1>
  <p>The application flow control is detailed below:</p>
-    <p>1️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that               receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                 from DSS0 when the user has selected which storage system to work with.</p>
+    <p>1️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that             receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                from DSS0 when the user has selected which storage system to work with.</p>
     <p align="center"><img width="359" alt="image" src="https://github.com/user-attachments/assets/cf714817-eb7e-4831-87cd-50d6ceee14c9"></p>
-    <p>2️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that               receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                 from DSS0 when the user has selected which storage system to work with.</p>
+    <p>2️⃣ Once the user has selected the storage system, the CIO prepares, with the help of the Routes.java file, and certifies that the system is available and generates             a DAO object to be able to access the methods that allow CRUD operations. If the system is available in CIO, the user is shown the main screen of the application            (Menu.java); otherwise, the user is informed and the application is closed.</p>
+    <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6"><img width="234" alt="image" src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47">
+</p>
+
     
 
 <h2>🚀Getting started</h2>
