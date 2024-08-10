@@ -95,7 +95,7 @@
     <p>2️⃣ Once the user has selected the storage system, the CIO prepares, with the help of the Routes.java file, and certifies that the system is available and generates             a DAO object to be able to access the methods that allow CRUD operations to be performed. If the system is available, the CIO shows the user the main screen of              the application (Menu.java); otherwise, the user is informed and the application is closed. If during the execution of the application the storage system becomes            unavailable, the application will also close after informing the user.</p>
     <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6"><img width="234" alt="image"                               src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47">
     </p>
-    <p>The CIO is also responsible for programming a "listener" for each menu option, performing the relevant operation against the DAOX to execute the action selected by          the user and displaying information to the user if necessary.</p>
+    <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen with         a suitable format so that the user can enter the data and carry out the relevant option.</p>
 
 
     
