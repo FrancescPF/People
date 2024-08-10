@@ -99,14 +99,26 @@
     <p>3️⃣ INSERT: in order to register a person, it is mandatory to enter the NIF and the name. If you try to register a person with an existing NIF, the application does             not allow it.</p>
      <p align="center"><img width="587" alt="image" src="https://github.com/user-attachments/assets/839dddbe-7ef8-41a0-b1e7-24500c60c404">
        <img width="265" alt="image" src="https://github.com/user-attachments/assets/103df1d6-c1b1-4a78-ad14-3787c0934ed3"></p>
-    <p>34️⃣ READ: to search for a person you need to enter their NIF and the application will display the data they have registered. If there is no person registered                 with the NIF entered, the user will be informed.</p>
+    <p>4️⃣ READ: to search for a person you need to enter their NIF and the application will display the data they have registered. If there is no person registered                 with the NIF entered, the user will be informed.</p>
       <p align="center"><img width="589" alt="image" src="https://github.com/user-attachments/assets/162fac68-e791-468d-bfc3-5bb10015de7a">
         <img width="191" alt="image" src="https://github.com/user-attachments/assets/a7497a64-5e41-476c-83ed-44e1f50b74cc">
       </p>
-    
+    <p>5️⃣ UPDATE: any attribute of a person can be updated except their NIF. To update a person you need to enter their NIF. If there is no person registered with the NIF         entered, the user will be informed.</p>
+      <p align="center"><img width="698" alt="image" src="https://github.com/user-attachments/assets/5b6ced22-15ed-46a8-91e5-fe5596db6577">
+        <img width="191" alt="image" src="https://github.com/user-attachments/assets/f5cfa0bc-126b-44c0-92aa-27f483e53872">
+      </p>
+    <p>6️⃣ DELETE: to delete a person you need to enter their NIF. If there is no person registered with the NIF entered, the user will be informed.</p>
+      <p align="center"><img width="381" alt="image" src="https://github.com/user-attachments/assets/d4b146f7-10bb-4801-a4d0-d07768c68c05">
+        <img width="272" alt="image" src="https://github.com/user-attachments/assets/d39dbe00-c242-4c00-b006-756cae9f924f">
+      </p>
+    <p>7️⃣ READ ALL: the program displays a grid with the available data of all registered persons. If there is no registered person, the program informs the user.</p>
+      <p align="center"><img width="642" alt="image" src="https://github.com/user-attachments/assets/ee6ce717-3286-4fb0-a34e-de429564a161">
+        <img width="200" alt="image" src="https://github.com/user-attachments/assets/b906383e-0c3d-40fb-9308-6684b7d2c9e8">
+      </p>
+    <p>8️⃣ DELETE ALL: his option allows you to delete all registered user information. Before executing it, the program asks the user for confirmation.</p>
+      <p align="center"><img width="239" alt="image" src="https://github.com/user-attachments/assets/291e9016-5e45-41e5-b998-2625f18f3891">
+      </p>
 
-
-    
 
 <h2>🚀Getting started</h2>
 
