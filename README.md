@@ -37,9 +37,8 @@
     <p><b>📦 Controller</b></p>
       <p><b>🗒️ IController.java</b></p> 
         <p><span>Interface that defines the operations that the controller, and therefore the application, can perform regardless of the type of storage selected. These   
-                  operations are: read one or all people, register a person, update a person, and delete one or all people. The "start()" method allows you to start the 
-                  application. The use of an interface isolates the Controller package code from the rest of the application packages, minimizing the impact on future     
-                  software updates.</span></p>
+                  operations are: read one or all people, register a person, update a person, and delete one or all people. The use of an interface isolates the Controller   
+                  package code from the rest of the application packages, minimizing the impact on future software updates.</span></p>
       <p><b>🗒️ ControllerImplementation.java</b></p> 
         <p><span>Class that implements the IController.java interface. It is responsible for scheduling and managing the events of the visual part. Thanks to these events, 
                   it is able to prepare the necessary structure for data storage, operate with these structures and show the information to the user if necessary. This block                   also manages exceptions that are mainly related to information access problems.</span></p>
@@ -91,7 +90,10 @@
 </div>
 <h1></h1>
  <p>The application flow control is detailed below:</p>
-    <p>1️⃣The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation object that receives as             an argument a DataStorageSelection object.</p>
+    <p>1️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that               receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                 from DSS0 when the user has selected which storage system to work with.</p>
+    <p align="center"><img width="359" alt="image" src="https://github.com/user-attachments/assets/cf714817-eb7e-4831-87cd-50d6ceee14c9"></p>
+    <p>2️⃣ The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation (CIO) type object that               receives a DataStorageSelection (DSSO) type object as an argument. From CIO, the "listener" is programmed, which in this case will manage the event generated                 from DSS0 when the user has selected which storage system to work with.</p>
+    
 
 <h2>🚀Getting started</h2>
 
