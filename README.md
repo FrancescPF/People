@@ -89,6 +89,9 @@
       <p><b>🗒️ DataValidation.java</b></p> 
         <p><span>Class that contains a method for validating data entered by the user.</span></p>
 </div>
+ <p>The application flow control is detailed below:</p>
+    <p>1️⃣The application starts by executing the Start.java file that contains the "main" method. This method generates a ControllerImplementation object that receives as             an argument a DataStorageSelection object.</p>
+
 <h2>🚀Getting started</h2>
 
 
