@@ -28,8 +28,8 @@
   <p>The application code is distributed in the following packages: </p>
     <p><b>📦 Model.Class</b></p>
       <p><b>🗒️ Person.java</b></p> 
-        <p><span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The key attribute that   
-                  distinguishes one person from another is their NIF. People with the same NIF cannot exist in the applicationThe three main MVC packages do not exchange     
+        <p><span>Class that defines the type of object with which the application works. In our case it structures the person :raising_hand: entity. The key attribute that  
+                  distinguishes one person from another is their NIF. People with the same NIF cannot exist in the applicationThe three main MVC packages do not exchange    
                   basic data but rather exchange objects of this class.</span></p>
       <p><b>🗒️ PersonException.java</b></p>
         <p><span>Own exception thrown from the Controller package when an attempt is made to insert or delete a person who has not been previously registered. The management                   of the exception is also carried out within the Controller package by displaying an alert message to the user. It is not necessary to include it for the   
@@ -62,7 +62,7 @@
       <p><b>🗒️ DAOSQL.java</b></p> 
         <p><span>This class implements the IDAO interface and completes the code blocks of the functions so that they can operate with a relational SQL database using the                     Java Database Connector (JDBC) API. In this type of storage, objects are broken down into basic elements and stored in tables, except for photos of people,                   which, if present, are stored in the "Photo" folder under the "SQL_Database" directory in the application's working folder. Only the paths to the images are                 stored in the database.</span></p>
     <p><b>📦 View</b></p>
-      <p><span>The files in this package contain the graphical part of the application. They have been created with the Swing API. One of the functions of this block is                     to validate that the data entered by the user is correct.</span></p>
+      <p><span>The files in this package contain the graphical part of the application. They have been created with the Swing API. One of the functions of this block is to validate that the data entered by the user is correct. For example: that the NIF cannot contain letters in the numerical part or "strange" symbols, that the user name cannot contain numbers and that the images are in . png format and cannot exceed a size of 64KB.</span></p>
         <p><b>🗒️ DataStorageSelection.java</b></p> 
           <p><span>Class that allows the user to select the data storage system that the application will use. You can choose between volatile storage systems that                             reference "Person" objects such as ArrayList and HashMap and non-volatile ones. Within this last group you can choose between systems that store object                      information in a fractional way in simple data such as files (File) and relational databases (SQL) or systems that store objects as files combined with                      serialization (File - Serialization) and object-oriented databases (JPA).</span></p>
         <p><b>🗒️ Menu.java</b></p> 
@@ -95,7 +95,8 @@
     <p>2️⃣ Once the user has selected the storage system, the CIO prepares, with the help of the Routes.java file, and certifies that the system is available and generates             a DAO object to be able to access the methods that allow CRUD operations to be performed. If the system is available, the CIO shows the user the main screen of              the application (Menu.java); otherwise, the user is informed and the application is closed. If during the execution of the application the storage system becomes            unavailable, the application will also close after informing the user.</p>
     <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6"><img width="234" alt="image"                               src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47">
     </p>
-    <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen with         a suitable format so that the user can enter the data and carry out the relevant option.</p>
+    <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen with         a suitable format so that the user can enter the data and carry out the relevant option. Once the user has selected an option from the menu, the CIO opens a new             window and programs the "listeners" that allow him to perform the relevant operations against the storage system thanks to the DAO object.</p>
+    <p>3️⃣  </p>
 
 
     
