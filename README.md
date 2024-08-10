@@ -96,7 +96,10 @@
     <p align="center"><img width="205" alt="image" src="https://github.com/user-attachments/assets/3bc08d87-2d8a-40fb-91b8-8720259ab3d6"><img width="234" alt="image"                               src="https://github.com/user-attachments/assets/92deabb9-228a-4a23-adc1-2f2a182bee47">
     </p>
     <p>The CIO is also responsible for programming a listener for each menu option. These events triggered from the visual side will cause the CIO to open a new screen with         a suitable format so that the user can enter the data and carry out the relevant option. Once the user has selected an option from the menu, the CIO opens a new             window and programs the "listeners" that allow him to perform the relevant operations against the storage system thanks to the DAO object.</p>
-    <p>3️⃣  </p>
+    <p>3️⃣ INSERT: in order to register a person, it is mandatory to enter the NIF and the name. If you try to register a person with an existing NIF, the application does             not allow it.</p>
+     <p align="center"><img width="587" alt="image" src="https://github.com/user-attachments/assets/839dddbe-7ef8-41a0-b1e7-24500c60c404">
+<img width="265" alt="image" src="https://github.com/user-attachments/assets/103df1d6-c1b1-4a78-ad14-3787c0934ed3"></p>
+    
 
 
     
