@@ -87,6 +87,7 @@
     <p><b>📦 OtherFuncitions</b></p>
       <p><b>🗒️ DataValidation.java</b></p> 
         <p><span>Class that contains a method for validating data entered by the user.</span></p>
+<p align="center"><img width="578" alt="image" src="https://github.com/user-attachments/assets/e43413c1-9066-4301-8c1e-4be8e450f84d"></p>
 </div>
 <h1></h1>
  <p>The application flow control is detailed below:</p>
