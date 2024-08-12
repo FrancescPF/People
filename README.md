@@ -121,7 +121,7 @@
       </p>
 
 <h2>🚀Getting started</h2>
-<p>1️⃣ Download version 1.1.0 of the project and open it with an IDE that allows you to manage projects developed with Maven, such as Netbeans.</p>
+<p>1️⃣ Download version 1.1.0 (.zip) of the project and import it with an IDE that allows you to manage projects developed with Maven, such as Netbeans.</p>
 <p>2️⃣ Run the application from the IDE, you can use any storage system, but you need to read this about the options with databases, both SQL and JPA, and files: </p>
 <p>2️⃣.1️⃣ SQL: I have used locally the <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download">MariaDB</a> database integrated into XAMPP with the root user and without a password. You can modify these parameters in the Routes.java file within the Start package.</p>
 <p>2️⃣.2️⃣ JPA: I have used locally the <a href="https://www.objectdb.com/download/2.9.0">ObjectDB</a> database with the root admin and password a admin. You can modify these parameters in the Routes.java file within the Start package.</p>
