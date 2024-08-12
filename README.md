@@ -126,5 +126,5 @@
 <p>2️⃣.1️⃣ SQL: I have used locally the <a href="https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download">MariaDB</a> database integrated into XAMPP with the root user and without a password. You can modify these parameters in the Routes.java file within the Start package.</p>
 <p>2️⃣.2️⃣ JPA: I have used locally the <a href="https://www.objectdb.com/download/2.9.0">ObjectDB</a> database with the root admin and password a admin. You can modify these parameters in the Routes.java file within the Start package.</p>
 <p>3️⃣ For the files I have also used local directories, but you can also use network drives. You can modify these parameters in the Routes.java file within the Start package.</p>
-<p>34️⃣ If you want an executable .jar file you must create it yourself.</p>
+<p>4️⃣ If you want an executable .jar file you must create it yourself.</p>
 
